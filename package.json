@@ -7,21 +7,20 @@
   "peerDependencies": {
     "@material-ui/core": "^3.2.0",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "material-ui-pickers": "^1.0.0-rc.14"
   },
   "dependencies": {
     "country-telephone-data": "^0.5.5",
     "date-fns": "^2.0.0-alpha.16",
     "lodash": "^4.17.10",
-    "material-ui-pickers": "^1.0.0-rc.14",
     "mson": "^1.0.1",
     "react-google-recaptcha": "^1.0.0",
     "react-markdown": "^4.0.0",
     "react-router-dom": "^4.3.1",
     "react-select": "^2.1.0",
     "react-text-mask": "^5.4.3",
-    "text-mask-addons": "^3.8.0",
-    "typeface-roboto": "^0.0.54"
+    "text-mask-addons": "^3.8.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -36,6 +35,7 @@
     "prettier": "^1.14.2",
     "react-scripts": "^2.0.3",
     "style-loader": "^0.23.1",
+    "typeface-roboto": "^0.0.54",
     "wait-on": "^3.0.1",
     "webpack-bundle-analyzer": "^3.0.2",
     "webpack-cli": "^3.1.2"
