@@ -4,7 +4,7 @@
 import './firebase-mock';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppContainer from '../mson-react/app-container';
+import AppContainer from '../app-container';
 import app from './app';
 
 it('renders without crashing', () => {

@@ -1,7 +1,7 @@
-import _ from '../mson/lodash';
-import compiler from '../mson/compiler';
+import _ from 'mson/lib/mson/lodash';
+import compiler from 'mson/lib/mson/compiler';
 import * as components from './components';
-import globals from '../mson/globals';
+import globals from 'mson/lib/mson/globals';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: 'TODO' });
