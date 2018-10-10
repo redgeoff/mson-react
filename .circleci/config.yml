@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     # Change working directory so that mson-server scripts have reference back to mson
-    working_directory: ~/mson
+    working_directory: ~/mson-react
 
     docker:
       - image: circleci/node:stretch-browsers
