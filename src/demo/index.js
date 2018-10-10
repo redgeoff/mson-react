@@ -1,4 +1,4 @@
-import * as msonreact from '../mson-react';
+import * as msonreact from '../bundle';
 import 'typeface-roboto';
 import app from './app';
 

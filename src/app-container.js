@@ -1,5 +1,5 @@
 import React from 'react';
-import AppUI from '../mson-react/app';
+import AppUI from './app';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
