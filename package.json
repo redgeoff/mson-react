@@ -5,10 +5,9 @@
   "author": "Geoff Cox",
   "license": "Apache-2.0",
   "peerDependencies": {
-
+    "@material-ui/core": "^3.2.0"
   },
   "dependencies": {
-    "@material-ui/core": "^3.2.0",
     "country-telephone-data": "^0.5.5",
     "date-fns": "^2.0.0-alpha.16",
     "lodash": "^4.17.10",
