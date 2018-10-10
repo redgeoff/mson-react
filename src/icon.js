@@ -1,6 +1,6 @@
 import React from 'react';
 import IconMui from '@material-ui/core/Icon';
-import _ from 'mson/lib/mson/lodash';
+import snakeCase from 'lodash/snakeCase';
 
 // Note: we use font icons instead of SVG icons as this allows us to support any icon dynamically
 // without adding all icons to the JS bundle. The MaterialUI icons are about 54KB which is
@@ -18,7 +18,7 @@ export default class Icon extends React.PureComponent {
   // Convert to the font icon name so that we can use the SVG Icon names. This allows us to make
   // changes to this logic without changing the calling code.
   toFontIconName(svgIconName) {
-    return _.snakeCase(svgIconName);
+    return snakeCase(svgIconName);
   }
 
   render() {
