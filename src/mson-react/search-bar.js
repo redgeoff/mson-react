@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Icon from './icon';
-import globals from '../mson/globals';
+import globals from 'mson/lib/mson/globals';
 
 // TODO: see https://material-ui-next.com/style/icons/#icons and implement:
 // 1. Mouseover to change background color

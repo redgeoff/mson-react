@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import Submenu from './submenu';
 import attach from './attach';
 import Typography from '@material-ui/core/Typography';
-import registrar from '../mson/compiler/registrar';
+import registrar from 'mson/lib/mson/compiler/registrar';
 
 const drawerWidth = 240;
 

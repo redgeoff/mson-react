@@ -1,7 +1,7 @@
 {
-  "name": "mson",
+  "name": "mson-react",
   "version": "1.0.1",
-  "description": "MSON Lang: Generate an app from JSON",
+  "description": "UI Rendering Layer for React and Material-UI",
   "author": "Geoff Cox",
   "license": "Apache-2.0",
   "dependencies": {
@@ -19,6 +19,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.10",
     "material-ui-pickers": "^1.0.0-rc.14",
+    "mson": "^1.0.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-google-recaptcha": "^1.0.0",

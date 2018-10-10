@@ -6,12 +6,12 @@ import attach from '../attach';
 import Button from '../button';
 import Typography from '@material-ui/core/Typography';
 import ConfirmationDialog from '../confirmation-dialog';
-import access from '../../mson/access';
+import access from 'mson/lib/mson/access';
 import withStyles from '@material-ui/core/styles/withStyles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import './collection-field.css';
 import SelectOrder from './select-order';
-import ButtonField from '../../mson/fields/button-field';
+import ButtonField from 'mson/lib/mson/fields/button-field';
 import Icon from '../icon';
 import CommonField from './common-field';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppContainer from './app-container';
-import registrar from '../mson/compiler/registrar';
+import registrar from 'mson/lib/mson/compiler/registrar';
 import registerServiceWorker from './register-service-worker';
 
 export default async app => {

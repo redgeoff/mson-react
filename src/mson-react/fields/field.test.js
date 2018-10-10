@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Field from './field';
-import { Field as FieldModel } from '../../mson/fields';
+import { Field as FieldModel } from 'mson/lib/mson/fields';
 
 it('renders', () => {
   const div = document.createElement('div');

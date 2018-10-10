@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from '../mson/lodash';
+import _ from 'mson/lib/mson/lodash';
 
 // Usage: attach(['prop1', 'prop2', ...], componentOrName)(Component)
 

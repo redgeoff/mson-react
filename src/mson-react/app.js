@@ -15,19 +15,19 @@ import SearchBar from './search-bar';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import Component from './component';
-// import compiler from '../mson/compiler';
+// import compiler from 'mson/lib/mson/compiler';
 import withRouter from 'react-router/withRouter';
 import attach from './attach';
-import globals from '../mson/globals';
+import globals from 'mson/lib/mson/globals';
 import Snackbar from './snackbar';
 import ConfirmationDialog from './confirmation-dialog';
 import MUISwitch from '@material-ui/core/Switch';
 // import UserMenu from './user-menu';
-import Action from '../mson/actions/action';
-import CollectionField from '../mson/fields/collection-field';
-import Form from '../mson/form';
-import access from '../mson/access';
-import registrar from '../mson/compiler/registrar';
+import Action from 'mson/lib/mson/actions/action';
+import CollectionField from 'mson/lib/mson/fields/collection-field';
+import Form from 'mson/lib/mson/form';
+import access from 'mson/lib/mson/access';
+import registrar from 'mson/lib/mson/compiler/registrar';
 
 const drawerWidth = 240;
 

@@ -6,8 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import Icon from './icon';
-import _ from '../mson/lodash';
-import registrar from '../mson/compiler/registrar';
+import _ from 'mson/lib/mson/lodash';
+import registrar from 'mson/lib/mson/compiler/registrar';
 
 const styles = theme => ({
   nested: {

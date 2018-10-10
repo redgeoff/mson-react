@@ -1,7 +1,7 @@
 import React from 'react';
 import Field from './fields/field';
 import attach from './attach';
-import access from '../mson/access';
+import access from 'mson/lib/mson/access';
 
 // Use a PureComponent so that the form is re-rendered when the state/props do not change
 class Form extends React.PureComponent {
