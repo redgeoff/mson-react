@@ -2,6 +2,7 @@ export default {
   name: 'app.App',
   component: 'App',
   // menuAlwaysTemporary: true,
+  basename: '/mson-react', // Root of site is https://redgeoff.github.io/mson-react
   menu: {
     component: 'Menu',
     items: [

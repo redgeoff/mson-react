@@ -8,6 +8,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import Prompt from 'react-router-dom/Prompt';
 import globals from 'mson/lib/globals';
+import attach from './attach';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,11 +33,14 @@ class AppContainer extends React.Component {
   };
 
   render() {
-    const { component } = this.props;
+    const { component, basename } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter getUserConfirmation={this.onNavigate}>
+        <BrowserRouter
+          getUserConfirmation={this.onNavigate}
+          basename={basename}
+        >
           {/* Wrapping div required by BrowserRouter */}
           <div>
             <AppUI component={component} />
@@ -51,4 +55,4 @@ class AppContainer extends React.Component {
   }
 }
 
-export default AppContainer;
+export default attach(['basename'])(AppContainer);
