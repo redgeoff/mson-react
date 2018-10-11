@@ -7,7 +7,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import Icon from './icon';
 import each from 'lodash/each';
-import registrar from 'mson/lib/mson/compiler/registrar';
+import registrar from 'mson/lib/compiler/registrar';
 
 const styles = theme => ({
   nested: {

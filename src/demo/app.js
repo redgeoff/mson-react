@@ -1,6 +1,6 @@
-import compiler from 'mson/lib/mson/compiler';
+import compiler from 'mson/lib/compiler';
 import * as components from './components';
-import globals from 'mson/lib/mson/globals';
+import globals from 'mson/lib/globals';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: 'TODO' });

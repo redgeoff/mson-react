@@ -7,7 +7,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import Prompt from 'react-router-dom/Prompt';
-import globals from 'mson/lib/mson/globals';
+import globals from 'mson/lib/globals';
 
 const theme = createMuiTheme({
   palette: {
