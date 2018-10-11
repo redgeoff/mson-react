@@ -4,6 +4,7 @@
   "description": "UI Rendering Layer for React and Material-UI",
   "author": "Geoff Cox",
   "license": "Apache-2.0",
+  "main": "lib/bundle.js",
   "peerDependencies": {
     "@material-ui/core": "^3.2.0",
     "material-ui-pickers": "^1.0.0-rc.14",
@@ -69,8 +70,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!**/demo/**",
-      "!**/src/index.js"
+      "!**/demo/**"
     ],
     "coverageThreshold": {
       "global": {
