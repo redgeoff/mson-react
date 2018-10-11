@@ -3,7 +3,7 @@
 // to index.js if we decide to move away from react-scripts.
 
 import render from './render';
-import compiler from 'mson/lib/mson/compiler';
+import compiler from 'mson/lib/compiler';
 import Component from './component';
 
 // Note: the "default" must be excluded so that webpack can bundle the library properly

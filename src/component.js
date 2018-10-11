@@ -1,6 +1,6 @@
 import React from 'react';
 import components from './components';
-import compiler from 'mson/lib/mson/compiler';
+import compiler from 'mson/lib/compiler';
 
 export default class Component extends React.PureComponent {
   render() {

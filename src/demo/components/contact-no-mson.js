@@ -1,7 +1,7 @@
-import Form from 'mson/lib/mson/form';
-import { TextField, EmailField, ButtonField } from 'mson/lib/mson/fields';
-import compiler from 'mson/lib/mson/compiler';
-import globals from 'mson/lib/mson/globals';
+import Form from 'mson/lib/form';
+import { TextField, EmailField, ButtonField } from 'mson/lib/fields';
+import compiler from 'mson/lib/compiler';
+import globals from 'mson/lib/globals';
 
 // Note: you can also use the following instead of the import above
 // const Form = compiler.getCompiledComponent('Form');
