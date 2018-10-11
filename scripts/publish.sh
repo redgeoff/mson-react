@@ -18,8 +18,11 @@ yarn compile
 yarn bundle
 
 # Publish npm release
-npm publish
+yarn publish
 
 # Tag and push
 git tag $VERSION
 git push origin master --tags $VERSION
+
+# Push demo to gh-pages
+yarn deploy 
