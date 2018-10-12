@@ -2,6 +2,11 @@ version: 2
 
 jobs:
   build:
+    branches:
+      ignore:
+        # Ignore gh-pages as the tests don't apply
+        - gh-pages
+  
     # Change working directory so that mson-server scripts have reference back to mson
     working_directory: ~/mson-react
 
