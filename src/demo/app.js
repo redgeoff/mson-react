@@ -3,7 +3,7 @@ import * as components from './components';
 import globals from 'mson/lib/globals';
 
 // Set the site key when using the ReCAPTCHAField
-globals.set({ reCAPTCHASiteKey: 'TODO' });
+globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
 
 // Register all the components
 for (let name in components) {
