@@ -28,7 +28,7 @@ class Card extends React.PureComponent {
           <Paper className={classes.paper}>
             <Grid container wrap="nowrap">
               <Grid item className={classes.content}>
-                <Typography variant="headline" component="h2">
+                <Typography variant="h5" component="h2">
                   {title}
                 </Typography>
                 <Component component={content} />
