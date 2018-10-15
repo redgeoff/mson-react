@@ -240,13 +240,13 @@ class App extends React.PureComponent {
       if (menuItem && menuItem.content) {
         const { location, component } = this.props;
         const menu = component.get('menu');
-        globals.set(
-          menu.toRoute({
+        globals.set({
+          route: menu.toRoute({
             parameters,
             queryString: location.search.substr(1),
             hash: location.hash.substr(1)
           })
-        );
+        });
 
         const parentItem = menu.getParent(menuItem.path);
         if (
