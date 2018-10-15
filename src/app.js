@@ -165,7 +165,8 @@ class App extends React.PureComponent {
     if (!menuItem || path !== menuItem.path) {
       // if (this.requireAccess(menu.get('roles'))) {
       // The route is changing
-      return this.switchContent(menu.getItem(path));
+      const item = menu.getItemAndParsePath(path);
+      return this.switchContent(item.item, item.params);
       // }
     }
   }
@@ -222,7 +223,7 @@ class App extends React.PureComponent {
     return canAccess;
   }
 
-  switchContent = async menuItem => {
+  switchContent = async (menuItem, parameters) => {
     // Prevent inifinite recursion when menuItem is null by making sure that the menuItem is
     // changing before changing anything, especially the state
     if (menuItem !== this.state.menuItem) {
@@ -237,7 +238,16 @@ class App extends React.PureComponent {
       // Note: menuItem.content can be an action if the user goes directly to a route where the
       // content is an action
       if (menuItem && menuItem.content) {
-        const menu = this.props.component.get('menu');
+        const { location, component } = this.props;
+        const menu = component.get('menu');
+        globals.set(
+          menu.toRoute({
+            parameters,
+            queryString: location.search.substr(1),
+            hash: location.hash.substr(1)
+          })
+        );
+
         const parentItem = menu.getParent(menuItem.path);
         if (
           this.requireAccess(menuItem.roles) &&
