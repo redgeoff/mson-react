@@ -7,7 +7,7 @@
   "main": "lib/bundle.js",
   "homepage": "https://redgeoff.github.io/mson-react",
   "peerDependencies": {
-    "@material-ui/core": "^3.2.0",
+    "@material-ui/core": "^3.2.2",
     "material-ui-pickers": "^1.0.0-rc.14",
     "mson": "^1.0.3",
     "react": "^16.4.2",
@@ -29,7 +29,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@material-ui/core": "^3.2.0",
+    "@material-ui/core": "^3.2.2",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.0",
     "gh-pages": "^2.0.1",
