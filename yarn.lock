@@ -6866,18 +6866,19 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-mson@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-1.0.3.tgz#1403b628a5c7b613408d0eb9020b5d2cd17be4f9"
-  integrity sha512-rimeB/RLWjKt9XL1EBgvemXaTRD1KXsHgsrhUE2uLUB2t9DJb1qo0ygFv0kn/Pd9iSTgkC4ytJJYbNGExGqQmQ==
+mson@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-1.0.5.tgz#337ed770f4ea753cd9ab2398b49b2a67a06e2be1"
+  integrity sha512-LPrC/+fQL5qz/zD4/Q2Y2Xbm8UiRXaLmVSJkW5fap23bNK8aVERrclyYSMHwigESqK8V64z5Y4GuzfvMd+GG6w==
   dependencies:
     "@babel/runtime" "^7.1.2"
     country-telephone-data "^0.5.5"
     date-fns "^2.0.0-alpha.16"
     events "^3.0.0"
     lodash "^4.17.10"
-    sift "^6.0.0"
+    sift "^7.0.0"
     text-mask-addons "^3.8.0"
+    uuid "^3.3.2"
     vanilla-text-mask "^5.1.1"
 
 multicast-dns-service-types@^1.1.0:
@@ -9533,10 +9534,10 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
-sift@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/sift/-/sift-6.0.0.tgz#f93a778e5cbf05a5024ebc391e6b32511a6d1f82"
-  integrity sha1-+Tp3jly/BaUCTrw5HmsyURptH4I=
+sift@^7.0.0:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
+  integrity sha512-oqD7PMJ+uO6jV9EQCl0LrRw1OwsiPsiFQR5AR30heR+4Dl7jBBbDLnNvWiak20tzZlSE1H7RB30SX/1j/YYT7g==
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
