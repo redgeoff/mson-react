@@ -1,6 +1,5 @@
 import React from 'react';
-import components from '../components';
-import compiler from 'mson/lib/compiler';
+import componentUtils from '../component-utils';
 import attach from '../attach';
 import FlexBreak from '../flex-break';
 
@@ -21,15 +20,8 @@ class Field extends React.PureComponent {
     if (hidden || !didCreate) {
       return null;
     } else {
-      const name = component.getClassName();
-
-      let Field = components[name];
-      if (!Field) {
-        // The React component wasn't found so check the MSON layer to see if we can automatically
-        // determine the component from any MSON.
-        let ext = compiler.getOldestCompiledAncestor(name);
-        Field = components[ext];
-      }
+      // Get corresponding UI component
+      const Field = componentUtils.getUIComponent(component);
 
       // Note: we use React.Fragment over a span as spans can cause issues with the flexbox layout
       // when displaying a nested form
