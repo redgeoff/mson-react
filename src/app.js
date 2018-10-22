@@ -454,6 +454,7 @@ class App extends React.PureComponent {
 
     const appBar = (
       <AppBar
+        elevation={1} // tone down the elevation
         className={
           classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
         }
