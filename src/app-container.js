@@ -24,6 +24,8 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true
   }
+
+  // shadows: ['none']
 });
 
 // Note: BrowserRouter needs to be outside of App so that we can use withRouter
