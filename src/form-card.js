@@ -2,7 +2,7 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Form from './form';
+import Component from './component';
 import attach from './attach';
 import FormCardButtons from './form-card-buttons';
 
@@ -58,7 +58,7 @@ class FormCard extends React.PureComponent {
               className={classes.content}
               onClick={event => this.handleClick(event)}
             >
-              <Form component={component} formTag={false} mode="read" />
+              <Component component={component} formTag={false} mode="read" />
             </Grid>
             <FormCardButtons
               forbidUpdate={forbidUpdate}

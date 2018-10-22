@@ -16,10 +16,9 @@ class BooleanField extends React.PureComponent {
       disabled,
       component,
       editable,
-      useDisplayValue
+      useDisplayValue,
+      label
     } = this.props;
-
-    const label = component.get('label');
 
     let hideLabelUI = null;
 
@@ -60,5 +59,6 @@ export default attach([
   'err',
   'disabled',
   'editable',
-  'useDisplayValue'
+  'useDisplayValue',
+  'label'
 ])(BooleanField);

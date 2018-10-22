@@ -351,7 +351,7 @@ class CollectionField extends React.PureComponent {
           component={form}
           currentForm={currentForm}
           onClose={this.handleClose}
-          onRead={this.handleRead}
+          onCancel={this.handleRead}
           onSave={this.handleSave}
           onEdit={this.handleEdit}
           onDelete={this.handleDelete}
