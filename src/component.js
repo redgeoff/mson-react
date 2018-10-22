@@ -3,10 +3,10 @@ import componentUtils from './component-utils';
 
 export default class Component extends React.PureComponent {
   render() {
-    const { component } = this.props;
+    const { component, ...others } = this.props;
 
     const Component = componentUtils.getUIComponent(component);
 
-    return <Component component={component} />;
+    return <Component component={component} {...others} />;
   }
 }

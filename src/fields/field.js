@@ -2,6 +2,7 @@ import React from 'react';
 import componentUtils from '../component-utils';
 import attach from '../attach';
 import FlexBreak from '../flex-break';
+import utils from '../utils';
 
 // Use MSON React Component instead?
 class Field extends React.PureComponent {
@@ -12,12 +13,16 @@ class Field extends React.PureComponent {
       block,
       accessEditable,
       didCreate,
-      noBlock
+      noBlock,
+      disabled
     } = this.props;
 
     // Don't show the component until didCreate is true as we may need to wait for fields to be
     // hidden or otherwise modified by listeners
     if (hidden || !didCreate) {
+      return null;
+    } else if (component.getClassName() === 'Field') {
+      // Prevent an infinite loop caused by trying to render component=Field
       return null;
     } else {
       // Get corresponding UI component
@@ -31,6 +36,7 @@ class Field extends React.PureComponent {
             component={component}
             accessEditable={accessEditable}
             block={block}
+            {...utils.getIfDefined({ disabled })}
           />
           {!noBlock && block ? <FlexBreak /> : null}
         </React.Fragment>

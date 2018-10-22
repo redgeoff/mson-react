@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import Form from './form';
+import Component from './component';
 import attach from './attach';
 
 class FormDialog extends React.PureComponent {
@@ -12,15 +12,15 @@ class FormDialog extends React.PureComponent {
 
   handleClose = withCancelButton => {
     // Prevent the user from losing data when pressing esc or clicking outside dialog
-    const { mode, onClose, onRead } = this.props;
+    const { mode, onClose, onCancel, currentForm } = this.props;
     if (withCancelButton || mode !== 'update') {
       if (mode === 'update') {
-        if (onRead) {
-          onRead(this.props.currentForm);
+        if (onCancel) {
+          onCancel(currentForm);
         }
       } else {
         if (onClose) {
-          onClose(this.props.currentForm);
+          onClose(currentForm);
         }
       }
     }
@@ -141,7 +141,7 @@ class FormDialog extends React.PureComponent {
         {/* We use a form element so that we can submit the form on enter */}
         <form onSubmit={this.handleSave}>
           <DialogContent>
-            <Form component={component} formTag={false} mode={mode} />
+            <Component component={component} formTag={false} mode={mode} />
           </DialogContent>
           {buttons ? <DialogActions>{buttons}</DialogActions> : ''}
         </form>
