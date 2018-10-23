@@ -8,15 +8,30 @@ import Typography from '@material-ui/core/Typography';
 import ConfirmationDialog from '../confirmation-dialog';
 import access from 'mson/lib/access';
 import withStyles from '@material-ui/core/styles/withStyles';
-import blueGrey from '@material-ui/core/colors/blueGrey';
 import './collection-field.css';
 import SelectOrder from './select-order';
 import ButtonField from 'mson/lib/fields/button-field';
 import Icon from '../icon';
 import CommonField from './common-field';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-// TODO:
-//   - Support drag to order
+const getItemStyle = (isDragging, draggableStyle, theme) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: 'none',
+  padding: theme.spacing.unit / 8,
+  margin: `0 0 ${theme.spacing.unit / 8}px 0`,
+
+  // change background colour if dragging
+  background: isDragging ? theme.palette.secondary[400] : undefined,
+
+  // styles we need to apply on draggables
+  ...draggableStyle
+});
+
+const getListStyle = (isDraggingOver, theme) => ({
+  background: isDraggingOver ? theme.palette.grey[300] : undefined,
+  width: '100%'
+});
 
 // Note:
 //   - We use a dialog to view/edit the forms as we want to be able to display just a few pieces
@@ -24,7 +39,7 @@ import CommonField from './common-field';
 
 const styles = theme => ({
   spacer: {
-    backgroundColor: blueGrey[100],
+    backgroundColor: theme.palette.grey[300],
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     animation: 'fadeIn 1s infinite alternate'
@@ -33,7 +48,7 @@ const styles = theme => ({
     // Create space at the footer so that it is more evident to the user that the next page has been
     // loaded
     height: 50,
-    backgroundColor: blueGrey[100],
+    backgroundColor: theme.palette.grey[300],
     margin: theme.spacing.unit,
     animation: 'fadeIn 1s infinite alternate'
   }
@@ -50,12 +65,22 @@ class CollectionField extends React.PureComponent {
     this.props.component.set({ mode: null });
   };
 
-  handleRead = form => {
-    this.props.component.set({ currentForm: form, mode: 'read' });
+  handleCancel = form => {
+    const { component } = this.props;
+    if (component.get('skipRead')) {
+      component.set({ mode: null });
+    } else {
+      component.set({ currentForm: form, mode: 'read' });
+    }
   };
 
   handleClick = form => {
-    this.props.component.set({ currentForm: form, mode: 'read' });
+    const { component } = this.props;
+    if (component.get('skipRead')) {
+      component.set({ currentForm: form, mode: 'update' });
+    } else {
+      component.set({ currentForm: form, mode: 'read' });
+    }
   };
 
   handleEdit = form => {
@@ -146,15 +171,24 @@ class CollectionField extends React.PureComponent {
       component,
       forbidUpdate,
       forbidDelete,
+      forbidOrder,
       editable,
       disabled,
-      maxColumns,
-      useDisplayValue
+      useDisplayValue,
+      theme
     } = this.props;
+
+    // Force to 1 colum when ordering allowed
+    const maxColumns = forbidOrder === false ? 1 : this.props.maxColumns;
+
+    const maxGrids = 12 / maxColumns;
 
     let cards = [];
 
+    let index = 0;
     for (const form of component.getForms()) {
+      // TODO: Rendering should not change form. Use utils.getIfDefined() in form to allow passing
+      // in of editable via React layer
       form.setEditable(false);
 
       // We need to use the id for the key as we use the same list of cards when toggling
@@ -165,9 +199,7 @@ class CollectionField extends React.PureComponent {
       // frameworks.
       const id = component.getUniqueItemId(key);
 
-      const maxGrids = 12 / maxColumns;
-
-      cards.push(
+      const item = (
         <Grid item xs={12} sm={maxGrids} lg={maxGrids} key={key} id={id}>
           <FormCard
             onClick={() => this.handleClick(form)}
@@ -181,6 +213,30 @@ class CollectionField extends React.PureComponent {
           />
         </Grid>
       );
+
+      // Can we order by dragging?
+      if (!forbidOrder) {
+        cards.push(
+          <Draggable key={id} draggableId={id} index={index++}>
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getItemStyle(
+                  snapshot.isDragging,
+                  provided.draggableProps.style,
+                  theme
+                )}
+              >
+                {item}
+              </div>
+            )}
+          </Draggable>
+        );
+      } else {
+        cards.push(item);
+      }
     }
 
     return cards;
@@ -230,6 +286,7 @@ class CollectionField extends React.PureComponent {
       disabled,
       component,
       forbidSort,
+      forbidOrder,
       store,
       useDisplayValue
     } = this.props;
@@ -250,7 +307,8 @@ class CollectionField extends React.PureComponent {
       !reachedMax &&
       canCreate;
 
-    const canOrder = !forbidSort;
+    // Cannot sort when ordering is enabled
+    const canOrder = !forbidSort && !!forbidOrder;
 
     const sortOptions = this.sortOptions();
 
@@ -285,12 +343,27 @@ class CollectionField extends React.PureComponent {
     );
   }
 
+  onDragEnd = result => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index !== result.source.index) {
+      this.props.component.moveAndSaveForm({
+        sourceIndex: result.source.index,
+        destinationIndex: result.destination.index
+      });
+    }
+  };
+
   // TODO: how to prevent re-rendering of all form-cards when dialog open state is changed? Or, does
   // it not really matter as we are using PureComponents?
   field() {
     const {
       forbidUpdate,
       forbidDelete,
+      forbidOrder,
       component,
       spacerHeight,
       classes,
@@ -300,7 +373,8 @@ class CollectionField extends React.PureComponent {
       noResults,
       disabled,
       accessEditable,
-      useDisplayValue
+      useDisplayValue,
+      theme
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -316,7 +390,28 @@ class CollectionField extends React.PureComponent {
 
     const spacerId = component.get('spacerId');
 
-    const cards = this.cards(canUpdate, canArchive);
+    let cards = this.cards(canUpdate, canArchive);
+
+    let cardContainer = cards;
+
+    // Can we order by dragging?
+    if (!forbidOrder) {
+      cardContainer = (
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver, theme)}
+              >
+                {cards}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      );
+    }
 
     const searchString = component.get('searchString');
 
@@ -338,7 +433,7 @@ class CollectionField extends React.PureComponent {
         <div id={spacerId} className={classes.spacer} style={spacerStyle} />
 
         <Grid container spacing={0}>
-          {cards}
+          {cardContainer}
         </Grid>
 
         {isLoading ? <div className={classes.footer} /> : null}
@@ -351,7 +446,7 @@ class CollectionField extends React.PureComponent {
           component={form}
           currentForm={currentForm}
           onClose={this.handleClose}
-          onCancel={this.handleRead}
+          onCancel={this.handleCancel}
           onSave={this.handleSave}
           onEdit={this.handleEdit}
           onDelete={this.handleDelete}
@@ -388,7 +483,7 @@ class CollectionField extends React.PureComponent {
   }
 }
 
-CollectionField = withStyles(styles)(CollectionField);
+CollectionField = withStyles(styles, { withTheme: true })(CollectionField);
 CollectionField = attach([
   'change',
   'label',
@@ -397,6 +492,7 @@ CollectionField = attach([
   'forbidUpdate',
   'forbidDelete',
   'forbidSort',
+  'forbidOrder',
   'editable',
   'disabled',
   'spacerHeight',

@@ -16,6 +16,7 @@
   "dependencies": {
     "date-fns": "^2.0.0-alpha.16",
     "lodash": "^4.17.10",
+    "react-beautiful-dnd": "^9.0.2",
     "react-google-recaptcha": "^1.0.0",
     "react-markdown": "^4.0.0",
     "react-router-dom": "^4.3.1",

@@ -1,20 +1,26 @@
 import App from './app';
-import FieldsScreen from './fields-screen';
-import Fields from './fields';
+import './contact-no-mson';
 import Contacts from './contacts';
 import ContactsLocalStorage from './contacts-local-storage';
 import ContactsFirebase from './contacts-firebase';
 import EditContact from './edit-contact';
-import './contact-no-mson';
+import FieldsScreen from './fields-screen';
+import Fields from './fields';
 import Home from './home';
+import Tasks from './tasks';
+import TasksLocalStorage from './tasks-local-storage';
+import TasksFirebase from './tasks-firebase';
 
 export {
   App,
-  FieldsScreen,
-  Fields,
   Contacts,
   ContactsLocalStorage,
   ContactsFirebase,
   EditContact,
-  Home
+  FieldsScreen,
+  Fields,
+  Home,
+  Tasks,
+  TasksLocalStorage,
+  TasksFirebase
 };
