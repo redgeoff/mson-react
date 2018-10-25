@@ -41,6 +41,26 @@ export default {
         ]
       },
       {
+        path: '/tasks',
+        label: 'Tasks',
+        items: [
+          {
+            path: '/tasks',
+            label: 'Tasks LocalStorage',
+            content: {
+              component: 'app.TasksLocalStorage'
+            }
+          },
+          {
+            path: '/tasks-firebase',
+            label: 'Tasks Firebase',
+            content: {
+              component: 'app.TasksFirebase'
+            }
+          }
+        ]
+      },
+      {
         path: '/contact/edit',
         label: 'Edit Contact',
         content: {
