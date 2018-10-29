@@ -35,7 +35,7 @@
     "css-loader": "^1.0.0",
     "gh-pages": "^2.0.1",
     "husky": "^1.1.2",
-    "lint-staged": "^7.2.2",
+    "lint-staged": "^8.0.0",
     "material-ui-pickers": "^1.0.0",
     "mson": "^1.0.5",
     "prettier": "^1.14.2",
