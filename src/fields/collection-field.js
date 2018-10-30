@@ -166,6 +166,13 @@ class CollectionField extends React.PureComponent {
     }
   }
 
+  canDrag() {
+    const { forbidOrder, showArchived } = this.props;
+
+    // Can we order by dragging?
+    return !forbidOrder && !showArchived;
+  }
+
   cards(canUpdate, canArchive) {
     const {
       component,
@@ -214,8 +221,7 @@ class CollectionField extends React.PureComponent {
         </Grid>
       );
 
-      // Can we order by dragging?
-      if (!forbidOrder) {
+      if (this.canDrag()) {
         cards.push(
           <Draggable key={id} draggableId={id} index={index++}>
             {(provided, snapshot) => (
@@ -363,7 +369,6 @@ class CollectionField extends React.PureComponent {
     const {
       forbidUpdate,
       forbidDelete,
-      forbidOrder,
       component,
       spacerHeight,
       classes,
@@ -394,8 +399,7 @@ class CollectionField extends React.PureComponent {
 
     let cardContainer = cards;
 
-    // Can we order by dragging?
-    if (!forbidOrder) {
+    if (this.canDrag()) {
       cardContainer = (
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
@@ -505,6 +509,7 @@ CollectionField = attach([
   'store',
   'maxColumns',
   'useDisplayValue',
-  'hideLabel'
+  'hideLabel',
+  'showArchived'
 ])(CollectionField);
 export default CollectionField;
