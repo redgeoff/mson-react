@@ -167,10 +167,10 @@ class CollectionField extends React.PureComponent {
   }
 
   canDrag() {
-    const { forbidOrder, showArchived } = this.props;
+    const { forbidOrder, showArchived, searchString } = this.props;
 
     // Can we order by dragging?
-    return !forbidOrder && !showArchived;
+    return !forbidOrder && !showArchived && !searchString;
   }
 
   cards(canUpdate, canArchive) {
@@ -510,6 +510,7 @@ CollectionField = attach([
   'maxColumns',
   'useDisplayValue',
   'hideLabel',
-  'showArchived'
+  'showArchived',
+  'searchString'
 ])(CollectionField);
 export default CollectionField;
