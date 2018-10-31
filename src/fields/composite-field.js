@@ -6,7 +6,14 @@ import FlexBreak from '../flex-break';
 
 class CompositeField extends React.PureComponent {
   render() {
-    const { component, help, editable, useDisplayValue, block } = this.props;
+    const {
+      component,
+      help,
+      editable,
+      useDisplayValue,
+      block,
+      disabled
+    } = this.props;
 
     let fields = [];
 
@@ -21,7 +28,14 @@ class CompositeField extends React.PureComponent {
         if (last && field.get('block')) {
           lastIsBlock = true;
         }
-        fields.push(<Field component={field} key={index} noBlock={last} />);
+        fields.push(
+          <Field
+            component={field}
+            key={index}
+            noBlock={last}
+            disabled={disabled}
+          />
+        );
       }
 
       if (first) {

@@ -20,7 +20,7 @@ class ListItemField extends React.PureComponent {
       const block = component.get('block');
       return (
         <span>
-          <Field component={component} block={false} />
+          <Field component={component} block={false} disabled={disabled} />
           {allowDelete && !disabled && editable ? (
             <IconButton aria-label="Delete" onClick={this.handleDelete}>
               <Icon icon="DeleteIcon" />

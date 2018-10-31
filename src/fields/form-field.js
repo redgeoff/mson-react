@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class FormField extends React.PureComponent {
   render() {
-    const { component, hideLabel, classes } = this.props;
+    const { component, hideLabel, classes, disabled } = this.props;
 
     const isBlank = component.isBlank();
 
@@ -36,7 +36,7 @@ class FormField extends React.PureComponent {
         )}
         <FlexBreak />
         <span className={classes.root}>
-          <Form component={form} formTag={false} />
+          <Form component={form} formTag={false} disabled={disabled} />
         </span>
       </span>
     );

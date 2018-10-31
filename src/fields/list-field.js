@@ -52,6 +52,7 @@ class ListField extends React.PureComponent {
               (canDeleteEmpty || !fieldIsBlank) &&
               !hideDeleteButton
             }
+            disabled={disabled}
           />
         );
       }
@@ -68,7 +69,7 @@ class ListField extends React.PureComponent {
           aria-label="add"
           onClick={this.handleNew}
           icon="Add"
-          label={'Add ' + singularLabel}
+          label={'Add ' + (singularLabel ? singularLabel : '')}
           marginTop={false}
         />
       );
@@ -102,5 +103,7 @@ export default attach([
   'editable',
   'canDeleteEmpty',
   'disabled',
-  'hideDeleteButton'
+  'hideDeleteButton',
+  'singularLabel',
+  'label'
 ])(ListField);

@@ -95,7 +95,7 @@ class Form extends React.PureComponent {
   };
 
   render() {
-    const { component, formTag, isLoading } = this.props;
+    const { component, formTag, isLoading, disabled } = this.props;
     const { fieldsCanAccess } = this.state;
     const fields = component.get('fields');
 
@@ -125,6 +125,7 @@ class Form extends React.PureComponent {
             key={key + '_' + index}
             component={field}
             accessEditable={accessEditable}
+            disabled={disabled}
           />
         );
       } else {

@@ -36,12 +36,15 @@ class FormDialog extends React.PureComponent {
     // Stop the form from refreshing the page
     event.preventDefault();
 
-    if (this.props.onSave) {
-      this.props.onSave();
-    }
+    // Should the submit action be disabled? For example, we may be editing in a nested dialog
+    if (!this.props.disableSubmit) {
+      if (this.props.onSave) {
+        this.props.onSave();
+      }
 
-    // Disable the save button so that the user sees that something is being processed
-    this.setState({ saveClicked: true });
+      // Disable the save button so that the user sees that something is being processed
+      this.setState({ saveClicked: true });
+    }
   };
 
   handleDelete = () => {
@@ -151,5 +154,7 @@ class FormDialog extends React.PureComponent {
 }
 
 FormDialog = withMobileDialog()(FormDialog);
-FormDialog = attach(['err', 'dirty', 'value', 'mode'])(FormDialog);
+FormDialog = attach(['err', 'dirty', 'value', 'mode', 'disableSubmit'])(
+  FormDialog
+);
 export default FormDialog;
