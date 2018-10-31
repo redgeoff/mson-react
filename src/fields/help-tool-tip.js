@@ -8,8 +8,12 @@ import Icon from '../icon';
 export default class HelpToolTip extends React.PureComponent {
   render() {
     const { help } = this.props;
+
+    // Note: we use disableTouchListener as otherwise the user needs to press and hold before the
+    // tooltip appears, something that is not intuitive. With this configuration, the user can just
+    // click the button to view the tooltip.
     return (
-      <Tooltip title={help}>
+      <Tooltip disableTouchListener title={help}>
         <IconButton aria-label="Help">
           <Icon icon="HelpOutline" />
         </IconButton>
