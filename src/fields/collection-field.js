@@ -167,10 +167,10 @@ class CollectionField extends React.PureComponent {
   }
 
   canDrag() {
-    const { forbidOrder, showArchived, searchString } = this.props;
+    const { forbidOrder, showArchived, searchString, order } = this.props;
 
     // Can we order by dragging?
-    return !forbidOrder && !showArchived && !searchString;
+    return !forbidOrder && !showArchived && !searchString && !order;
   }
 
   cards(canUpdate, canArchive) {
@@ -292,7 +292,6 @@ class CollectionField extends React.PureComponent {
       disabled,
       component,
       forbidSort,
-      forbidOrder,
       store,
       useDisplayValue
     } = this.props;
@@ -313,8 +312,7 @@ class CollectionField extends React.PureComponent {
       !reachedMax &&
       canCreate;
 
-    // Cannot sort when ordering is enabled
-    const canOrder = !forbidSort && !!forbidOrder;
+    const canOrder = !forbidSort;
 
     const sortOptions = this.sortOptions();
 
@@ -511,6 +509,7 @@ CollectionField = attach([
   'useDisplayValue',
   'hideLabel',
   'showArchived',
-  'searchString'
+  'searchString',
+  'order'
 ])(CollectionField);
 export default CollectionField;
