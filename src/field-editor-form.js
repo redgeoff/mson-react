@@ -1,0 +1,119 @@
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Form from './form';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Field from './fields/field';
+import compiler from 'mson/lib/compiler';
+import each from 'lodash/each';
+import attach from './attach';
+
+const styles = theme => ({
+  form: {
+    overflowY: 'scroll',
+    maxHeight: 'calc(100vh - 390px)',
+    marginTop: theme.spacing.unit * 3
+  }
+});
+
+class FieldEditorForm extends React.PureComponent {
+  state = {
+    field: null
+  };
+
+  handleValueChange = value => {
+    const form = this.props.component;
+    let { field } = this.state;
+
+    // Is the field changing?
+    if (!field || value.componentName !== field.getClassName()) {
+      if (field) {
+        // Prevent listener leak
+        field.destroy();
+      }
+
+      if (value.componentName) {
+        field = compiler.newComponent({
+          component: value.componentName
+        });
+
+        // Auto validate so that the user can preview how the validation will work
+        const validate = () => {
+          field.clearErr();
+          field.validate();
+        };
+        field.on('value', validate);
+        field.on('touched', validate);
+      } else {
+        field = null;
+      }
+    }
+
+    if (field) {
+      // Set field values using form values. The corresponding values may not exist if the field was
+      // just changed.
+      const values = form.getValues({ default: false });
+      each(values, (value, name) => {
+        if (field.has(name)) {
+          field.set({ [name]: value });
+        }
+      });
+    }
+
+    this.setState({ field });
+  };
+
+  componentDidMount() {
+    // Note: we use a listener on value instead of attaching to value as a shallow compare of value
+    // would not trigger a state change.
+    this.props.component.on('value', this.handleValueChange);
+
+    // Initialize with the current value
+    this.handleValueChange(this.props.component.getValues());
+  }
+
+  componentWillUnmount() {
+    this.props.component.removeListener('value', this.handleValueChange);
+  }
+
+  render() {
+    const { component, classes, formTag, mode } = this.props;
+    const { field } = this.state;
+
+    let preview = null;
+    if (field && mode !== 'read') {
+      preview = (
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Preview
+            </Typography>
+            <Field component={field} />
+          </CardContent>
+        </Card>
+      );
+    }
+
+    if (mode !== 'read') {
+      return (
+        <React.Fragment>
+          <div className={classes.preview}>{preview}</div>
+          <div className={classes.form}>
+            <Form component={component} formTag={formTag} mode={mode} />
+          </div>
+        </React.Fragment>
+      );
+    } else if (field) {
+      // Disable so that the user can edit the field with a click
+      return <Field component={field} disabled={true} />;
+    } else {
+      return null;
+    }
+  }
+}
+
+FieldEditorForm = withStyles(styles)(FieldEditorForm);
+FieldEditorForm = attach(['mode'])(FieldEditorForm);
+
+export default FieldEditorForm;

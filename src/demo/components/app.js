@@ -61,6 +61,13 @@ export default {
         ]
       },
       {
+        path: '/form-editor',
+        label: 'Form Editor',
+        content: {
+          component: 'app.FormEditor'
+        }
+      },
+      {
         path: '/contact/edit',
         label: 'Edit Contact',
         content: {
