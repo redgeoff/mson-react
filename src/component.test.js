@@ -11,9 +11,11 @@ const definition = {
 };
 
 let component = null;
+let unmounted = null;
 
 beforeEach(() => {
   component = compiler.newComponent(definition);
+  unmounted = false;
 });
 
 it('renders without crashing', () => {
@@ -22,25 +24,8 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('should listen to events', async () => {
-  let unmounted = false;
-
-  const { getByLabelText, unmount } = render(
-    <Component
-      component={component}
-      on={(name, value, component) => {
-        if (name === 'mount') {
-          // Initial value
-          component.setValue('Bob');
-        } else if (name === 'unmount') {
-          unmounted = true;
-        } else if (name === 'value' && value === 'Ella') {
-          // Change value from Ella to Lauryn
-          component.setValue('Lauryn');
-        }
-      }}
-    />
-  );
+const shouldListenToEvents = async jsx => {
+  const { getByLabelText, unmount } = render(jsx);
 
   const field = getByLabelText('First Name');
 
@@ -56,6 +41,41 @@ it('should listen to events', async () => {
   // Unmount
   unmount();
   expect(unmounted).toEqual(true);
+};
+
+it('should listen to all events', async () => {
+  await shouldListenToEvents(
+    <Component
+      component={component}
+      on={({ name, value, component }) => {
+        if (name === 'mount') {
+          // Initial value
+          component.setValue('Bob');
+        } else if (name === 'unmount') {
+          unmounted = true;
+        } else if (name === 'value' && value === 'Ella') {
+          // Change value from Ella to Lauryn
+          component.setValue('Lauryn');
+        }
+      }}
+    />
+  );
+});
+
+it('should listen to specific events', async () => {
+  await shouldListenToEvents(
+    <Component
+      component={component}
+      onMount={({ component }) => component.setValue('Bob')}
+      onUnmount={() => (unmounted = true)}
+      onValue={({ value, component }) => {
+        if (value === 'Ella') {
+          // Change value from Ella to Lauryn
+          component.setValue('Lauryn');
+        }
+      }}
+    />
+  );
 });
 
 it('should change component', async () => {
@@ -75,7 +95,7 @@ it('should change component', async () => {
   rerender(
     <Component
       component={age}
-      on={(name, value, component) => {
+      on={({ name, value, component }) => {
         if (name === 'value' && value === '50') {
           component.setValue('40');
         }
