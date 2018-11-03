@@ -23,13 +23,17 @@ it('renders without crashing', () => {
 });
 
 it('should listen to events', async () => {
-  const { getByLabelText } = render(
+  let unmounted = false;
+
+  const { getByLabelText, unmount } = render(
     <Component
       component={component}
       on={(name, value, component) => {
-        if (name === 'load') {
+        if (name === 'mount') {
           // Initial value
           component.setValue('Bob');
+        } else if (name === 'unmount') {
+          unmounted = true;
         } else if (name === 'value' && value === 'Ella') {
           // Change value from Ella to Lauryn
           component.setValue('Lauryn');
@@ -48,6 +52,10 @@ it('should listen to events', async () => {
 
   // Wait for change to Lauryn
   await wait(() => expect(field.value).toEqual('Lauryn'));
+
+  // Unmount
+  unmount();
+  expect(unmounted).toEqual(true);
 });
 
 it('should change component', async () => {

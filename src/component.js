@@ -20,11 +20,14 @@ export default class Component extends React.PureComponent {
   componentDidMount() {
     this.addChangeListener();
 
-    // Emit a load event so that the component can load any initial data, etc...
-    this.props.component.emitLoad();
+    // Emit a mount event so that the component can load any initial data, etc...
+    this.props.component.emitChange('mount');
   }
 
   componentWillUnmount() {
+    // Emit a unmount event so that we can perform any needed clean up
+    this.props.component.emitChange('unmount');
+
     this.removeChangeListener();
   }
 
