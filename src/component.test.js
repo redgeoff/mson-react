@@ -85,4 +85,7 @@ it('should change component', async () => {
 
   // Wait for change
   await wait(() => expect(field.value).toEqual('40'));
+
+  // Rerender with the same component
+  rerender(<Component component={age} />);
 });
