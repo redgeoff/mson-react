@@ -94,23 +94,17 @@ it('should create with definition', async () => {
   );
 });
 
-it('should change component', async () => {
+const shouldChangeComponent = async (props1, props2) => {
   const { getByText, getByLabelText, rerender } = render(
-    <Component component={component} />
+    <Component {...props1} />
   );
 
   expect(getByText('First Name')).not.toBeNull();
 
-  const age = compiler.newComponent({
-    name: 'age',
-    component: 'NumberField',
-    label: 'Age'
-  });
-
   // Rerender with a different component
   rerender(
     <Component
-      component={age}
+      {...props2}
       on={({ name, value, component }) => {
         if (name === 'value' && value === '50') {
           component.setValue('40');
@@ -131,5 +125,25 @@ it('should change component', async () => {
   await wait(() => expect(field.value).toEqual('40'));
 
   // Rerender with the same component
-  rerender(<Component component={age} />);
+  rerender(<Component {...props2} />);
+};
+
+it('should change component', async () => {
+  const age = compiler.newComponent({
+    name: 'age',
+    component: 'NumberField',
+    label: 'Age'
+  });
+
+  await shouldChangeComponent({ component }, { component: age });
+});
+
+it('should change definition', async () => {
+  const age = {
+    name: 'age',
+    component: 'NumberField',
+    label: 'Age'
+  };
+
+  await shouldChangeComponent({ definition }, { definition: age });
 });
