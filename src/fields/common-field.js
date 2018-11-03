@@ -9,7 +9,6 @@ import FormLabel from './form-label';
 class CommonField extends React.PureComponent {
   render() {
     const {
-      name,
       component,
       children,
       label,
@@ -34,11 +33,13 @@ class CommonField extends React.PureComponent {
 
     const isBlank = component.isBlank();
 
+    const id = component.getUniqueId();
+
     if (!hideLabelUI && !hideLabel && (!autoHideLabel || label)) {
       if (editable && !useDisplayValue && !inlineLabel) {
         lbl = (
           <InputLabel
-            htmlFor={name}
+            htmlFor={id}
             error={touched && err ? true : false}
             // If label is blank then don't show as required
             required={label && required}
@@ -54,7 +55,7 @@ class CommonField extends React.PureComponent {
 
         lbl = (
           <FormLabel
-            htmlFor={name}
+            htmlFor={id}
             error={touched && err ? true : false}
             required={required && !useDisplayValue && editable}
             shrink={useDisplayValue || !editable || shrinkLabel}
@@ -98,7 +99,6 @@ class CommonField extends React.PureComponent {
 
 // 'value' is needed in the event we are showing the display value
 CommonField = attach([
-  'name',
   'label',
   'required',
   'fullWidth',
