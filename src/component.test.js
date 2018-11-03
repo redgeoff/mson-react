@@ -1,7 +1,7 @@
 import React from 'react';
 import Component from './component';
 import compiler from 'mson/lib/compiler';
-import { render, wait } from 'react-testing-library';
+import { render, wait, fireEvent } from 'react-testing-library';
 
 const definition = {
   name: 'firstName',
@@ -15,11 +15,26 @@ it('should listen to events', async () => {
       component={compiler.newComponent(definition)}
       on={(name, value, component) => {
         if (name === 'load') {
+          // Initial value
           component.setValue('Bob');
+        } else if (name === 'value' && value === 'Ella') {
+          // Change value from Ella to Lauryn
+          component.setValue('Lauryn');
         }
       }}
     />
   );
 
-  await wait(() => expect(getByLabelText('First Name').value).toEqual('Bob'));
+  const field = getByLabelText('First Name');
+
+  // Wait for initial value
+  await wait(() => expect(field.value).toEqual('Bob'));
+
+  // Fill in Ella
+  fireEvent.change(field, { target: { value: 'Ella' } });
+
+  // Wait for change to Lauryn
+  await wait(() =>
+    expect(getByLabelText('First Name').value).toEqual('Lauryn')
+  );
 });
