@@ -78,6 +78,22 @@ it('should listen to specific events', async () => {
   );
 });
 
+it('should create with definition', async () => {
+  await shouldListenToEvents(
+    <Component
+      definition={definition}
+      onMount={({ component }) => component.setValue('Bob')}
+      onUnmount={() => (unmounted = true)}
+      onValue={({ value, component }) => {
+        if (value === 'Ella') {
+          // Change value from Ella to Lauryn
+          component.setValue('Lauryn');
+        }
+      }}
+    />
+  );
+});
+
 it('should change component', async () => {
   const { getByText, getByLabelText, rerender } = render(
     <Component component={component} />
