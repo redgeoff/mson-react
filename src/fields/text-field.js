@@ -40,6 +40,7 @@ class TextField extends React.PureComponent {
 
   render() {
     const {
+      name,
       err,
       maxLength,
       touched,
@@ -69,6 +70,7 @@ class TextField extends React.PureComponent {
 
       fld = (
         <Input
+          id={name}
           error={touched && err ? true : false}
           inputProps={{
             maxLength: maxLength
@@ -99,6 +101,7 @@ class TextField extends React.PureComponent {
 }
 
 export default attach([
+  'name',
   'value',
   'err',
   'maxLength',
