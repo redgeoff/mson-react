@@ -33,10 +33,13 @@ class CommonField extends React.PureComponent {
 
     const isBlank = component.isBlank();
 
+    const id = component.getUniqueId();
+
     if (!hideLabelUI && !hideLabel && (!autoHideLabel || label)) {
       if (editable && !useDisplayValue && !inlineLabel) {
         lbl = (
           <InputLabel
+            htmlFor={id}
             error={touched && err ? true : false}
             // If label is blank then don't show as required
             required={label && required}
@@ -52,6 +55,7 @@ class CommonField extends React.PureComponent {
 
         lbl = (
           <FormLabel
+            htmlFor={id}
             error={touched && err ? true : false}
             required={required && !useDisplayValue && editable}
             shrink={useDisplayValue || !editable || shrinkLabel}

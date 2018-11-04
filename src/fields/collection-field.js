@@ -200,11 +200,11 @@ class CollectionField extends React.PureComponent {
 
       // We need to use the id for the key as we use the same list of cards when toggling
       // showArchive
-      const key = form.getValue('id');
+      const key = form.getUniqueId();
 
       // Note: we use an id instead of ref so that more of our logic can be reused across different
       // frameworks.
-      const id = component.getUniqueItemId(key);
+      const id = key;
 
       const item = (
         <Grid item xs={12} sm={maxGrids} lg={maxGrids} key={key} id={id}>

@@ -9,6 +9,7 @@ import app from './app';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  app.set({ basename: null }); // Clear basename to prevent warning
   ReactDOM.render(<AppContainer component={app} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

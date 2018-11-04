@@ -69,6 +69,7 @@ class TextField extends React.PureComponent {
 
       fld = (
         <Input
+          id={component.getUniqueId()}
           error={touched && err ? true : false}
           inputProps={{
             maxLength: maxLength
