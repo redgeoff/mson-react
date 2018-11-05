@@ -6,6 +6,8 @@ Note: this must be run on Linux (we need the --parent option for cp)
 
   - $ npm adduser
   - $ git config credential.helper store
+  - $ yarn add --dev mson # To update to latest version of MSON
+  - Modify package.json and manually update the version of the mson package in peerDependencies
   - Modify the version in package.json
   - $ git diff # check that only the version has changed
   - $ ./scripts/publish.sh
