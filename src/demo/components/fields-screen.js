@@ -105,7 +105,7 @@ export default {
             ],
             'fields.moneyField.value': 1000000.11,
             'fields.numberField.value': 123.4,
-            'fields.passwordField.value': 'password',
+            'fields.passwordField.value': 'password123',
             'fields.personFullNameField.value': {
               firstName: 'Daenerys',
               lastName: 'Targaryen'
