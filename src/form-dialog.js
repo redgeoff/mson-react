@@ -72,7 +72,14 @@ class FormDialog extends React.PureComponent {
   }
 
   render() {
-    const { mode, component, forbidUpdate, forbidDelete, value } = this.props;
+    const {
+      mode,
+      component,
+      forbidUpdate,
+      forbidDelete,
+      value,
+      fullScreen
+    } = this.props;
 
     const { saveClicked, previousMode } = this.state;
 
@@ -137,6 +144,8 @@ class FormDialog extends React.PureComponent {
 
     return (
       <Dialog
+        // fullScreen will be true on a small screen
+        fullScreen={fullScreen}
         open={open}
         onClose={() => this.handleClose(false)}
         aria-labelledby="form-dialog-title"
