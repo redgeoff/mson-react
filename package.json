@@ -8,7 +8,7 @@
   "homepage": "https://redgeoff.github.io/mson-react",
   "peerDependencies": {
     "@material-ui/core": "^3.2.2",
-    "material-ui-pickers": "^1.0.0-rc.14",
+    "material-ui-pickers": "^2.0.0",
     "mson": "^1.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
@@ -41,6 +41,7 @@
     "material-ui-pickers": "^2.0.0",
     "mson": "^1.1.0",
     "prettier": "^1.14.2",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "^2.0.4",
