@@ -6964,10 +6964,10 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-mson@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-1.1.0.tgz#7b2e6bf4d6b2cc98d80785656704c34f2fae6cbf"
-  integrity sha512-vYo8M0ez9t4W2nUGVBGUh/IW4/scgmkvcxCtWw2yRbaChj9MXtdwMIUQmH6kuokOV9+M3TvIjw/XU84AiiBfQw==
+mson@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-1.1.1.tgz#9f7d5c54156843ecee3c5fecc0bddf0293ee5228"
+  integrity sha512-SHp7bdKJWp3Cogb+0pwf5D0/7HukmCqo2Csb/L+FoWMu5cOPVpQg4zuk6dDPos+sUX48h3J+N1cORX/DpYiL/g==
   dependencies:
     "@babel/runtime" "^7.1.2"
     country-telephone-data "^0.6.0"
