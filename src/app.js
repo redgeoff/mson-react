@@ -87,6 +87,7 @@ const styles = theme => ({
   }
 });
 
+// TODO: break up into components for header, menu, body, etc...
 class App extends React.PureComponent {
   state = {
     mobileOpen: false,
@@ -393,37 +394,8 @@ class App extends React.PureComponent {
     });
   };
 
-  render() {
-    const {
-      classes,
-      component,
-      confirmation,
-      menuAlwaysTemporary
-    } = this.props;
-    const {
-      mobileOpen,
-      menuItem,
-      snackbarOpen,
-      snackbarMessage,
-      confirmationOpen,
-      showArchived,
-      showArchivedToggle,
-      // path,
-      searchString,
-      showSearch
-      // isLoggedIn
-    } = this.state;
-
-    const responsive = !menuAlwaysTemporary;
-
-    const menu = component.get('menu');
-
-    // Use the path from the location prop as this.state.path may not be up to date
-    const path = this.props.location.pathname;
-
-    const comp = this.component ? (
-      <Component component={this.component} />
-    ) : null;
+  archivedToggle() {
+    const { showArchived, showArchivedToggle } = this.state;
 
     // A component must not switch from controlled to uncontrolled so we need to avoid setting
     // checked=undefined
@@ -441,6 +413,13 @@ class App extends React.PureComponent {
       );
     }
 
+    return archivedToggle;
+  }
+
+  searchBox() {
+    const { classes } = this.props;
+    const { searchString, showSearch } = this.state;
+
     let searchBox = null;
     if (showSearch) {
       searchBox = (
@@ -451,8 +430,18 @@ class App extends React.PureComponent {
         />
       );
     }
+    return searchBox;
+  }
 
-    const appBar = (
+  appBar() {
+    const { classes } = this.props;
+    const { menuItem } = this.state;
+
+    const responsive = this.isResponsive();
+    const archivedToggle = this.archivedToggle();
+    const searchBox = this.searchBox();
+
+    return (
       <AppBar
         elevation={1} // tone down the elevation
         className={
@@ -482,6 +471,34 @@ class App extends React.PureComponent {
         </Toolbar>
       </AppBar>
     );
+  }
+
+  isResponsive() {
+    return !this.props.menuAlwaysTemporary;
+  }
+
+  render() {
+    const { classes, component, confirmation } = this.props;
+    const {
+      mobileOpen,
+      menuItem,
+      snackbarOpen,
+      snackbarMessage,
+      confirmationOpen
+    } = this.state;
+
+    const responsive = this.isResponsive();
+
+    const menu = component.get('menu');
+
+    // Use the path from the location prop as this.state.path may not be up to date
+    const path = this.props.location.pathname;
+
+    const comp = this.component ? (
+      <Component component={this.component} />
+    ) : null;
+
+    const appBar = this.appBar();
 
     const menuSidebar = (
       <Menu
