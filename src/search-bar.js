@@ -4,10 +4,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from './icon';
+import classNames from 'classnames';
 
 // TODO: see https://material-ui-next.com/style/icons/#icons and implement:
 // 1. Mouseover to change background color
-// 2. Focus to increase width
 
 const styles = theme => ({
   textField: {
@@ -41,6 +41,10 @@ const styles = theme => ({
     position: 'absolute',
     top: '-43px',
     right: '-5px'
+  },
+
+  grow: {
+    flexGrow: 1
   }
 });
 
@@ -57,10 +61,16 @@ class SearchBar extends React.PureComponent {
   };
 
   render() {
-    const { classes, className, searchString, onChange } = this.props;
+    const {
+      classes,
+      className,
+      searchString,
+      onChange,
+      fullWidth
+    } = this.props;
 
     return (
-      <div className={className}>
+      <div className={classNames(className, fullWidth ? classes.grow : null)}>
         <TextField
           InputProps={{
             disableUnderline: true,

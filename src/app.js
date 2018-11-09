@@ -29,7 +29,6 @@ import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
-import classNames from 'classnames';
 
 const drawerWidth = 240;
 
@@ -85,9 +84,6 @@ const styles = theme => ({
   },
   alignRight: {
     marginLeft: 'auto' // right align
-  },
-  grow: {
-    flexGrow: 1
   }
 });
 
@@ -445,10 +441,8 @@ class App extends React.PureComponent {
     if (showSearch) {
       searchBox = (
         <SearchBar
-          className={classNames(
-            classes.alignRight,
-            fullWidth ? classes.grow : null
-          )}
+          fullWidth={fullWidth}
+          className={classes.alignRight}
           searchString={searchStringInput}
           onChange={this.handleSearchStringInputChange}
           onSearch={this.handleSearch}
