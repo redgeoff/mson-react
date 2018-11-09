@@ -17,6 +17,7 @@ import Route from 'react-router-dom/Route';
 import Component from './component';
 // import compiler from 'mson/lib/compiler';
 import withRouter from 'react-router/withRouter';
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import attach from './attach';
 import globals from 'mson/lib/globals';
 import Snackbar from './snackbar';
@@ -84,6 +85,9 @@ const styles = theme => ({
   searchBar: {
     // marginLeft: theme.spacing.unit * 3, // left align
     marginLeft: 'auto' // right align
+  },
+  grow: {
+    flexGrow: 1
   }
 });
 
@@ -98,11 +102,15 @@ class App extends React.PureComponent {
     nextMenuItem: null,
     showArchivedToggle: false,
 
-    // Note: we need both searchString and globals.searchString as searchString is the controlled
-    // value for the text input and globals.searchString is the actual string with which we are
-    // searching.
-    searchString: '',
-    showSearch: false
+    // Note: we need both searchStringInput and globals.searchString as searchStringInput is the
+    // controlled value for the text input and globals.searchString is the actual string with which
+    // we are searching. These values not the same as we expect the user to submit the search before
+    // it is performed so that we don't search on every keystroke. FUTURE: wait a little bit after
+    // characters have been entered and then automatically search.
+    searchStringInput: '',
+    showSearch: false,
+
+    showSearchOnMobile: false
 
     // isLoggedIn: false
   };
@@ -274,7 +282,7 @@ class App extends React.PureComponent {
               menuItem,
               showArchived: false,
               showArchivedToggle: canArchive,
-              searchString: '',
+              searchStringInput: '',
               showSearch: canSearch
             });
           }
@@ -388,10 +396,23 @@ class App extends React.PureComponent {
     }
   };
 
-  handleSearchStringChange = event => {
+  handleSearchStringInputChange = searchStringInput => {
     this.setState({
-      searchString: event.target.value
+      searchStringInput
     });
+  };
+
+  handleSearch = searchStringInput => {
+    this.setState(
+      {
+        searchStringInput
+      },
+      () => {
+        globals.set({
+          searchString: searchStringInput ? searchStringInput : null
+        });
+      }
+    );
   };
 
   archivedToggle() {
@@ -418,37 +439,41 @@ class App extends React.PureComponent {
 
   searchBox() {
     const { classes } = this.props;
-    const { searchString, showSearch } = this.state;
+    const { searchStringInput, showSearch } = this.state;
 
     let searchBox = null;
     if (showSearch) {
       searchBox = (
         <SearchBar
           className={classes.searchBar}
-          searchString={searchString}
-          onChange={this.handleSearchStringChange}
+          searchString={searchStringInput}
+          onChange={this.handleSearchStringInputChange}
+          onSearch={this.handleSearch}
         />
       );
     }
     return searchBox;
   }
 
+  toggleShowSearch = () => {
+    this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
+  };
+
   appBar() {
-    const { classes } = this.props;
-    const { menuItem } = this.state;
+    const { classes, width } = this.props;
+    const { menuItem, showSearchOnMobile } = this.state;
 
+    const onMobile = isWidthDown('sm', width);
     const responsive = this.isResponsive();
-    const archivedToggle = this.archivedToggle();
-    const searchBox = this.searchBox();
 
-    return (
-      <AppBar
-        elevation={1} // tone down the elevation
-        className={
-          classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
-        }
-      >
-        <Toolbar>
+    let left = null;
+    let middle = null;
+    let right = null;
+
+    if (!onMobile || !showSearchOnMobile) {
+      const archivedToggle = this.archivedToggle();
+      left = (
+        <React.Fragment>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -462,12 +487,38 @@ class App extends React.PureComponent {
           </Typography>
 
           {archivedToggle}
+        </React.Fragment>
+      );
+    }
 
-          {searchBox}
+    if (!onMobile || showSearchOnMobile) {
+      const searchBox = this.searchBox();
+      middle = searchBox;
+    }
 
-          {/*
-          <UserMenu isLoggedIn={isLoggedIn} />
-          */}
+    if (onMobile) {
+      right = (
+        <IconButton
+          color="inherit"
+          aria-label="toggle search"
+          onClick={this.toggleShowSearch}
+        >
+          <Icon icon={showSearchOnMobile ? 'Close' : 'Search'} />
+        </IconButton>
+      );
+    }
+
+    return (
+      <AppBar
+        elevation={1} // tone down the elevation
+        className={
+          classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
+        }
+      >
+        <Toolbar>
+          {left}
+          {middle}
+          {right}
         </Toolbar>
       </AppBar>
     );
@@ -558,6 +609,7 @@ class App extends React.PureComponent {
 }
 
 App = withStyles(styles, { withTheme: true })(App);
+App = withWidth()(App);
 App = withRouter(App);
 App = attach(['menuAlwaysTemporary'])(App);
 App = attach(
