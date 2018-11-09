@@ -14,7 +14,7 @@ const styles = theme => ({
     borderRadius: 3,
     backgroundColor: theme.palette.primary[400],
     fontSize: theme.typography.subtitle1.fontSize,
-    padding: '10px 10px 10px 42px',
+    padding: '10px 34px 10px 42px',
     marginTop: '4px',
     width: 'calc(100%)',
     color: theme.palette.common.white
@@ -22,7 +22,7 @@ const styles = theme => ({
   searchIcon: {
     position: 'relative',
     top: '7px',
-    left: '-210px'
+    left: '-234px'
   },
   closeIcon: {
     position: 'relative',
