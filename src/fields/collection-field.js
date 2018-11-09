@@ -38,6 +38,10 @@ const getListStyle = (isDraggingOver, theme) => ({
 //     of data in the list and all the data when viewing/editing.
 
 const styles = theme => ({
+  root: {
+    // Needed when field is nested in a form that is nested in a form, e.g. FormEditor
+    width: '100%'
+  },
   spacer: {
     backgroundColor: theme.palette.grey[300],
     marginLeft: theme.spacing.unit,
@@ -467,12 +471,12 @@ class CollectionField extends React.PureComponent {
   }
 
   render() {
-    const { component, hideLabel } = this.props;
+    const { component, hideLabel, classes } = this.props;
 
     const isBlank = component.isBlank();
 
     return (
-      <span>
+      <span className={classes.root}>
         {!hideLabel && (
           <CommonField
             component={component}
