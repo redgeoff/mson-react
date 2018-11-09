@@ -14,20 +14,29 @@ const styles = theme => ({
     borderRadius: 3,
     backgroundColor: theme.palette.primary[400],
     fontSize: theme.typography.subtitle1.fontSize,
-    padding: '10px 34px 10px 42px',
+    padding: '10px 34px 10px 34px',
     marginTop: '4px',
     width: 'calc(100%)',
     color: theme.palette.common.white
   },
-  searchIcon: {
+
+  // Needed so that relative components don't take up any space
+  iconContainer: {
     position: 'relative',
-    top: '7px',
-    left: '-234px'
+    width: '0px',
+    height: '0px'
   },
+
+  searchIcon: {
+    position: 'absolute',
+    top: '-31px',
+    left: '6px'
+  },
+
   closeIcon: {
-    position: 'relative',
-    top: '-1px',
-    right: '66px'
+    position: 'absolute',
+    top: '-43px',
+    right: '-240px'
   }
 });
 
@@ -59,15 +68,17 @@ class SearchBar extends React.PureComponent {
           onKeyUp={this.handleKeyUp}
           onChange={event => onChange(event.target.value)}
         />
-        <Icon icon="Search" className={classes.searchIcon} />
-        <IconButton
-          color="inherit"
-          aria-label="clear search"
-          onClick={this.handleClearSearch}
-          className={classes.closeIcon}
-        >
-          <Icon icon="Close" />
-        </IconButton>
+        <div className={classes.iconContainer}>
+          <Icon icon="Search" className={classes.searchIcon} />
+          <IconButton
+            color="inherit"
+            aria-label="clear search"
+            onClick={this.handleClearSearch}
+            className={classes.closeIcon}
+          >
+            <Icon icon="Close" />
+          </IconButton>
+        </div>
       </div>
     );
   }
