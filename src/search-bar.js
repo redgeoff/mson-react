@@ -15,7 +15,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary[400],
     fontSize: theme.typography.subtitle1.fontSize,
     padding: '10px 34px 10px 34px',
-    marginTop: '4px',
+    marginTop: '2px',
     width: 'calc(100%)',
     color: theme.palette.common.white
   },

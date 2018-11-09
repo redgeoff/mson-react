@@ -459,52 +459,76 @@ class App extends React.PureComponent {
     this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
   };
 
+  menuButton() {
+    const { classes } = this.props;
+    const responsive = this.isResponsive();
+    return (
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={this.handleDrawerToggle}
+        className={responsive ? classes.navIconHide : ''}
+      >
+        <Icon icon="Menu" />
+      </IconButton>
+    );
+  }
+
+  title() {
+    const { menuItem } = this.state;
+    return (
+      <Typography variant="h6" color="inherit" noWrap>
+        {menuItem ? menuItem.label : ''}
+      </Typography>
+    );
+  }
+
   appBar() {
     const { classes, width } = this.props;
-    const { menuItem, showSearchOnMobile } = this.state;
+    const { showSearchOnMobile } = this.state;
 
     const onMobile = isWidthDown('sm', width);
     const responsive = this.isResponsive();
 
-    let left = null;
-    let middle = null;
-    let right = null;
-
-    if (!onMobile || !showSearchOnMobile) {
-      const archivedToggle = this.archivedToggle();
-      left = (
-        <React.Fragment>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={this.handleDrawerToggle}
-            className={responsive ? classes.navIconHide : ''}
-          >
-            <Icon icon="Menu" />
-          </IconButton>
-          <Typography variant="h6" color="inherit" noWrap>
-            {menuItem ? menuItem.label : ''}
-          </Typography>
-
-          {archivedToggle}
-        </React.Fragment>
-      );
-    }
-
-    if (!onMobile || showSearchOnMobile) {
-      const searchBox = this.searchBox();
-      middle = searchBox;
-    }
+    let bar = null;
 
     if (onMobile) {
-      right = (
-        <IconButton
-          color="inherit"
-          aria-label="toggle search"
-          onClick={this.toggleShowSearch}
-        >
-          <Icon icon={showSearchOnMobile ? 'Close' : 'Search'} />
-        </IconButton>
+      if (showSearchOnMobile) {
+        bar = (
+          <React.Fragment>
+            <IconButton
+              color="inherit"
+              aria-label="close search"
+              onClick={this.toggleShowSearch}
+            >
+              <Icon icon="ArrowBack" />
+            </IconButton>
+            {this.searchBox()}
+          </React.Fragment>
+        );
+      } else {
+        bar = (
+          <React.Fragment>
+            {this.menuButton()}
+            {this.title()}
+            {this.archivedToggle()}
+            <IconButton
+              color="inherit"
+              aria-label="toggle search"
+              onClick={this.toggleShowSearch}
+            >
+              <Icon icon="Search" />
+            </IconButton>
+          </React.Fragment>
+        );
+      }
+    } else {
+      bar = (
+        <React.Fragment>
+          {this.menuButton()}
+          {this.title()}
+          {this.searchBox()}
+        </React.Fragment>
       );
     }
 
@@ -515,11 +539,7 @@ class App extends React.PureComponent {
           classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
         }
       >
-        <Toolbar>
-          {left}
-          {middle}
-          {right}
-        </Toolbar>
+        <Toolbar>{bar}</Toolbar>
       </AppBar>
     );
   }
