@@ -49,6 +49,8 @@ const styles = theme => ({
 });
 
 class SearchBar extends React.PureComponent {
+  state = { autoFullWidth: false };
+
   handleKeyUp = event => {
     // Enter pressed?
     if (event.keyCode === 13) {
@@ -60,6 +62,14 @@ class SearchBar extends React.PureComponent {
     this.props.onSearch('');
   };
 
+  handleFocus = () => {
+    this.setState({ autoFullWidth: true });
+  };
+
+  handleBlur = () => {
+    this.setState({ autoFullWidth: false });
+  };
+
   render() {
     const {
       classes,
@@ -69,8 +79,12 @@ class SearchBar extends React.PureComponent {
       fullWidth
     } = this.props;
 
+    const { autoFullWidth } = this.state;
+
+    const full = fullWidth || autoFullWidth;
+
     return (
-      <div className={classNames(className, fullWidth ? classes.grow : null)}>
+      <div className={classNames(className, full ? classes.grow : null)}>
         <TextField
           InputProps={{
             disableUnderline: true,
@@ -82,6 +96,8 @@ class SearchBar extends React.PureComponent {
           onKeyUp={this.handleKeyUp}
           onChange={event => onChange(event.target.value)}
           className={classes.textField}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
         <div className={classes.iconContainer}>
           <Icon icon="Search" className={classes.searchIcon} />
