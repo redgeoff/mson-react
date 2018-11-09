@@ -10,6 +10,10 @@ import Icon from './icon';
 // 2. Focus to increase width
 
 const styles = theme => ({
+  textField: {
+    width: '100%'
+  },
+
   textFieldInput: {
     borderRadius: 3,
     backgroundColor: theme.palette.primary[400],
@@ -23,7 +27,7 @@ const styles = theme => ({
   // Needed so that relative components don't take up any space
   iconContainer: {
     position: 'relative',
-    width: '0px',
+    width: '100%', // Set 100% so that we can position the close icon relative to this
     height: '0px'
   },
 
@@ -36,7 +40,7 @@ const styles = theme => ({
   closeIcon: {
     position: 'absolute',
     top: '-43px',
-    right: '-240px'
+    right: '-5px'
   }
 });
 
@@ -67,6 +71,7 @@ class SearchBar extends React.PureComponent {
           value={searchString}
           onKeyUp={this.handleKeyUp}
           onChange={event => onChange(event.target.value)}
+          className={classes.textField}
         />
         <div className={classes.iconContainer}>
           <Icon icon="Search" className={classes.searchIcon} />

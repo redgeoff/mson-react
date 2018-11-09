@@ -29,6 +29,7 @@ import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
+import classNames from 'classnames';
 
 const drawerWidth = 240;
 
@@ -82,8 +83,7 @@ const styles = theme => ({
       marginLeft: drawerWidth
     }
   },
-  searchBar: {
-    // marginLeft: theme.spacing.unit * 3, // left align
+  alignRight: {
     marginLeft: 'auto' // right align
   },
   grow: {
@@ -437,7 +437,7 @@ class App extends React.PureComponent {
     return archivedToggle;
   }
 
-  searchBox() {
+  searchBox(fullWidth) {
     const { classes } = this.props;
     const { searchStringInput, showSearch } = this.state;
 
@@ -445,7 +445,10 @@ class App extends React.PureComponent {
     if (showSearch) {
       searchBox = (
         <SearchBar
-          className={classes.searchBar}
+          className={classNames(
+            classes.alignRight,
+            fullWidth ? classes.grow : null
+          )}
           searchString={searchStringInput}
           onChange={this.handleSearchStringInputChange}
           onSearch={this.handleSearch}
@@ -503,7 +506,7 @@ class App extends React.PureComponent {
             >
               <Icon icon="ArrowBack" />
             </IconButton>
-            {this.searchBox()}
+            {this.searchBox(true)}
           </React.Fragment>
         );
       } else {
@@ -516,6 +519,7 @@ class App extends React.PureComponent {
               color="inherit"
               aria-label="toggle search"
               onClick={this.toggleShowSearch}
+              className={classes.alignRight}
             >
               <Icon icon="Search" />
             </IconButton>
@@ -527,6 +531,7 @@ class App extends React.PureComponent {
         <React.Fragment>
           {this.menuButton()}
           {this.title()}
+          {this.archivedToggle()}
           {this.searchBox()}
         </React.Fragment>
       );
