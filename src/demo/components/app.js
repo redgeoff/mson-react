@@ -61,10 +61,10 @@ export default {
         ]
       },
       {
-        path: '/form-editor',
-        label: 'Form Editor',
+        path: '/form-builder',
+        label: 'Form Builder',
         content: {
-          component: 'app.FormEditor'
+          component: 'app.FormBuilder'
         }
       },
       {

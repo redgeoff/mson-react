@@ -1,6 +1,6 @@
 import React from 'react';
 import CommonField from './common-field';
-import Form from '../form';
+import Component from '../component';
 import attach from '../attach';
 import FlexBreak from '../flex-break';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -36,7 +36,7 @@ class FormField extends React.PureComponent {
         )}
         <FlexBreak />
         <span className={classes.root}>
-          <Form component={form} formTag={false} disabled={disabled} />
+          <Component component={form} formTag={false} disabled={disabled} />
         </span>
       </span>
     );
