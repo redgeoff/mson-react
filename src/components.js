@@ -9,6 +9,8 @@ import DateField from './fields/date-field';
 import Field from './fields/field';
 import Form from './form';
 import FormField from './fields/form-field';
+import Grid from './grid';
+import GridItem from './grid-item';
 import CollectionField from './fields/collection-field';
 import ListField from './fields/list-field';
 import ReCAPTCHAField from './fields/re-captcha-field';
@@ -31,6 +33,8 @@ export default {
   Field,
   Form,
   FormField,
+  Grid,
+  GridItem,
   CollectionField,
   IdField: TextField,
   IntegerField: TextField,
