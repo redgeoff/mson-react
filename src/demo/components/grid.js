@@ -37,6 +37,28 @@ export default {
         component: 'Text',
         text: '# D'
       }
+    },
+    {
+      component: 'GridItem',
+      md: 6,
+      xs: 12,
+      content: {
+        name: 'hideA',
+        component: 'ButtonField',
+        label: 'Hide A',
+        listeners: [
+          {
+            event: 'click',
+            actions: [
+              {
+                component: 'Set',
+                name: 'parent.parent.items.0.hidden',
+                value: true
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 };
