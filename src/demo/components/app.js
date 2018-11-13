@@ -80,6 +80,13 @@ export default {
         content: {
           component: 'app.ContactNoMSON'
         }
+      },
+      {
+        path: '/grid',
+        label: 'Grid',
+        content: {
+          component: 'app.Grid'
+        }
       }
     ]
   }

@@ -7,6 +7,7 @@ import EditContact from './edit-contact';
 import FieldsScreen from './fields-screen';
 import Fields from './fields';
 import FormBuilder from './form-builder';
+import Grid from './grid';
 import Home from './home';
 import Tasks from './tasks';
 import TasksLocalStorage from './tasks-local-storage';
@@ -21,6 +22,7 @@ export {
   FieldsScreen,
   Fields,
   FormBuilder,
+  Grid,
   Home,
   Tasks,
   TasksLocalStorage,
