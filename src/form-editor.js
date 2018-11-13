@@ -9,14 +9,8 @@ class FormEditor extends React.Component {
     if (editable !== false) {
       return <Form {...this.props} />;
     } else {
-      const definition = {
-        component: 'Form',
-        fields: component.get('fields.fields').mapForms(form => ({
-          ...form.getValues({ default: false }),
-          componentName: undefined,
-          component: form.getValue('componentName')
-        }))
-      };
+      // Note: we need to use a getter to generate the definition
+      const definition = component.get('definition');
 
       // Needed as form tag cannot be a descendant of a form tag
       const formTag = false;

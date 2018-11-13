@@ -8,6 +8,7 @@ import Field from './fields/field';
 import compiler from 'mson/lib/compiler';
 import each from 'lodash/each';
 import attach from './attach';
+import ComponentField from 'mson/lib/fields/component-field';
 
 const styles = theme => ({
   form: {
@@ -25,6 +26,7 @@ class FieldEditorForm extends React.PureComponent {
   handleValueChange = value => {
     const form = this.props.component;
     let { field } = this.state;
+    let component = null;
 
     // Is the field changing?
     if (!field || value.componentName !== field.getClassName()) {
@@ -34,9 +36,17 @@ class FieldEditorForm extends React.PureComponent {
       }
 
       if (value.componentName) {
-        field = compiler.newComponent({
+        component = compiler.newComponent({
           component: value.componentName
         });
+
+        // Is the component a field?
+        if (component.isField) {
+          field = component;
+        } else {
+          // e.g. Text component is not a field
+          field = new ComponentField({ content: component });
+        }
 
         // Auto validate so that the user can preview how the validation will work
         const validate = () => {
@@ -54,9 +64,13 @@ class FieldEditorForm extends React.PureComponent {
       // Set field values using form values. The corresponding values may not exist if the field was
       // just changed.
       const values = form.getValues({ default: false });
+      component =
+        field.getClassName() === 'ComponentField'
+          ? field.get('content')
+          : field;
       each(values, (value, name) => {
-        if (field.has(name)) {
-          field.set({ [name]: value });
+        if (component.has(name)) {
+          component.set({ [name]: value });
         }
       });
     }
