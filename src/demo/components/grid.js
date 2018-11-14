@@ -43,17 +43,32 @@ export default {
       md: 6,
       xs: 12,
       content: {
-        name: 'hideA',
+        name: 'toggleA',
         component: 'ButtonField',
-        label: 'Hide A',
+        label: 'Toggle A',
         listeners: [
           {
             event: 'click',
             actions: [
               {
-                component: 'Set',
-                name: 'parent.parent.items.0.hidden',
-                value: true
+                component: 'Action',
+                if: {
+                  'parent.parent.items.0.hidden': true
+                },
+                actions: [
+                  {
+                    component: 'Set',
+                    name: 'parent.parent.items.0.hidden',
+                    value: false
+                  }
+                ],
+                else: [
+                  {
+                    component: 'Set',
+                    name: 'parent.parent.items.0.hidden',
+                    value: true
+                  }
+                ]
               }
             ]
           }
