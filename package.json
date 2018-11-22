@@ -8,7 +8,7 @@
   "homepage": "https://redgeoff.github.io/mson-react",
   "peerDependencies": {
     "@date-io/date-fns": "^0.0.2",
-    "@material-ui/core": "^3.2.2",
+    "@material-ui/core": "^3.5.1",
     "material-ui-pickers": "^2.0.2",
     "mson": "^1.1.1",
     "react": "^16.4.2",
