@@ -3,7 +3,6 @@ import Field from './fields/field';
 import attach from './attach';
 import access from 'mson/lib/access';
 
-// Use a PureComponent so that the form is re-rendered when the state/props do not change
 class Form extends React.PureComponent {
   state = {
     fieldsCanAccess: null
@@ -66,11 +65,12 @@ class Form extends React.PureComponent {
       this.turnOnAutoValidate();
     }
 
-    // Did the access, more or form change?
+    // Did the access, mode or form change?
     if (
       prevProps.access !== access ||
       prevProps.mode !== mode ||
-      prevProps.component !== component
+      prevProps.component !== component ||
+      prevProps.value !== this.props.value
     ) {
       this.adjustAccess();
     }
@@ -147,5 +147,6 @@ export default attach([
   'isLoading',
 
   // We listen for a change to fields so that we can render when a field is added
-  'change'
+  'change',
+  'value'
 ])(Form);
