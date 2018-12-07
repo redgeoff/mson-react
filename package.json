@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "date-fns": "^2.0.0-alpha.16",
-    "jest-dom": "^2.1.0",
+    "jest-dom": "^3.0.0",
     "lodash": "^4.17.10",
     "react-beautiful-dnd": "^10.0.0",
     "react-google-recaptcha": "^1.0.0",
