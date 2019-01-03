@@ -36,7 +36,7 @@ const attach = (_watchProps, componentOrName) => {
 
       handleFieldChange = (name, value) => {
         if (this.watchProps.indexOf(name) !== -1) {
-          // Is the component mounted? Prevent a race condition where the handler tries to act the
+          // Is the component mounted? Prevent a race condition where the handler tries to set the
           // state after the component has been unmounted.
           if (this.wasMounted) {
             this.setState({ [name]: value });
