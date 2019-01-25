@@ -768,17 +768,17 @@
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
 
-"@date-io/core@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-0.0.2.tgz#35be27d26eb652e752ccfbffe624c95169200dbd"
-  integrity sha512-rkanRee2Agpw3tZLaCGJxkNRzi7FdyqueQDmEZAgZfIQaPo0MoOrO0gcTGwhTNREV8+OBKiZLpbaHK79dsU/Wg==
+"@date-io/core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.0.1.tgz#70624c535f2a53bf7ecefb486fc86e3edecf0078"
+  integrity sha512-vUdpOjCyjjDXjooyy+1MGCbw2BI00M/avAk+S8hQVs8CrLW78w7HdPFfVVpywC5f1ygueGc6IkSBVj0yawYGEg==
 
-"@date-io/date-fns@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-0.0.2.tgz#1604546d080707b73185a135db197598cfd16e6d"
-  integrity sha512-MGcRweZCAQ3O2RNfwflH9zF2MgwNpYxRBpcVm4adhyZLKxG4xUQTJvQ/BtO93/MEbjcpGgNS0Yfej/96eTKFfQ==
+"@date-io/date-fns@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-1.0.1.tgz#2e775fd1184bfb14993601aaef68a153ff21ceeb"
+  integrity sha512-egGn37+ReN1OhxfwiwngOiddalzauENg7Lf53EbcxlYYw8SRgxmvS5zxdG07AlDrPLCQg5tGqpqLyj3o3nsj0A==
   dependencies:
-    "@date-io/core" "^0.0.2"
+    "@date-io/core" "^1.0.1"
 
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
