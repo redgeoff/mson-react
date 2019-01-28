@@ -6169,9 +6169,10 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
-mson@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-1.1.1.tgz#9f7d5c54156843ecee3c5fecc0bddf0293ee5228"
+mson@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-1.2.0.tgz#33c64311aea78c776d686a2fef85c9a344e78024"
+  integrity sha512-Fyd+BW1qX0bZN8s1AV/Z1kG0YMhsydlBo+taYVtsr6uOQaGVtPA4z6UVKL5Vnru6Tw6n9njQId44lrRICYcalA==
   dependencies:
     "@babel/runtime" "^7.1.2"
     country-telephone-data "^0.6.0"
