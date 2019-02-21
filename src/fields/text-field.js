@@ -15,7 +15,15 @@ class TextField extends React.PureComponent {
       const { inputRef, ...other } = props;
       const { mask } = this.props;
 
-      return <MaskedInput {...other} ref={inputRef} mask={mask} />;
+      return (
+        <MaskedInput
+          {...other}
+          ref={ref => {
+            inputRef(ref ? ref.inputElement : null);
+          }}
+          mask={mask}
+        />
+      );
     };
   }
 

@@ -29,9 +29,8 @@ class Tabs extends React.Component {
           onChange={this.handleChange}
           indicatorColor="primary"
           textColor="primary"
-          scrollable
           scrollButtons="auto"
-          fullWidth
+          variant="fullWidth"
         >
           {items.map((item, index) => (
             <Tab
