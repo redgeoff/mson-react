@@ -828,10 +828,10 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.1.0"
 
-"@babel/runtime-corejs2@^7.3.0":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.3.1.tgz#0c113242e2328f9674d42703a89bee6ebebe9a82"
-  integrity sha512-YpO13776h3e6Wy8dl2J8T9Qwlvopr+b4trCEhHE+yek6yIqV8sx6g3KozdHMbXeBpjosbPi+Ii5Z7X9oXFHUKA==
+"@babel/runtime-corejs2@^7.3.4":
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.3.4.tgz#63f8bbc77622da202e9ea6f8f6e3bf28991832d9"
+  integrity sha512-QwPuQE65kNxjsNKk34Rfgen2R5fk0J2So99SD45uXBp34QOfyz11SqVgJ4xvyCpnCIieSQ0X0hSSc9z/ymlJJw==
   dependencies:
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
@@ -6013,10 +6013,10 @@ jest-docblock@^23.2.0:
   dependencies:
     detect-newline "^2.1.0"
 
-jest-dom@^3.0.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-3.1.2.tgz#45be8831108abfbcc2c6a9fe315a6b9e234a1a24"
-  integrity sha512-QpyhZxgx8SkFefBaTD426RDT90dSmoB4nBXIHbQQ/MdrpFl9V2HRmhBYe7p82T22TkHQHbSAmis+il4c1R4cBg==
+jest-dom@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-3.1.3.tgz#9490de549c02366fe586f23bdafffd8374bd1d65"
+  integrity sha512-V9LdySiA74/spcAKEG3FRMRKnisKlcYr3EeCNYI4n7CWNE7uYg5WoBUHeGXirjWjRYLLZ5vx8rUaR/6x6o75oQ==
   dependencies:
     chalk "^2.4.1"
     css "^2.2.3"
@@ -8896,12 +8896,12 @@ react-async-script@^1.0.0:
     hoist-non-react-statics "^3.0.1"
     prop-types "^15.5.0"
 
-react-beautiful-dnd@^10.0.0:
-  version "10.0.4"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-10.0.4.tgz#56913a77706ad2d1b002041d9cb1ac3849a4ae89"
-  integrity sha512-j2Ra/mW48tXz1Mk6bNBuiENpRBt8wQcPbJgHSswmLDonUE8JPwVikaONoMavdowoMKQJoOJ9IwPTo82d/8aKKg==
+react-beautiful-dnd@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-10.1.0.tgz#11b8958cfba5c54cb013dcff797efd15a3e0f333"
+  integrity sha512-oij2ZLIQ6SFmqy/MiXbuO8HUFHQ39gaPsTYj0Ewk0XwbLM32L+diVP0NXbEK7nhYv5lF2jviXGnda+BYMi6+nA==
   dependencies:
-    "@babel/runtime-corejs2" "^7.3.0"
+    "@babel/runtime-corejs2" "^7.3.4"
     css-box-model "^1.1.1"
     memoize-one "^5.0.0"
     prop-types "^15.6.1"
@@ -9093,10 +9093,10 @@ react-scripts@^2.1.5:
   optionalDependencies:
     fsevents "1.2.4"
 
-react-select@^2.1.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-2.4.1.tgz#99dd9c8b7700b5ebd38007dd707b1abdbad2e70f"
-  integrity sha512-je1cVAFsyQrGxkruQnNCuwo3+P0+1dyq7M4/gTlSwhO4ptPeTjf0eNrvCJ9iurVyorrnI88zgx2/yxrr2/oLLQ==
+react-select@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-2.4.2.tgz#27da80e3880e92b081be607207bebdf63bcf4f3a"
+  integrity sha512-5xFOQ6JJktkY5NTaHrc6x9mKwIjhNIiBkGic1j71uyY+ulFpRFra6f4WKLd9fuCylk4WjLpO5zDhdF4CAcwFzA==
   dependencies:
     classnames "^2.2.5"
     emotion "^9.1.2"
