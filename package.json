@@ -22,7 +22,7 @@
     "react-beautiful-dnd": "^10.1.0",
     "react-google-recaptcha": "^1.0.0",
     "react-markdown": "^4.0.0",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.0.0",
     "react-select": "^2.4.2",
     "react-testing-library": "^6.0.0",
     "react-text-mask": "^5.4.3",
