@@ -2,9 +2,7 @@
 
 ## Creating a Release, Compiling the JS and Publishing to NPM
 
-Note: this must be run on Linux (we need the --parent option for cp)
-
-  - $ npm adduser
+  - $ npm login
   - $ git config credential.helper store
   - $ yarn add --dev mson # To update to latest version of MSON
   - Modify package.json and manually update the version of the mson package in peerDependencies
