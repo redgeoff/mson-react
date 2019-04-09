@@ -5,8 +5,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import lightBlue from '@material-ui/core/colors/lightBlue';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
-import Prompt from 'react-router-dom/Prompt';
+import { BrowserRouter, Prompt } from 'react-router-dom';
 import globals from 'mson/lib/globals';
 import attach from './attach';
 
