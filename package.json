@@ -23,7 +23,7 @@
     "react-google-recaptcha": "^1.0.0",
     "react-markdown": "^4.0.8",
     "react-router-dom": "^5.0.0",
-    "react-select": "^2.4.3",
+    "react-select": "^3.0.0",
     "react-testing-library": "^7.0.0",
     "react-text-mask": "^5.4.3",
     "text-mask-addons": "^3.8.0"
