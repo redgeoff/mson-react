@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Component from './component';
 import compiler from 'mson/lib/compiler';
-import { render, wait, fireEvent } from 'react-testing-library';
+import { render, wait, fireEvent } from '@testing-library/react';
 
 const definition = {
   name: 'firstName',
