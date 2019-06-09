@@ -9,7 +9,7 @@
   "peerDependencies": {
     "@date-io/date-fns": "^1.0.1",
     "@material-ui/core": "^3.9.1",
-    "date-fns": "^2.0.0-alpha.21",
+    "date-fns": "^2.0.0-alpha.31",
     "material-ui-pickers": "^2.1.2",
     "mson": "^1.3.0",
     "prop-types": "^15.6.2",
