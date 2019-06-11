@@ -38,7 +38,7 @@
     "@testing-library/react": "^8.0.1",
     "babel-loader": "8.0.5",
     "copyfiles": "^2.1.0",
-    "css-loader": "^2.0.0",
+    "css-loader": "^3.0.0",
     "date-fns": "^2.0.0-alpha.31",
     "gh-pages": "^2.0.1",
     "husky": "^2.4.0",
