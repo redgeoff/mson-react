@@ -42,7 +42,7 @@
     "date-fns": "^2.0.0-alpha.31",
     "gh-pages": "^2.0.1",
     "husky": "^2.4.0",
-    "lint-staged": "^8.2.0",
+    "lint-staged": "^9.0.0",
     "material-ui-pickers": "^2.1.2",
     "mson": "^1.3.1",
     "prettier": "^1.18.2",
