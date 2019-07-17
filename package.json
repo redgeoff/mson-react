@@ -51,7 +51,7 @@
     "react-dom": "^16.8.2",
     "react-scripts": "^3.0.0",
     "style-loader": "^0.23.1",
-    "typeface-roboto": "^0.0.54",
+    "typeface-roboto": "^0.0.75",
     "wait-on": "^3.0.1",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.3"
