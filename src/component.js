@@ -46,7 +46,7 @@ export class Component extends React.PureComponent {
       comp = this.state.component;
     }
 
-    // Note: the component can be null, e.g. it has not yet been defined
+    // Note: the component can be falsy, e.g. it has not yet been defined
     if (comp && comp.get('hidden')) {
       return null;
     } else {
