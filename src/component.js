@@ -1,8 +1,9 @@
 import React from 'react';
 import InnerComponent from './inner-component';
 import compiler from 'mson/lib/compiler';
+import attach from './attach';
 
-export default class Component extends React.PureComponent {
+export class Component extends React.PureComponent {
   state = { component: null };
 
   createComponent() {
@@ -45,6 +46,13 @@ export default class Component extends React.PureComponent {
       comp = this.state.component;
     }
 
-    return <InnerComponent component={comp} {...childProps} />;
+    // Note: the component can be falsy, e.g. it has not yet been defined
+    if (comp && comp.get('hidden')) {
+      return null;
+    } else {
+      return <InnerComponent component={comp} {...childProps} />;
+    }
   }
 }
+
+export default attach(['hidden'])(Component);

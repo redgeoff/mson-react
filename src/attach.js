@@ -23,6 +23,12 @@ const attach = (_watchProps, componentOrName) => {
         }
       };
 
+      // The component can be created at any time, e.g. when the definition is set. Therefore, we
+      // need to handle a missing component until the component is present.
+      hasComponent() {
+        return !!this.getComponent();
+      }
+
       constructor(props) {
         super(props);
 
@@ -31,7 +37,9 @@ const attach = (_watchProps, componentOrName) => {
         this.watchProps = difference(_watchProps, Object.keys(this.props));
 
         // These values need to be in the state so that the component is rerendered when they change.
-        this.state = this.getComponent().get(this.watchProps);
+        if (this.hasComponent()) {
+          this.state = this.getComponent().get(this.watchProps);
+        }
       }
 
       handleFieldChange = (name, value) => {
@@ -56,16 +64,22 @@ const attach = (_watchProps, componentOrName) => {
       }
 
       addListener() {
-        this.getComponent().on('$change', this.handleFieldChange);
+        if (this.hasComponent()) {
+          this.getComponent().on('$change', this.handleFieldChange);
+        }
       }
 
       removeListener() {
-        this.getComponent().removeListener('$change', this.handleFieldChange);
+        if (this.hasComponent()) {
+          this.getComponent().removeListener('$change', this.handleFieldChange);
+        }
       }
 
       setInitialState() {
-        const initialState = this.getComponent().get(this.watchProps);
-        this.setState(initialState);
+        if (this.hasComponent()) {
+          const initialState = this.getComponent().get(this.watchProps);
+          this.setState(initialState);
+        }
       }
 
       componentDidMount() {
