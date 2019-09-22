@@ -18,8 +18,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const getItemStyle = (isDragging, draggableStyle, theme) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
-  padding: theme.spacing.unit / 8,
-  margin: `0 0 ${theme.spacing.unit / 8}px 0`,
+  padding: theme.spacing(0.125),
+  margin: `0 0 ${theme.spacing(0.125)}px 0`,
 
   // change background colour if dragging
   background: isDragging ? theme.palette.secondary[400] : undefined,
@@ -44,8 +44,8 @@ const styles = theme => ({
   },
   spacer: {
     backgroundColor: theme.palette.grey[300],
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     animation: 'fadeIn 1s infinite alternate'
   },
   footer: {
@@ -53,7 +53,7 @@ const styles = theme => ({
     // loaded
     height: 50,
     backgroundColor: theme.palette.grey[300],
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     animation: 'fadeIn 1s infinite alternate'
   }
 });

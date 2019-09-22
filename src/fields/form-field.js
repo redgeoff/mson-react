@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   root: {
-    marginLeft: theme.spacing.unit * 2,
+    marginLeft: theme.spacing(2),
 
     // The following flex properties are needed so that we can set a margin for all fields in the
     // nested form

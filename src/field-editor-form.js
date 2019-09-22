@@ -14,7 +14,7 @@ const styles = theme => ({
   form: {
     overflowY: 'scroll',
     maxHeight: 'calc(100vh - 390px)',
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing(3)
   }
 });
 

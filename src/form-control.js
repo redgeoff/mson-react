@@ -4,11 +4,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   formControl: {
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   fullWidth: {
     // TODO: bug in material ui?
-    width: `calc(100% - ${theme.spacing.unit * 2}px)`
+    width: `calc(100% - ${theme.spacing(2)}px)`
   },
   noMarginBottom: {
     marginBottom: 0
@@ -26,9 +26,7 @@ class FormControl extends React.PureComponent {
     return (
       <FormControlMU
         fullWidth={fullWidth}
-        className={`${
-          classes.formControl
-        } ${fullWidthClassName} ${noMarginBottomClassName}`}
+        className={`${classes.formControl} ${fullWidthClassName} ${noMarginBottomClassName}`}
       >
         {children}
       </FormControlMU>

@@ -24,10 +24,10 @@ const styles = theme => ({
     alignItems: 'center',
 
     // Adjust for MUI label
-    marginTop: theme.spacing.unit * 2 + 5
+    marginTop: theme.spacing(2) + 5
   },
   chip: {
-    margin: `${theme.spacing.unit / 1}px ${theme.spacing.unit / 4}px`
+    margin: `${theme.spacing(1)}px ${theme.spacing(0.25)}px`
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -38,7 +38,7 @@ const styles = theme => ({
     )
   },
   noOptionsMessage: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
   },
   singleValue: {
     fontSize: theme.typography.subtitle1.fontSize
@@ -54,7 +54,7 @@ const styles = theme => ({
 
     // Adjust for MUI label
     // marginTop: theme.spacing.unit * 7
-    marginTop: theme.spacing.unit * 1
+    marginTop: theme.spacing(1)
   },
   root: {
     // Allow for help icon to be placed on right of field
