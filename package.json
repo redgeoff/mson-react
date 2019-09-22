@@ -17,7 +17,7 @@
     "react-dom": "^16.8.2"
   },
   "dependencies": {
-    "jest-dom": "^4.0.0",
+    "@testing-library/jest-dom": "^4.1.0",
     "lodash": "^4.17.15",
     "react-beautiful-dnd": "^11.0.5",
     "react-google-recaptcha": "^2.0.1",
