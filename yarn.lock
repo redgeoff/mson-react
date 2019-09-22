@@ -9456,10 +9456,10 @@ react-event-listener@^0.6.6:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-google-recaptcha@^2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-2.0.0-rc.1.tgz#8136bd4835b17356c790f23065b779ea4d4bdc2b"
-  integrity sha512-4oUWH1iLFabXVqSUqcHRNsGeGAlFLubRfszykFjw8xKuGwG9+GYcoQiTMfti+BKc+K/Pnog+4c+jWivElbViBA==
+react-google-recaptcha@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-google-recaptcha/-/react-google-recaptcha-2.0.1.tgz#3276b29659493f7ca2a5b7739f6c239293cdf1d8"
+  integrity sha512-4Y8awVnarn7+gdVpu8uvSmRJzzlMMoXqdhLoyToTOfVK6oM+NaChNI8NShnu75Q2YGHLvR1IA1FWZesuYHwn5w==
   dependencies:
     prop-types "^15.5.0"
     react-async-script "^1.1.1"
