@@ -14,7 +14,8 @@ const styles = theme => ({
   input: {
     display: 'flex',
     padding: 0,
-    minWidth: 240 // A good default for most labels
+    minWidth: 240, // A good default for most labels
+    height: 'auto'
   },
   valueContainer: {
     display: 'flex',
