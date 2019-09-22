@@ -1,9 +1,8 @@
 import React from 'react';
 import attach from '../attach';
 import CommonField from './common-field';
-import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
+import { MuiPickersUtilsProvider, TimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import TimePicker from 'material-ui-pickers/TimePicker';
 import withStyles from '@material-ui/core/styles/withStyles';
 import DisplayValueTypography from './display-value-typography';
 
