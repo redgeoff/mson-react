@@ -11,7 +11,7 @@ The best way to get started with MSON is to play with the [Getting Started App](
 
 ### Adding MSON-React to Your Existing React Project
 
-  - `yarn add @date-io/date-fns @material-ui/core date-fns@2.0.0-alpha.27 material-ui-pickers mson mson-react typeface-roboto`
+  - `yarn add @date-io/date-fns @material-ui/core date-fns @material-ui/pickers mson mson-react typeface-roboto`
     - Note: this is needed as MSON and MSON-React are libraries that work in conjunction with React, Material UI and Date-IO. As such, these dependencies are peer dependencies.
   - Add the following to the head section of your index.html:
     ```html

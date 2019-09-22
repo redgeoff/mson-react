@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   paper: {
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit * 2
+    margin: theme.spacing(1),
+    padding: theme.spacing(2)
   },
   content: {
     flex: 1 // TODO: needed?

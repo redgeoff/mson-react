@@ -15,8 +15,8 @@ const drawerWidth = 240;
 const styles = theme => ({
   drawerHeader: {
     ...theme.mixins.toolbar,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit
+    paddingLeft: theme.spacing(3),
+    paddingTop: theme.spacing(1)
   },
   drawerPaper: {
     width: 250

@@ -11,7 +11,7 @@ import registrar from 'mson/lib/compiler/registrar';
 
 const styles = theme => ({
   nested: {
-    paddingLeft: theme.spacing.unit * 4
+    paddingLeft: theme.spacing(4)
   },
   primary: {
     color: theme.palette.text.primary

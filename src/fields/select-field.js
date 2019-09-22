@@ -17,7 +17,7 @@ const styles = theme => ({
     minWidth: 120
   },
   chip: {
-    margin: theme.spacing.unit / 4
+    margin: theme.spacing(0.25)
   }
 });
 

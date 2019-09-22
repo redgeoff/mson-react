@@ -8,8 +8,8 @@ import FormCardButtons from './form-card-buttons';
 
 const styles = theme => ({
   paper: {
-    margin: theme.spacing.unit,
-    padding: theme.spacing.unit * 2
+    margin: theme.spacing(1),
+    padding: theme.spacing(2)
   },
   content: {
     flex: 1,

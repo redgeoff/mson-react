@@ -1,17 +1,19 @@
 import React from 'react';
 import attach from '../attach';
 import CommonField from './common-field';
-import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
+import {
+  MuiPickersUtilsProvider,
+  DateTimePicker,
+  DatePicker
+} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import DateTimePicker from 'material-ui-pickers/DateTimePicker';
-import DatePicker from 'material-ui-pickers/DatePicker';
 import withStyles from '@material-ui/core/styles/withStyles';
 import DisplayValueTypography from './display-value-typography';
 
 const styles = theme => ({
   root: {
     // We need to add a margin as the picker doesn't play well with the Material-UI label
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing(2)
   }
 });
 
