@@ -71,8 +71,8 @@ class CollectionField extends React.PureComponent {
   };
 
   handleCancel = form => {
-    const { component, preventRead } = this.props;
-    if (component.get('skipRead') || preventRead) {
+    const { component, preventReadAction } = this.props;
+    if (component.get('skipRead') || preventReadAction) {
       component.set({ mode: null });
     } else {
       component.set({
@@ -120,7 +120,7 @@ class CollectionField extends React.PureComponent {
   }
 
   handleDelete = async formToDelete => {
-    const { component, preventDelete } = this.props;
+    const { component, preventDeleteAction } = this.props;
 
     const open = this.isOpen();
     if (formToDelete) {
@@ -145,7 +145,7 @@ class CollectionField extends React.PureComponent {
         component.set({ mode: null });
       }
     } else {
-      if (!preventDelete) {
+      if (!preventDeleteAction) {
         this.setState({
           confirmationOpen: true,
           // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
@@ -405,7 +405,7 @@ class CollectionField extends React.PureComponent {
       useDisplayValue,
       theme,
       preventUpdate,
-      preventDelete
+      preventDeleteAction
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -492,7 +492,7 @@ class CollectionField extends React.PureComponent {
             !canArchive ||
             dis ||
             useDisplayValue ||
-            preventDelete
+            preventDeleteAction
           }
         />
 
@@ -551,8 +551,8 @@ CollectionField = attach([
   'showArchived',
   'searchString',
   'order',
-  'preventRead',
+  'preventReadAction',
   'preventUpdate',
-  'preventDelete'
+  'preventDeleteAction'
 ])(CollectionField);
 export default CollectionField;
