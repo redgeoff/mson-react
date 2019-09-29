@@ -126,7 +126,7 @@ class CollectionField extends React.PureComponent {
     if (formToDelete) {
       component.set({
         currentForm: formToDelete,
-        mode: CollectionFieldCore.MODES.ARCHIVE
+        mode: CollectionFieldCore.MODES.DELETE
       });
     } else {
       // Are we already focussed on this form
