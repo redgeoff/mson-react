@@ -14,6 +14,7 @@ import ButtonField from 'mson/lib/fields/button-field';
 import Icon from '../icon';
 import CommonField from './common-field';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import CollectionFieldCore from 'mson/lib/fields/collection-field';
 
 const getItemStyle = (isDragging, draggableStyle, theme) => ({
   // some basic styles to make the items look a bit nicer
@@ -70,29 +71,44 @@ class CollectionField extends React.PureComponent {
   };
 
   handleCancel = form => {
-    const { component } = this.props;
-    if (component.get('skipRead')) {
+    const { component, preventRead } = this.props;
+    if (component.get('skipRead') || preventRead) {
       component.set({ mode: null });
     } else {
-      component.set({ currentForm: form, mode: 'read' });
+      component.set({
+        currentForm: form,
+        mode: CollectionFieldCore.MODES.READ
+      });
     }
   };
 
   handleClick = form => {
     const { component } = this.props;
     if (component.get('skipRead')) {
-      component.set({ currentForm: form, mode: 'update' });
+      component.set({
+        currentForm: form,
+        mode: CollectionFieldCore.MODES.UPDATE
+      });
     } else {
-      component.set({ currentForm: form, mode: 'read' });
+      component.set({
+        currentForm: form,
+        mode: CollectionFieldCore.MODES.READ
+      });
     }
   };
 
   handleEdit = form => {
-    this.props.component.set({ currentForm: form, mode: 'update' });
+    this.props.component.set({
+      currentForm: form,
+      mode: CollectionFieldCore.MODES.UPDATE
+    });
   };
 
   handleNew = () => {
-    this.props.component.set({ currentForm: null, mode: 'create' });
+    this.props.component.set({
+      currentForm: null,
+      mode: CollectionFieldCore.MODES.CREATE
+    });
   };
 
   handleSave = async () => {
@@ -104,11 +120,14 @@ class CollectionField extends React.PureComponent {
   }
 
   handleDelete = async formToDelete => {
-    const { component } = this.props;
+    const { component, preventDelete } = this.props;
 
     const open = this.isOpen();
     if (formToDelete) {
-      component.set({ currentForm: formToDelete });
+      component.set({
+        currentForm: formToDelete,
+        mode: CollectionFieldCore.MODES.ARCHIVE
+      });
     } else {
       // Are we already focussed on this form
       formToDelete = component.get('form');
@@ -126,11 +145,13 @@ class CollectionField extends React.PureComponent {
         component.set({ mode: null });
       }
     } else {
-      this.setState({
-        confirmationOpen: true,
-        // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
-        confirmationTitle: 'Delete this?'
-      });
+      if (!preventDelete) {
+        this.setState({
+          confirmationOpen: true,
+          // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
+          confirmationTitle: 'Delete this?'
+        });
+      }
       component.set({ mode: null });
     }
   };
@@ -382,7 +403,9 @@ class CollectionField extends React.PureComponent {
       disabled,
       accessEditable,
       useDisplayValue,
-      theme
+      theme,
+      preventUpdate,
+      preventDelete
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -457,8 +480,20 @@ class CollectionField extends React.PureComponent {
           onSave={this.handleSave}
           onEdit={this.handleEdit}
           onDelete={this.handleDelete}
-          forbidUpdate={forbidUpdate || !canUpdate || dis || useDisplayValue}
-          forbidDelete={forbidDelete || !canArchive || dis || useDisplayValue}
+          forbidUpdate={
+            forbidUpdate ||
+            !canUpdate ||
+            dis ||
+            useDisplayValue ||
+            preventUpdate
+          }
+          forbidDelete={
+            forbidDelete ||
+            !canArchive ||
+            dis ||
+            useDisplayValue ||
+            preventDelete
+          }
         />
 
         <ConfirmationDialog
@@ -515,6 +550,9 @@ CollectionField = attach([
   'hideLabel',
   'showArchived',
   'searchString',
-  'order'
+  'order',
+  'preventRead',
+  'preventUpdate',
+  'preventDelete'
 ])(CollectionField);
 export default CollectionField;

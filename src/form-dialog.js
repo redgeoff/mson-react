@@ -6,6 +6,7 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Component from './component';
 import attach from './attach';
+import CollectionFieldCore from 'mson/lib/fields/collection-field';
 
 class FormDialog extends React.PureComponent {
   state = { saveClicked: false, previousMode: null };
@@ -54,7 +55,13 @@ class FormDialog extends React.PureComponent {
   };
 
   isOpen() {
-    return !!this.props.mode;
+    const { mode } = this.props;
+    if (mode === CollectionFieldCore.MODES.ARCHIVE) {
+      // Don't show the dialog when restoring
+      return false;
+    } else {
+      return !!mode;
+    }
   }
 
   componentDidUpdate(prevProps) {
