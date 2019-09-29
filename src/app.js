@@ -292,16 +292,13 @@ class App extends React.PureComponent {
     globals.set({ path: location.pathname });
   };
 
-  // TODO: move logic to componentDidUpdate
-  componentWillUpdate(props) {
+  componentDidUpdate(prevProps) {
     const snackbarMessage = globals.get('snackbarMessage');
     if (snackbarMessage) {
       this.displaySnackbar(snackbarMessage);
       globals.set({ snackbarMessage: null });
     }
-  }
 
-  componentDidUpdate(prevProps) {
     if (
       this.props.redirectPath &&
       this.props.redirectPath !== prevProps.redirectPath
@@ -330,6 +327,18 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
+    // Allows us to listen to back and forward button clicks
+    this.unlisten = this.props.history.listen(this.onLocation);
+
+    if (registrar.client) {
+      // Wait for the session to load before loading the initial component so that we can do things
+      // like route based on a user's role
+      registrar.client.user.awaitSession();
+    }
+
+    // Load the correct component based on the initial path
+    this.onLocation(this.props.location);
+
     // TODO: is this too inefficient in that it cascades a lot of unecessary events? Instead, could:
     // 1. move more logic to app layer so that only cascade when need new window 2. use something
     // like a global scroll listener that the component can use when it is active
@@ -343,24 +352,6 @@ class App extends React.PureComponent {
     if (this.props.redirectPath) {
       this.redirect(this.props.redirectPath);
     }
-  }
-
-  componentWillMount() {
-    // Allows us to listen to back and forward button clicks
-    this.unlisten = this.props.history.listen(this.onLocation);
-
-    Promise.resolve()
-      .then(() => {
-        if (registrar.client) {
-          // Wait for the session to load before loading the initial component so that we can do things
-          // like route based on a user's role
-          registrar.client.user.awaitSession();
-        }
-      })
-      .then(() => {
-        // Load the correct component based on the initial path
-        this.onLocation(this.props.location);
-      });
   }
 
   componentWillUnmount() {
