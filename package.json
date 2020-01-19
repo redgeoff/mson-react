@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@material-ui/pickers": "^3.2.6",
-    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/jest-dom": "^5.0.0",
     "classnames": "^2.2.6",
     "lodash": "^4.17.15",
     "react-beautiful-dnd": "^11.0.5",
