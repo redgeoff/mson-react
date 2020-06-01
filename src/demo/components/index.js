@@ -26,5 +26,5 @@ export {
   Home,
   Tasks,
   TasksLocalStorage,
-  TasksFirebase
+  TasksFirebase,
 };

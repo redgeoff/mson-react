@@ -3,6 +3,6 @@ export default {
   component: 'app.Contacts',
   store: {
     component: 'LocalStorageStore',
-    storeName: 'contactsLocalStorage'
-  }
+    storeName: 'contactsLocalStorage',
+  },
 };

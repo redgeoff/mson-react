@@ -2,10 +2,10 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    display: 'inline-block'
-  }
+    display: 'inline-block',
+  },
 });
 
 class DisplayValueTypography extends React.PureComponent {

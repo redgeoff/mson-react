@@ -3,13 +3,13 @@ import ButtonMui from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Icon from './icon';
 
-const styles = theme => ({
+const styles = (theme) => ({
   leftIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   marginTop: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 });
 
 class Button extends React.PureComponent {
@@ -28,7 +28,7 @@ class Button extends React.PureComponent {
       icon,
       fullWidth,
       variant,
-      marginTop
+      marginTop,
     } = this.props;
 
     const className = marginTop !== false ? classes.marginTop : null;

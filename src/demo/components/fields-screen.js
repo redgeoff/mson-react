@@ -6,44 +6,44 @@ export default {
       name: 'import',
       component: 'ButtonField',
       label: 'Import',
-      icon: 'ImportContacts'
+      icon: 'ImportContacts',
     },
     {
       name: 'reset',
       component: 'ButtonField',
       label: 'Reset',
-      icon: 'ClearAll'
+      icon: 'ClearAll',
     },
     {
       name: 'toggleDisplayValues',
       component: 'ButtonField',
       label: 'Show Display Values',
-      icon: 'ViewHeadline'
+      icon: 'ViewHeadline',
     },
     {
       name: 'toggleEditable',
       component: 'ButtonField',
       label: 'Immutable',
-      icon: 'NotInterested'
+      icon: 'NotInterested',
     },
     {
       name: 'toggleDisabled',
       component: 'ButtonField',
       label: 'Disable',
-      icon: 'Lock'
+      icon: 'Lock',
     },
     {
       name: 'toggleFullWidth',
       component: 'ButtonField',
       label: 'Full Width',
-      icon: 'FormatAlignJustify'
+      icon: 'FormatAlignJustify',
     },
     {
       name: 'log',
       component: 'ButtonField',
       label: 'Log Values',
-      icon: 'MoveToInbox'
-    }
+      icon: 'MoveToInbox',
+    },
   ],
   listeners: [
     {
@@ -59,28 +59,31 @@ export default {
               city: 'Seatte',
               stateProvince: 'WA',
               postalCode: '98107',
-              country: 'US'
+              country: 'US',
             },
             'fields.booleanField.value': true,
             'fields.chainedSelectField.value': [2, 5, 9, 10],
-            'fields.chainedSelectListField.value': [[1, 3, 7], [2, 5, 9, 10]],
+            'fields.chainedSelectListField.value': [
+              [1, 3, 7],
+              [2, 5, 9, 10],
+            ],
             'fields.cityField.value': 'Seattle',
             'fields.collectionField.value': [
               {
                 id: 'daenerys',
                 firstName: 'Daenerys',
-                lastName: 'Targaryen'
+                lastName: 'Targaryen',
               },
               {
                 id: 'jon',
                 firstName: 'Jon',
-                lastName: 'Snow'
+                lastName: 'Snow',
               },
               {
                 id: 'tyrion',
                 firstName: 'Tyrion',
-                lastName: 'Lannister'
-              }
+                lastName: 'Lannister',
+              },
             ],
             'fields.countryField.value': 'US',
             'fields.dateField.value': '2018-09-27T17:24:24.960Z',
@@ -88,7 +91,7 @@ export default {
             'fields.formField.value': {
               github: 'github.com/redgeoff',
               medium: 'medium.com/@redgeoff',
-              twitter: 'twitter.com/redgeoff7'
+              twitter: 'twitter.com/redgeoff7',
             },
             // 'fields.github.value': 'github.com/redgeoff',
             // 'fields.medium.value': 'medium.com/@redgeoff',
@@ -97,18 +100,18 @@ export default {
             'fields.integerField.value': 123,
             'fields.listFieldEmail.value': [
               'test1@example.com',
-              'test2@example.com'
+              'test2@example.com',
             ],
             'fields.listFieldName.value': [
               { firstName: 'Ella', lastName: 'Fitzgerald' },
-              { firstName: 'Ray', lastName: 'Charles' }
+              { firstName: 'Ray', lastName: 'Charles' },
             ],
             'fields.moneyField.value': 1000000.11,
             'fields.numberField.value': 123.4,
             'fields.passwordField.value': 'password123',
             'fields.personFullNameField.value': {
               firstName: 'Daenerys',
-              lastName: 'Targaryen'
+              lastName: 'Targaryen',
             },
             'fields.personNameField.value': 'Daenerys',
             'fields.phoneField.value': '6461234567',
@@ -121,10 +124,10 @@ export default {
             'fields.timeField.value': '2018-09-27T17:24:24.960Z',
             'fields.textField.value': 'Go MSON',
             'fields.textListField.value': ['MSON', 'React', 'Material-UI'],
-            'fields.urlField.value': 'mson.co'
-          }
-        }
-      ]
+            'fields.urlField.value': 'mson.co',
+          },
+        },
+      ],
     },
     {
       event: 'reset',
@@ -132,9 +135,9 @@ export default {
         {
           component: 'Set',
           name: 'reset',
-          value: true
-        }
-      ]
+          value: true,
+        },
+      ],
     },
     {
       event: 'toggleDisplayValues',
@@ -143,8 +146,8 @@ export default {
           component: 'Action',
           if: {
             'fields.id.useDisplayValue': {
-              $ne: true
-            }
+              $ne: true,
+            },
           },
           actions: [
             {
@@ -152,14 +155,14 @@ export default {
               name: 'component',
               value: {
                 eachField: {
-                  useDisplayValue: true
+                  useDisplayValue: true,
                 },
                 'fields.toggleDisplayValues': {
                   label: 'Hide Display Values',
-                  icon: 'Input'
-                }
-              }
-            }
+                  icon: 'Input',
+                },
+              },
+            },
           ],
           else: [
             {
@@ -167,17 +170,17 @@ export default {
               name: 'component',
               value: {
                 eachField: {
-                  useDisplayValue: false
+                  useDisplayValue: false,
                 },
                 'fields.toggleDisplayValues': {
                   label: 'Show Display Values',
-                  icon: 'ViewHeadline'
-                }
-              }
-            }
-          ]
-        }
-      ]
+                  icon: 'ViewHeadline',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       event: 'toggleEditable',
@@ -186,8 +189,8 @@ export default {
           component: 'Action',
           if: {
             'fields.id.editable': {
-              $ne: true
-            }
+              $ne: true,
+            },
           },
           actions: [
             {
@@ -197,10 +200,10 @@ export default {
                 editable: true,
                 'fields.toggleEditable': {
                   label: 'Immutable',
-                  icon: 'NotInterested'
-                }
-              }
-            }
+                  icon: 'NotInterested',
+                },
+              },
+            },
           ],
           else: [
             {
@@ -210,13 +213,13 @@ export default {
                 editable: false,
                 'fields.toggleEditable': {
                   label: 'Editable',
-                  icon: 'Edit'
-                }
-              }
-            }
-          ]
-        }
-      ]
+                  icon: 'Edit',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       event: 'toggleDisabled',
@@ -225,8 +228,8 @@ export default {
           component: 'Action',
           if: {
             'fields.id.disabled': {
-              $ne: true
-            }
+              $ne: true,
+            },
           },
           actions: [
             {
@@ -236,16 +239,16 @@ export default {
                 disabled: true,
                 'fields.toggleDisabled': {
                   label: 'Enable',
-                  icon: 'LockOpen'
-                }
-              }
+                  icon: 'LockOpen',
+                },
+              },
             },
             {
               // Renable so we can still click the button
               component: 'Set',
               name: 'fields.toggleDisabled.disabled',
-              value: false
-            }
+              value: false,
+            },
           ],
           else: [
             {
@@ -255,13 +258,13 @@ export default {
                 disabled: false,
                 'fields.toggleDisabled': {
                   label: 'Disable',
-                  icon: 'Lock'
-                }
-              }
-            }
-          ]
-        }
-      ]
+                  icon: 'Lock',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       event: 'toggleFullWidth',
@@ -270,8 +273,8 @@ export default {
           component: 'Action',
           if: {
             'fields.id.fullWidth': {
-              $ne: true
-            }
+              $ne: true,
+            },
           },
           actions: [
             {
@@ -281,10 +284,10 @@ export default {
                 fullWidth: true,
                 'fields.toggleFullWidth': {
                   label: 'Flex Width',
-                  icon: 'FormatAlignLeft'
-                }
-              }
-            }
+                  icon: 'FormatAlignLeft',
+                },
+              },
+            },
           ],
           else: [
             {
@@ -294,22 +297,22 @@ export default {
                 fullWidth: false,
                 'fields.toggleFullWidth': {
                   label: 'Full Width',
-                  icon: 'FormatAlignLeft'
-                }
-              }
-            }
-          ]
-        }
-      ]
+                  icon: 'FormatAlignLeft',
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       event: 'log',
       actions: [
         {
           component: 'ConsoleLog',
-          message: '{{value}}'
-        }
-      ]
-    }
-  ]
+          message: '{{value}}',
+        },
+      ],
+    },
+  ],
 };

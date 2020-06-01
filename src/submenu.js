@@ -9,19 +9,19 @@ import Icon from './icon';
 import each from 'lodash/each';
 import registrar from 'mson/lib/compiler/registrar';
 
-const styles = theme => ({
+const styles = (theme) => ({
   nested: {
-    paddingLeft: theme.spacing(4)
+    paddingLeft: theme.spacing(4),
   },
   primary: {
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
   },
   secondary: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   selected: {
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });
 
 class Submenu extends React.PureComponent {
@@ -29,7 +29,7 @@ class Submenu extends React.PureComponent {
     super(props);
 
     this.state = {
-      open: this.childSelected()
+      open: this.childSelected(),
     };
   }
 
@@ -38,7 +38,7 @@ class Submenu extends React.PureComponent {
 
     let childSelected = false;
 
-    each(item.items, item => {
+    each(item.items, (item) => {
       if (path === item.path) {
         childSelected = true;
         return false; // exit loop
@@ -48,7 +48,7 @@ class Submenu extends React.PureComponent {
     return childSelected;
   }
 
-  handleClick = item => {
+  handleClick = (item) => {
     // Has sub items?
     if (item.items) {
       this.setState({ open: !this.state.open });

@@ -6,6 +6,6 @@ export default {
     apiKey: 'AIzaSyCJfqjdBBrXtwkXla6uMX3LZGOLDAgTEx0',
     authDomain: 'mson-contacts.firebaseapp.com',
     projectId: 'mson-contacts',
-    collection: 'contacts'
-  }
+    collection: 'contacts',
+  },
 };

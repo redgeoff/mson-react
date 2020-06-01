@@ -5,7 +5,7 @@ import access from 'mson/lib/access';
 
 class Form extends React.PureComponent {
   state = {
-    fieldsCanAccess: null
+    fieldsCanAccess: null,
   };
 
   // Enable automatic validation whenever a user changes data. This feature allows the user to see
@@ -76,7 +76,7 @@ class Form extends React.PureComponent {
     }
   }
 
-  handleSave = event => {
+  handleSave = (event) => {
     // Stop the form from refreshing the page. We can't rely on the default functionality as there
     // may be form errors that need to stop the form from submitting.
     event.preventDefault();
@@ -148,5 +148,5 @@ export default attach([
 
   // We listen for a change to fields so that we can render when a field is added
   'change',
-  'value'
+  'value',
 ])(Form);

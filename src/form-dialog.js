@@ -11,7 +11,7 @@ import CollectionFieldCore from 'mson/lib/fields/collection-field';
 class FormDialog extends React.PureComponent {
   state = { saveClicked: false, previousMode: null };
 
-  handleClose = withCancelButton => {
+  handleClose = (withCancelButton) => {
     // Prevent the user from losing data when pressing esc or clicking outside dialog
     const { mode, onClose, onCancel, currentForm } = this.props;
     if (withCancelButton || mode !== 'update') {
@@ -33,7 +33,7 @@ class FormDialog extends React.PureComponent {
     }
   };
 
-  handleSave = event => {
+  handleSave = (event) => {
     // Stop the form from refreshing the page
     event.preventDefault();
 
@@ -85,7 +85,7 @@ class FormDialog extends React.PureComponent {
       forbidUpdate,
       forbidDelete,
       value,
-      fullScreen
+      fullScreen,
     } = this.props;
 
     const { saveClicked, previousMode } = this.state;

@@ -24,7 +24,7 @@ class CommonField extends React.PureComponent {
       shrinkLabel,
       inlineLabel,
       marginBottom,
-      autoHideLabel
+      autoHideLabel,
     } = this.props;
 
     let fld = null;
@@ -109,7 +109,7 @@ CommonField = attach([
   'help',
   'hideLabel',
   'useDisplayValue',
-  'autoHideLabel'
+  'autoHideLabel',
 ])(CommonField);
 
 export default CommonField;

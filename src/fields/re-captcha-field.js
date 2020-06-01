@@ -4,14 +4,14 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import withStyles from '@material-ui/core/styles/withStyles';
 import globals from 'mson/lib/globals';
 
-const styles = theme => ({
+const styles = (theme) => ({
   captcha: {
-    margin: theme.spacing(1)
-  }
+    margin: theme.spacing(1),
+  },
 });
 
 class ReCAPTCHAField extends React.PureComponent {
-  handleChange = value => {
+  handleChange = (value) => {
     this.props.component.setValue(value);
   };
 
@@ -21,7 +21,7 @@ class ReCAPTCHAField extends React.PureComponent {
       editable,
       accessEditable,
       classes,
-      useDisplayValue
+      useDisplayValue,
     } = this.props;
 
     const isEditable = accessEditable !== false && editable && !disabled;

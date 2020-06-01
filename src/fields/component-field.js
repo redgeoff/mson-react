@@ -3,10 +3,10 @@ import attach from '../attach';
 import Component from '../component';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    marginLeft: theme.spacing(1)
-  }
+    marginLeft: theme.spacing(1),
+  },
 });
 
 class ComponentField extends React.PureComponent {

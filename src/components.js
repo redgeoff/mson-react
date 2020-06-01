@@ -51,5 +51,5 @@ export default {
   TextField,
   TextListField: ListField,
   URLField,
-  User: Form
+  User: Form,
 };

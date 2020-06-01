@@ -5,14 +5,14 @@ import Paper from '@material-ui/core/Paper';
 import Component from './component';
 import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
+const styles = (theme) => ({
   paper: {
     margin: theme.spacing(1),
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   content: {
-    flex: 1 // TODO: needed?
-  }
+    flex: 1, // TODO: needed?
+  },
 });
 
 class Card extends React.PureComponent {

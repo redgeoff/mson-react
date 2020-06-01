@@ -9,18 +9,18 @@ export default {
         component: 'TextField',
         label: 'First Name',
         required: true,
-        block: false
+        block: false,
       },
       {
         name: 'lastName',
         component: 'TextField',
-        label: 'Last Name'
+        label: 'Last Name',
       },
       {
         name: 'email',
         component: 'EmailField',
-        label: 'Email'
-      }
+        label: 'Email',
+      },
     ],
     listeners: [
       {
@@ -31,18 +31,18 @@ export default {
             // from the route or the user's session
             component: 'Set',
             name: 'fields.id.value',
-            value: '1'
-          }
-        ]
-      }
-    ]
+            value: '1',
+          },
+        ],
+      },
+    ],
   },
   label: 'Contact',
   store: {
     component: 'LocalStorageStore',
-    storeName: 'contactLocalStorage'
+    storeName: 'contactLocalStorage',
   },
   storeWhere: {
-    id: '1'
-  }
+    id: '1',
+  },
 };

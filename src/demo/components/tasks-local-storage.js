@@ -3,6 +3,6 @@ export default {
   component: 'app.Tasks',
   store: {
     component: 'LocalStorageStore',
-    storeName: 'tasksLocalStorage'
-  }
+    storeName: 'tasksLocalStorage',
+  },
 };

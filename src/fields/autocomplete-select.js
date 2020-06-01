@@ -10,12 +10,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Icon from '../icon';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
-const styles = theme => ({
+const styles = (theme) => ({
   input: {
     display: 'flex',
     padding: 0,
     minWidth: 240, // A good default for most labels
-    height: 'auto'
+    height: 'auto',
   },
   valueContainer: {
     display: 'flex',
@@ -24,10 +24,10 @@ const styles = theme => ({
     alignItems: 'center',
 
     // Adjust for MUI label
-    marginTop: theme.spacing(2) + 5
+    marginTop: theme.spacing(2) + 5,
   },
   chip: {
-    margin: `${theme.spacing(1)}px ${theme.spacing(0.25)}px`
+    margin: `${theme.spacing(1)}px ${theme.spacing(0.25)}px`,
   },
   chipFocused: {
     backgroundColor: emphasize(
@@ -35,13 +35,13 @@ const styles = theme => ({
         ? theme.palette.grey[300]
         : theme.palette.grey[700],
       0.08
-    )
+    ),
   },
   noOptionsMessage: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
   },
   singleValue: {
-    fontSize: theme.typography.subtitle1.fontSize
+    fontSize: theme.typography.subtitle1.fontSize,
   },
   // placeholder: {
   //   position: 'absolute',
@@ -54,18 +54,18 @@ const styles = theme => ({
 
     // Adjust for MUI label
     // marginTop: theme.spacing.unit * 7
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   root: {
     // Allow for help icon to be placed on right of field
-    display: 'inline-flex'
+    display: 'inline-flex',
   },
   fullWidth: {
-    width: '100%'
+    width: '100%',
   },
   disabled: {
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 });
 
 function NoOptionsMessage(props) {
@@ -98,8 +98,8 @@ function Control(props) {
           className: props.selectProps.classes.input,
           inputRef: props.innerRef,
           children: props.children,
-          ...props.innerProps
-        }
+          ...props.innerProps,
+        },
       }}
       {...props.selectProps.textFieldProps}
     />
@@ -113,7 +113,7 @@ function Option(props) {
       selected={props.isFocused}
       component="div"
       style={{
-        fontWeight: props.isSelected ? 500 : 400
+        fontWeight: props.isSelected ? 500 : 400,
       }}
       {...props.innerProps}
     >
@@ -164,7 +164,7 @@ function MultiValue(props) {
       label={props.children}
       className={classNames(props.selectProps.classes.chip, {
         [props.selectProps.classes.chipFocused]: props.isFocused,
-        [props.selectProps.classes.disabled]: props.selectProps.isDisabled
+        [props.selectProps.classes.disabled]: props.selectProps.isDisabled,
       })}
       onDelete={props.removeProps.onClick}
       deleteIcon={<Icon icon="Cancel" />}
@@ -192,7 +192,7 @@ const components = {
   Option,
   // Placeholder,
   SingleValue,
-  ValueContainer
+  ValueContainer,
 };
 
 class AutoCompleteSelect extends React.Component {
@@ -209,24 +209,24 @@ class AutoCompleteSelect extends React.Component {
       value,
       isDisabled,
       fullWidth,
-      isMulti
+      isMulti,
     } = this.props;
 
     const selectStyles = {
-      dropdownIndicator: base => ({
+      dropdownIndicator: (base) => ({
         ...base,
-        cursor: 'pointer'
+        cursor: 'pointer',
       }),
-      clearIndicator: base => ({
+      clearIndicator: (base) => ({
         ...base,
-        cursor: 'pointer'
+        cursor: 'pointer',
       }),
 
       // Needed so that the menu appears above any dialog windows
-      menuPortal: base => ({
+      menuPortal: (base) => ({
         ...base,
-        zIndex: 2000
-      })
+        zIndex: 2000,
+      }),
     };
 
     return (

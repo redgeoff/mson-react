@@ -7,7 +7,7 @@ import { render, wait, fireEvent } from '@testing-library/react';
 const definition = {
   name: 'firstName',
   component: 'TextField',
-  label: 'First Name'
+  label: 'First Name',
 };
 
 let component = null;
@@ -24,7 +24,7 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-const shouldListenToEvents = async jsx => {
+const shouldListenToEvents = async (jsx) => {
   const { getByLabelText, unmount } = render(jsx);
 
   const field = getByLabelText('First Name');
@@ -132,7 +132,7 @@ it('should change component', async () => {
   const age = compiler.newComponent({
     name: 'age',
     component: 'NumberField',
-    label: 'Age'
+    label: 'Age',
   });
 
   await shouldChangeComponent({ component }, { component: age });
@@ -142,7 +142,7 @@ it('should change definition', async () => {
   const age = {
     name: 'age',
     component: 'NumberField',
-    label: 'Age'
+    label: 'Age',
   };
 
   await shouldChangeComponent({ definition }, { definition: age });

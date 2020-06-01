@@ -14,7 +14,7 @@ class Field extends React.PureComponent {
       accessEditable,
       didCreate,
       noBlock,
-      disabled
+      disabled,
     } = this.props;
 
     // Don't show the component until didCreate is true as we may need to wait for fields to be

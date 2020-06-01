@@ -11,14 +11,14 @@ class TextField extends React.PureComponent {
 
     // Create a custom TextMask component. This is done once in the constructor so that it is not
     // done in each call to render()
-    this.TextMaskCustom = props => {
+    this.TextMaskCustom = (props) => {
       const { inputRef, ...other } = props;
       const { mask } = this.props;
 
       return (
         <MaskedInput
           {...other}
-          ref={ref => {
+          ref={(ref) => {
             inputRef(ref ? ref.inputElement : null);
           }}
           mask={mask}
@@ -27,7 +27,7 @@ class TextField extends React.PureComponent {
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { component } = this.props;
     const value = component.fromUIValue(event.target.value);
     component.setValue(value);
@@ -37,7 +37,7 @@ class TextField extends React.PureComponent {
     this.props.component.setTouched(true);
   };
 
-  handleKeyUp = event => {
+  handleKeyUp = (event) => {
     // If the user presses enter on the field then mark as touched. This is necessary for when the
     // user is using the keyboard to enter data and there is an error on the last field that needs
     // to be reported when the user presses enter.
@@ -62,7 +62,7 @@ class TextField extends React.PureComponent {
       rowsMax,
       useDisplayValue,
       mask,
-      displayValue
+      displayValue,
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -80,7 +80,7 @@ class TextField extends React.PureComponent {
           id={component.getUniqueId()}
           error={touched && err ? true : false}
           inputProps={{
-            maxLength: maxLength
+            maxLength: maxLength,
           }}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
@@ -121,5 +121,5 @@ export default attach([
   'rowsMax',
   'useDisplayValue',
   'mask',
-  'unmask'
+  'unmask',
 ])(TextField);

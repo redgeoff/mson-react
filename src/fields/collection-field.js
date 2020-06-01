@@ -26,28 +26,28 @@ const getItemStyle = (isDragging, draggableStyle, theme) => ({
   background: isDragging ? theme.palette.secondary[400] : undefined,
 
   // styles we need to apply on draggables
-  ...draggableStyle
+  ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver, theme) => ({
   background: isDraggingOver ? theme.palette.grey[300] : undefined,
-  width: '100%'
+  width: '100%',
 });
 
 // Note:
 //   - We use a dialog to view/edit the forms as we want to be able to display just a few pieces
 //     of data in the list and all the data when viewing/editing.
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     // Needed when field is nested in a form that is nested in a form, e.g. FormEditor
-    width: '100%'
+    width: '100%',
   },
   spacer: {
     backgroundColor: theme.palette.grey[300],
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    animation: 'fadeIn 1s infinite alternate'
+    animation: 'fadeIn 1s infinite alternate',
   },
   footer: {
     // Create space at the footer so that it is more evident to the user that the next page has been
@@ -55,59 +55,59 @@ const styles = theme => ({
     height: 50,
     backgroundColor: theme.palette.grey[300],
     margin: theme.spacing(1),
-    animation: 'fadeIn 1s infinite alternate'
-  }
+    animation: 'fadeIn 1s infinite alternate',
+  },
 });
 
 class CollectionField extends React.PureComponent {
   state = {
     confirmationOpen: false,
     sortBy: '',
-    sortOrder: 'ASC'
+    sortOrder: 'ASC',
   };
 
   handleClose = () => {
     this.props.component.set({ mode: null });
   };
 
-  handleCancel = form => {
+  handleCancel = (form) => {
     const { component, preventReadAction } = this.props;
     if (component.get('skipRead') || preventReadAction) {
       component.set({ mode: null });
     } else {
       component.set({
         currentForm: form,
-        mode: CollectionFieldCore.MODES.READ
+        mode: CollectionFieldCore.MODES.READ,
       });
     }
   };
 
-  handleClick = form => {
+  handleClick = (form) => {
     const { component } = this.props;
     if (component.get('skipRead')) {
       component.set({
         currentForm: form,
-        mode: CollectionFieldCore.MODES.UPDATE
+        mode: CollectionFieldCore.MODES.UPDATE,
       });
     } else {
       component.set({
         currentForm: form,
-        mode: CollectionFieldCore.MODES.READ
+        mode: CollectionFieldCore.MODES.READ,
       });
     }
   };
 
-  handleEdit = form => {
+  handleEdit = (form) => {
     this.props.component.set({
       currentForm: form,
-      mode: CollectionFieldCore.MODES.UPDATE
+      mode: CollectionFieldCore.MODES.UPDATE,
     });
   };
 
   handleNew = () => {
     this.props.component.set({
       currentForm: null,
-      mode: CollectionFieldCore.MODES.CREATE
+      mode: CollectionFieldCore.MODES.CREATE,
     });
   };
 
@@ -119,14 +119,14 @@ class CollectionField extends React.PureComponent {
     return !!this.props.mode;
   }
 
-  handleDelete = async formToDelete => {
+  handleDelete = async (formToDelete) => {
     const { component, preventDeleteAction } = this.props;
 
     const open = this.isOpen();
     if (formToDelete) {
       component.set({
         currentForm: formToDelete,
-        mode: CollectionFieldCore.MODES.DELETE
+        mode: CollectionFieldCore.MODES.DELETE,
       });
     } else {
       // Are we already focussed on this form
@@ -149,14 +149,14 @@ class CollectionField extends React.PureComponent {
         this.setState({
           confirmationOpen: true,
           // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
-          confirmationTitle: 'Delete this?'
+          confirmationTitle: 'Delete this?',
         });
       }
       component.set({ mode: null });
     }
   };
 
-  handleConfirmationClose = async yes => {
+  handleConfirmationClose = async (yes) => {
     if (yes) {
       const { component } = this.props;
       await component.archive(component.get('form'));
@@ -207,7 +207,7 @@ class CollectionField extends React.PureComponent {
       editable,
       disabled,
       useDisplayValue,
-      theme
+      theme,
     } = this.props;
 
     // Force to 1 colum when ordering allowed
@@ -274,13 +274,13 @@ class CollectionField extends React.PureComponent {
     return cards;
   }
 
-  handleOrdering = props => {
+  handleOrdering = (props) => {
     // TODO: shouldn't the ordering just be in the field and not have to be in this state?
     this.setState(props, () => {
       this.props.component.set({
         order: this.state.sortBy
           ? [[this.state.sortBy, this.state.sortOrder]]
-          : null
+          : null,
       });
     });
   };
@@ -291,7 +291,7 @@ class CollectionField extends React.PureComponent {
       const form = component.get('form');
       const fieldsCanAccess = access.fieldsCanAccess('read', form);
       const fields = [];
-      form.eachField(field => {
+      form.eachField((field) => {
         const name = field.get('name');
 
         // Do we have access to the field? Allowed to sort? Not hidden? Not a button?
@@ -303,7 +303,7 @@ class CollectionField extends React.PureComponent {
         ) {
           fields.push({
             value: (form.isDefaultField(name) ? '' : 'fieldValues.') + name,
-            label: field.get('label')
+            label: field.get('label'),
           });
         }
       });
@@ -319,7 +319,7 @@ class CollectionField extends React.PureComponent {
       component,
       forbidSort,
       store,
-      useDisplayValue
+      useDisplayValue,
     } = this.props;
 
     const { sortBy, sortOrder } = this.state;
@@ -373,7 +373,7 @@ class CollectionField extends React.PureComponent {
     );
   }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -382,7 +382,7 @@ class CollectionField extends React.PureComponent {
     if (result.destination.index !== result.source.index) {
       this.props.component.moveAndSaveForm({
         sourceIndex: result.source.index,
-        destinationIndex: result.destination.index
+        destinationIndex: result.destination.index,
       });
     }
   };
@@ -405,7 +405,7 @@ class CollectionField extends React.PureComponent {
       useDisplayValue,
       theme,
       preventUpdate,
-      preventDeleteAction
+      preventDeleteAction,
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -553,6 +553,6 @@ CollectionField = attach([
   'order',
   'preventReadAction',
   'preventUpdate',
-  'preventDeleteAction'
+  'preventDeleteAction',
 ])(CollectionField);
 export default CollectionField;

@@ -12,7 +12,7 @@ class CompositeField extends React.PureComponent {
       editable,
       useDisplayValue,
       block,
-      disabled
+      disabled,
     } = this.props;
 
     let fields = [];

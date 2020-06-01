@@ -6,10 +6,10 @@ import SnackbarMUI from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from './icon';
 
-const styles = theme => ({
+const styles = (theme) => ({
   close: {
-    padding: theme.spacing(0.5)
-  }
+    padding: theme.spacing(0.5),
+  },
 });
 
 class Snackbar extends React.PureComponent {
@@ -29,13 +29,13 @@ class Snackbar extends React.PureComponent {
       <SnackbarMUI
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left'
+          horizontal: 'left',
         }}
         open={open}
         autoHideDuration={6000}
         onClose={this.handleClose}
         ContentProps={{
-          'aria-describedby': 'message-id'
+          'aria-describedby': 'message-id',
         }}
         message={<span id="message-id">{message}</span>}
         action={[
@@ -50,7 +50,7 @@ class Snackbar extends React.PureComponent {
             onClick={this.handleClose}
           >
             <Icon icon="Close" />
-          </IconButton>
+          </IconButton>,
         ]}
       />
     );
@@ -58,7 +58,7 @@ class Snackbar extends React.PureComponent {
 }
 
 Snackbar.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Snackbar);

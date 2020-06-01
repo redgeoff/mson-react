@@ -16,30 +16,30 @@ class ContactNoMSON extends Form {
           name: 'firstName',
           label: 'First Name',
           required: true,
-          block: false
+          block: false,
         }),
         new TextField({ name: 'lastName', label: 'Last Name', required: true }),
         new EmailField({ name: 'email', label: 'Email' }),
         new ButtonField({
           name: 'import',
           label: 'Import',
-          icon: 'ImportContacts'
+          icon: 'ImportContacts',
         }),
         new ButtonField({
           name: 'submit',
           label: 'Submit',
           type: 'submit',
-          icon: 'Save'
+          icon: 'Save',
         }),
-        new ButtonField({ name: 'cancel', label: 'Cancel', icon: 'Cancel' })
-      ]
+        new ButtonField({ name: 'cancel', label: 'Cancel', icon: 'Cancel' }),
+      ],
     });
 
     this.on('import', () => {
       this.setValues({
         firstName: 'Prince',
         lastName: 'Nelson',
-        email: 'prince@example.com'
+        email: 'prince@example.com',
       });
     });
 

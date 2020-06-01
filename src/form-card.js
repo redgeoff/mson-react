@@ -6,20 +6,20 @@ import Component from './component';
 import attach from './attach';
 import FormCardButtons from './form-card-buttons';
 
-const styles = theme => ({
+const styles = (theme) => ({
   paper: {
     margin: theme.spacing(1),
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   content: {
     flex: 1,
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 });
 
 // Use PureComponent so that we avoid unnecessary re-rendering
 class FormCard extends React.PureComponent {
-  handleClick = event => {
+  handleClick = (event) => {
     if (this.props.onClick) {
       this.props.onClick(event, this.props.component);
     }
@@ -31,7 +31,7 @@ class FormCard extends React.PureComponent {
     }
   };
 
-  handleDelete = event => {
+  handleDelete = (event) => {
     // this.handleMoreClose();
     if (this.props.onDelete) {
       this.props.onDelete(this.props.component);
@@ -46,7 +46,7 @@ class FormCard extends React.PureComponent {
       forbidDelete,
       editable,
       disabled,
-      value
+      value,
     } = this.props;
 
     return (
@@ -56,7 +56,7 @@ class FormCard extends React.PureComponent {
             <Grid
               item
               className={classes.content}
-              onClick={event => this.handleClick(event)}
+              onClick={(event) => this.handleClick(event)}
             >
               <Component component={component} formTag={false} mode="read" />
             </Grid>
@@ -66,8 +66,8 @@ class FormCard extends React.PureComponent {
               editable={editable}
               disabled={disabled}
               archivedAt={value.archivedAt}
-              onEdit={event => this.handleEdit(event)}
-              onDelete={event => this.handleDelete(event)}
+              onEdit={(event) => this.handleEdit(event)}
+              onDelete={(event) => this.handleDelete(event)}
             />
           </Grid>
         </Paper>

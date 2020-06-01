@@ -26,7 +26,7 @@ for (let name in components) {
 
 // Instantiate the app
 const app = compiler.newComponent({
-  component: 'app.App'
+  component: 'app.App',
 });
 
 export default app;

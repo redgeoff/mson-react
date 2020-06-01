@@ -12,14 +12,14 @@ import registrar from 'mson/lib/compiler/registrar';
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = (theme) => ({
   drawerHeader: {
     ...theme.mixins.toolbar,
     paddingLeft: theme.spacing(3),
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(1),
   },
   drawerPaper: {
-    width: 250
+    width: 250,
   },
   drawPaperResponsive: {
     [theme.breakpoints.up('md')]: {
@@ -30,9 +30,9 @@ const styles = theme => ({
       // Extend to bottom of screen. TODO: does this work on mobile?
       // https://stackoverflow.com/a/48506883/2831606
       position: 'fixed',
-      height: '100vh'
-    }
-  }
+      height: '100vh',
+    },
+  },
 });
 
 class Menu extends React.PureComponent {
@@ -42,7 +42,7 @@ class Menu extends React.PureComponent {
     }
   };
 
-  handleNavigate = menuItem => {
+  handleNavigate = (menuItem) => {
     if (this.props.onNavigate) {
       this.props.onNavigate(menuItem);
     }
@@ -97,11 +97,11 @@ class Menu extends React.PureComponent {
         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
         open={mobileOpen}
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.drawerPaper,
         }}
         onClose={this.handleDrawerToggle}
         ModalProps={{
-          keepMounted: true // Better open performance on mobile.
+          keepMounted: true, // Better open performance on mobile.
         }}
       >
         {drawer}
@@ -115,7 +115,7 @@ class Menu extends React.PureComponent {
         classes={{
           paper:
             classes.drawerPaper +
-            (responsive ? ` ${classes.drawPaperResponsive}` : '')
+            (responsive ? ` ${classes.drawPaperResponsive}` : ''),
         }}
       >
         {drawer}

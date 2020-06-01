@@ -6,15 +6,15 @@ import DateFnsUtils from '@date-io/date-fns';
 import withStyles from '@material-ui/core/styles/withStyles';
 import DisplayValueTypography from './display-value-typography';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     // We need to add a margin as the picker doesn't play well with the Material-UI label
-    marginTop: theme.spacing(2)
-  }
+    marginTop: theme.spacing(2),
+  },
 });
 
 class TimeField extends React.PureComponent {
-  handleDateChange = date => {
+  handleDateChange = (date) => {
     this.props.component.setValue(date);
   };
 
@@ -32,7 +32,7 @@ class TimeField extends React.PureComponent {
       showSeconds,
       fullWidth,
       disabled,
-      accessEditable
+      accessEditable,
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -97,5 +97,5 @@ export default attach([
   'useDisplayValue',
   'showSeconds',
   'fullWidth',
-  'disabled'
+  'disabled',
 ])(TimeField);

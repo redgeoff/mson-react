@@ -8,8 +8,8 @@ export default {
       xs: 12,
       content: {
         component: 'Text',
-        text: '# A'
-      }
+        text: '# A',
+      },
     },
     {
       component: 'GridItem',
@@ -17,8 +17,8 @@ export default {
       xs: 12,
       content: {
         component: 'Text',
-        text: '# B'
-      }
+        text: '# B',
+      },
     },
     {
       component: 'GridItem',
@@ -26,8 +26,8 @@ export default {
       xs: 12,
       content: {
         component: 'Text',
-        text: '# C'
-      }
+        text: '# C',
+      },
     },
     {
       component: 'GridItem',
@@ -35,8 +35,8 @@ export default {
       xs: 12,
       content: {
         component: 'Text',
-        text: '# D'
-      }
+        text: '# D',
+      },
     },
     {
       component: 'GridItem',
@@ -53,27 +53,27 @@ export default {
               {
                 component: 'Action',
                 if: {
-                  'parent.parent.items.0.hidden': true
+                  'parent.parent.items.0.hidden': true,
                 },
                 actions: [
                   {
                     component: 'Set',
                     name: 'parent.parent.items.0.hidden',
-                    value: false
-                  }
+                    value: false,
+                  },
                 ],
                 else: [
                   {
                     component: 'Set',
                     name: 'parent.parent.items.0.hidden',
-                    value: true
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
+                    value: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };
