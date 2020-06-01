@@ -10,15 +10,15 @@ export default {
         path: '/',
         label: 'Home',
         content: {
-          component: 'app.Home'
-        }
+          component: 'app.Home',
+        },
       },
       {
         path: '/fields',
         label: 'Fields',
         content: {
-          component: 'app.FieldsScreen'
-        }
+          component: 'app.FieldsScreen',
+        },
       },
       {
         path: '/contacts',
@@ -28,17 +28,17 @@ export default {
             path: '/contacts',
             label: 'Contacts LocalStorage',
             content: {
-              component: 'app.ContactsLocalStorage'
-            }
+              component: 'app.ContactsLocalStorage',
+            },
           },
           {
             path: '/contacts-firebase',
             label: 'Contacts Firebase',
             content: {
-              component: 'app.ContactsFirebase'
-            }
-          }
-        ]
+              component: 'app.ContactsFirebase',
+            },
+          },
+        ],
       },
       {
         path: '/tasks',
@@ -48,46 +48,68 @@ export default {
             path: '/tasks',
             label: 'Tasks LocalStorage',
             content: {
-              component: 'app.TasksLocalStorage'
-            }
+              component: 'app.TasksLocalStorage',
+            },
           },
           {
             path: '/tasks-firebase',
             label: 'Tasks Firebase',
             content: {
-              component: 'app.TasksFirebase'
-            }
-          }
-        ]
+              component: 'app.TasksFirebase',
+            },
+          },
+        ],
       },
       {
         path: '/form-builder',
         label: 'Form Builder',
         content: {
-          component: 'app.FormBuilder'
-        }
+          component: 'app.FormBuilder',
+        },
       },
       {
         path: '/contact/edit',
         label: 'Edit Contact',
         content: {
-          component: 'app.EditContact'
-        }
+          component: 'app.EditContact',
+        },
       },
       {
         path: '/contact-no-mson',
         label: 'Contact No MSON',
         content: {
-          component: 'app.ContactNoMSON'
-        }
+          component: 'app.ContactNoMSON',
+        },
       },
       {
         path: '/grid',
         label: 'Grid',
         content: {
-          component: 'app.Grid'
-        }
-      }
-    ]
-  }
+          component: 'app.Grid',
+        },
+      },
+      {
+        path: '/router',
+        label: 'Router',
+        content: {
+          component: 'Action',
+          actions: [
+            {
+              component: 'Redirect',
+              path:
+                '/router/person/p123/message/m456?first=Trevor&last=Noah#hash123',
+            },
+          ],
+        },
+      },
+      {
+        path: '/router/person/:personId/message/:messageId',
+        label: 'Router',
+        content: {
+          component: 'app.Router',
+        },
+        hidden: true, // Register route, but don't expose it in the menu
+      },
+    ],
+  },
 };

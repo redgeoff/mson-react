@@ -12,6 +12,7 @@ import Home from './home';
 import Tasks from './tasks';
 import TasksLocalStorage from './tasks-local-storage';
 import TasksFirebase from './tasks-firebase';
+import Router from './router';
 
 export {
   App,
@@ -26,5 +27,6 @@ export {
   Home,
   Tasks,
   TasksLocalStorage,
-  TasksFirebase
+  TasksFirebase,
+  Router,
 };
