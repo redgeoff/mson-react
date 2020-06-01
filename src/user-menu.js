@@ -6,10 +6,10 @@ import Menu from '@material-ui/core/Menu';
 
 export default class UserDropDown extends React.PureComponent {
   state = {
-    anchorEl: null
+    anchorEl: null,
   };
 
-  handleMenu = event => {
+  handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -41,11 +41,11 @@ export default class UserDropDown extends React.PureComponent {
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: 'top',
-            horizontal: 'right'
+            horizontal: 'right',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'right'
+            horizontal: 'right',
           }}
           open={open}
           onClose={this.handleClose}

@@ -4,11 +4,11 @@ import difference from 'lodash/difference';
 // Usage: attach(['prop1', 'prop2', ...], componentOrName)(Component)
 
 const attach = (_watchProps, componentOrName) => {
-  return Component => {
+  return (Component) => {
     return class extends React.PureComponent {
       wasMounted = false;
 
-      getComponent = props => {
+      getComponent = (props) => {
         if (!props) {
           props = this.props;
         }

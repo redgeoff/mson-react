@@ -6,9 +6,9 @@ export default {
     fields: [
       {
         name: 'store',
-        component: 'Field'
-      }
-    ]
+        component: 'Field',
+      },
+    ],
   },
   fields: [
     {
@@ -32,22 +32,22 @@ export default {
               component: 'TextField',
               label: 'First Name',
               required: true,
-              block: false
+              block: false,
             },
             {
               name: 'lastName',
               component: 'TextField',
-              label: 'Last Name'
+              label: 'Last Name',
             },
             {
               name: 'email',
               component: 'EmailField',
-              label: 'Email'
-            }
-          ]
-        }
+              label: 'Email',
+            },
+          ],
+        },
       },
-      store: '{{store}}'
-    }
-  ]
+      store: '{{store}}',
+    },
+  ],
 };

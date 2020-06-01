@@ -14,7 +14,7 @@ const chainedSelectOptions = [
   { value: 9, parentValue: 5, label: 'Model S' },
 
   { value: 10, parentValue: 9, label: 'Red' },
-  { value: 11, parentValue: 9, label: 'Blue' }
+  { value: 11, parentValue: 9, label: 'Blue' },
 ];
 
 export default {
@@ -27,14 +27,14 @@ export default {
       label: 'AddressField',
       help: 'Example help',
       required: true,
-      elevate: false
+      elevate: false,
     },
 
     {
       component: 'BooleanField',
       name: 'booleanField',
       label: 'BooleanField',
-      help: 'Example help'
+      help: 'Example help',
     },
 
     {
@@ -43,7 +43,7 @@ export default {
       label: 'ButtonField',
       icon: 'Save',
       type: 'submit',
-      block: true
+      block: true,
     },
 
     {
@@ -55,7 +55,7 @@ export default {
       blankString: 'None',
       // multiline: true,
       // fullWidth: true,
-      options: chainedSelectOptions
+      options: chainedSelectOptions,
     },
 
     {
@@ -67,7 +67,7 @@ export default {
       blankString: 'None',
       // multiline: true,
       // fullWidth: true,
-      options: chainedSelectOptions
+      options: chainedSelectOptions,
     },
 
     {
@@ -75,7 +75,7 @@ export default {
       component: 'CityField',
       label: 'CityField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -94,16 +94,16 @@ export default {
               name: 'firstName',
               component: 'TextField',
               label: 'First Name',
-              required: true
+              required: true,
             },
             {
               name: 'lastName',
               component: 'TextField',
-              label: 'Last Name'
-            }
-          ]
-        }
-      }
+              label: 'Last Name',
+            },
+          ],
+        },
+      },
     },
 
     {
@@ -112,7 +112,7 @@ export default {
       label: 'CountryField',
       help: 'Example help',
       blankString: 'None',
-      required: true
+      required: true,
     },
 
     {
@@ -123,7 +123,7 @@ export default {
       // includeTime: true,
       minDate: '2018-01-01T23:07:28.157Z',
       maxDate: '2022-01-01T23:07:28.157Z',
-      required: true
+      required: true,
     },
 
     {
@@ -131,7 +131,7 @@ export default {
       name: 'emailField',
       label: 'Email',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -148,20 +148,20 @@ export default {
             name: 'github',
             component: 'URLField',
             block: false,
-            label: 'GitHub'
+            label: 'GitHub',
           },
           {
             name: 'medium',
             component: 'URLField',
-            label: 'Medium'
+            label: 'Medium',
           },
           {
             name: 'twitter',
             component: 'URLField',
-            label: 'Twitter'
-          }
-        ]
-      }
+            label: 'Twitter',
+          },
+        ],
+      },
     },
 
     {
@@ -169,7 +169,7 @@ export default {
       component: 'IdField',
       label: 'IdField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -177,7 +177,7 @@ export default {
       component: 'IntegerField',
       label: 'IntegerField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -190,9 +190,9 @@ export default {
       fieldFactory: {
         component: 'Factory',
         product: {
-          component: 'EmailField'
-        }
-      }
+          component: 'EmailField',
+        },
+      },
     },
 
     {
@@ -205,9 +205,9 @@ export default {
       fieldFactory: {
         component: 'Factory',
         product: {
-          component: 'PersonFullNameField'
-        }
-      }
+          component: 'PersonFullNameField',
+        },
+      },
     },
 
     {
@@ -218,7 +218,7 @@ export default {
       // prefix: '€',
       // decimalSymbol: ',',
       // thousandsSeparatorSymbol: '.',
-      required: true
+      required: true,
     },
 
     {
@@ -227,7 +227,7 @@ export default {
       label: 'NumberField',
       help: 'Example help',
       // includeThousandsSeparator: true,
-      required: true
+      required: true,
     },
 
     {
@@ -235,7 +235,7 @@ export default {
       component: 'PasswordField',
       label: 'PasswordField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -243,7 +243,7 @@ export default {
       component: 'PersonFullNameField',
       label: 'PersonFullNameField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -251,7 +251,7 @@ export default {
       component: 'PersonNameField',
       label: 'PersonNameField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -260,7 +260,7 @@ export default {
       label: 'PhoneField',
       help: 'Example help',
       // defaultMask: '.... ......',
-      required: true
+      required: true,
     },
 
     {
@@ -268,7 +268,7 @@ export default {
       component: 'PostalCodeField',
       label: 'PostalCodeField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
@@ -276,11 +276,11 @@ export default {
       component: 'ProvinceField',
       label: 'ProvinceField',
       help: 'Example help',
-      required: true
+      required: true,
     },
 
     {
-      component: 'ReCAPTCHAField'
+      component: 'ReCAPTCHAField',
     },
 
     {
@@ -293,8 +293,8 @@ export default {
       options: [
         { value: 'red', label: 'Red' },
         { value: 'green', label: 'Green' },
-        { value: 'blue', label: 'Blue' }
-      ]
+        { value: 'blue', label: 'Blue' },
+      ],
     },
 
     {
@@ -309,8 +309,8 @@ export default {
       options: [
         { value: 'red', label: 'Red' },
         { value: 'green', label: 'Green' },
-        { value: 'blue', label: 'Blue' }
-      ]
+        { value: 'blue', label: 'Blue' },
+      ],
     },
 
     {
@@ -323,8 +323,8 @@ export default {
       options: [
         { value: 'red', label: 'Red' },
         { value: 'green', label: 'Green' },
-        { value: 'blue', label: 'Blue' }
-      ]
+        { value: 'blue', label: 'Blue' },
+      ],
     },
 
     {
@@ -333,14 +333,14 @@ export default {
       label: 'StateField',
       help: 'Example help',
       blankString: 'None',
-      required: true
+      required: true,
     },
 
     {
       name: 'text',
       component: 'Text',
       text:
-        '# Text\nCan contain any [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)'
+        '# Text\nCan contain any [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)',
     },
 
     {
@@ -349,7 +349,7 @@ export default {
       label: 'TimeField',
       help: 'Example help',
       // showSeconds: true,
-      required: true
+      required: true,
     },
 
     {
@@ -359,7 +359,7 @@ export default {
       help: 'Example help',
       // mask: ['(', '/[1-9]/', '/\\d/', '/\\d/', ')'],
       // mask: '(...)',
-      required: true
+      required: true,
     },
 
     {
@@ -368,7 +368,7 @@ export default {
       label: 'TextListField',
       help: 'Example help',
       singularLabel: 'Text Item',
-      required: true
+      required: true,
     },
 
     {
@@ -377,7 +377,7 @@ export default {
       label: 'URLField',
       help: 'Example help',
       // newWindow: true,
-      required: true
-    }
-  ]
+      required: true,
+    },
+  ],
 };

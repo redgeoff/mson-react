@@ -6,15 +6,15 @@ export default {
     fields: [
       {
         name: 'store',
-        component: 'Field'
-      }
-    ]
+        component: 'Field',
+      },
+    ],
   },
   fields: [
     {
       component: 'Text',
       name: 'header',
-      text: '(drag to reorder)'
+      text: '(drag to reorder)',
     },
     {
       component: 'CollectionField',
@@ -38,17 +38,17 @@ export default {
               component: 'TextField',
               label: 'Task',
               multiline: true,
-              required: true
+              required: true,
             },
             {
               name: 'due',
               component: 'DateField',
-              label: 'Due'
-            }
-          ]
-        }
+              label: 'Due',
+            },
+          ],
+        },
       },
-      store: '{{store}}'
-    }
-  ]
+      store: '{{store}}',
+    },
+  ],
 };

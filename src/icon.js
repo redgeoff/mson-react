@@ -9,7 +9,7 @@ import snakeCase from 'lodash/snakeCase';
 // import * as Icons from '@material-ui/icons';
 
 export default class Icon extends React.PureComponent {
-  handleClick = event => {
+  handleClick = (event) => {
     if (this.props.onClick) {
       this.props.onClick(event);
     }

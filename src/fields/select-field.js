@@ -11,19 +11,19 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import DisplayValueTypography from './display-value-typography';
 import AutoCompleteSelect from './autocomplete-select';
 
-const styles = theme => ({
+const styles = (theme) => ({
   formControl: {
     // Specify a more appropriate min width so that the field is wide enough to cover most labels
-    minWidth: 120
+    minWidth: 120,
   },
   chip: {
-    margin: theme.spacing(0.25)
-  }
+    margin: theme.spacing(0.25),
+  },
 });
 
 class SelectField extends React.PureComponent {
   state = {
-    focus: false
+    focus: false,
   };
 
   handleChange(value) {
@@ -33,7 +33,7 @@ class SelectField extends React.PureComponent {
   handleAutocompleteChange(value) {
     const { multiple } = this.props;
     if (multiple) {
-      this.handleChange(value.map(val => val.value));
+      this.handleChange(value.map((val) => val.value));
     } else {
       this.handleChange(value && (value.value ? value.value : null));
     }
@@ -63,7 +63,7 @@ class SelectField extends React.PureComponent {
         );
       }
 
-      options.forEach(option => {
+      options.forEach((option) => {
         if (multiple) {
           const checked = value ? value.indexOf(option.value) !== -1 : false;
           opts.push(
@@ -99,7 +99,7 @@ class SelectField extends React.PureComponent {
       accessEditable,
       useDisplayValue,
       options,
-      autocomplete
+      autocomplete,
     } = this.props;
 
     const { focus } = this.state;
@@ -116,9 +116,9 @@ class SelectField extends React.PureComponent {
     if (multiple) {
       input = <Input />;
 
-      renderValue = selected => (
+      renderValue = (selected) => (
         <div className={classes.chips}>
-          {selected.map(value => (
+          {selected.map((value) => (
             <Chip
               key={value}
               label={component.getOptionLabel(value)}
@@ -137,14 +137,14 @@ class SelectField extends React.PureComponent {
         let autocompleteValue = null;
 
         if (multiple) {
-          autocompleteValue = fieldValue.map(value => ({
+          autocompleteValue = fieldValue.map((value) => ({
             value: value,
-            label: component.getOptionLabel(value)
+            label: component.getOptionLabel(value),
           }));
         } else {
           autocompleteValue = {
             value: fieldValue,
-            label: component.getOptionLabel(fieldValue)
+            label: component.getOptionLabel(fieldValue),
           };
         }
 
@@ -158,7 +158,7 @@ class SelectField extends React.PureComponent {
             options={options}
             isClearable={true}
             placeholder=""
-            onChange={value => this.handleAutocompleteChange(value)}
+            onChange={(value) => this.handleAutocompleteChange(value)}
             onBlur={() => this.handleBlur()}
             onFocus={() => this.handleFocus()}
             value={autocompleteValue}
@@ -172,7 +172,7 @@ class SelectField extends React.PureComponent {
           <Select
             multiple={multiple}
             error={touched && err ? true : false}
-            onChange={event => this.handleChange(event.target.value)}
+            onChange={(event) => this.handleChange(event.target.value)}
             onBlur={() => this.handleBlur()}
             input={input}
             renderValue={renderValue}
@@ -188,7 +188,7 @@ class SelectField extends React.PureComponent {
     } else {
       let displayValue = null;
       if (multiple && value) {
-        displayValue = value.map(val => (
+        displayValue = value.map((val) => (
           <Chip
             key={val}
             label={component.getOptionLabel(val)}
@@ -222,5 +222,5 @@ export default attach([
   'editable',
   'multiple',
   'useDisplayValue',
-  'autocomplete'
+  'autocomplete',
 ])(SelectField);

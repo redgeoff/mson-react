@@ -35,5 +35,5 @@ export default attach([
   'disabled',
   'icon',
   'fullWidth',
-  'variant'
+  'variant',
 ])(ButtonField);

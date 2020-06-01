@@ -9,7 +9,7 @@ class URLField extends React.PureComponent {
       value,
       editable,
       useDisplayValue,
-      newWindow
+      newWindow,
     } = this.props;
 
     let displayValue = null;

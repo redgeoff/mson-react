@@ -6,7 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DisplayValueTypography from './display-value-typography';
 
 class BooleanField extends React.PureComponent {
-  handleChange = event => {
+  handleChange = (event) => {
     this.props.component.setValue(event.target.checked);
   };
 
@@ -17,7 +17,7 @@ class BooleanField extends React.PureComponent {
       component,
       editable,
       useDisplayValue,
-      label
+      label,
     } = this.props;
 
     let hideLabelUI = null;
@@ -60,5 +60,5 @@ export default attach([
   'disabled',
   'editable',
   'useDisplayValue',
-  'label'
+  'label',
 ])(BooleanField);

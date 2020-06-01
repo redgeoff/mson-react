@@ -5,15 +5,15 @@ import attach from '../attach';
 import FlexBreak from '../flex-break';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     marginLeft: theme.spacing(2),
 
     // The following flex properties are needed so that we can set a margin for all fields in the
     // nested form
     display: 'flex',
-    flexFlow: 'wrap'
-  }
+    flexFlow: 'wrap',
+  },
 });
 
 class FormField extends React.PureComponent {
@@ -47,5 +47,5 @@ FormField = withStyles(styles)(FormField);
 
 export default attach([
   'hideLabel',
-  'value' // Changes when the value is or isn't blank
+  'value', // Changes when the value is or isn't blank
 ])(FormField);

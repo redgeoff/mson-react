@@ -31,33 +31,33 @@ import registrar from 'mson/lib/compiler/registrar';
 
 const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: '100%',
     // height: 430,
     // marginTop: theme.spacing.unit * 3,
     zIndex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   appFrame: {
     position: 'relative',
     display: 'flex',
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   appBar: {
     position: 'fixed',
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
   },
   appBarResponsive: {
     [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`
-    }
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   content: {
     backgroundColor: theme.palette.background.default,
@@ -67,23 +67,23 @@ const styles = theme => ({
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
-      marginTop: 64
+      marginTop: 64,
     },
 
     // Disable Chrome's Scroll Anchoring as it causes problems with inifinite scrolling when
     // scrolling up. Specifically, the scroll location is locked after items are prepended to the
     // top of the list before the spacer is resized.
-    overflowAnchor: 'none'
+    overflowAnchor: 'none',
   },
   contentResponsive: {
     // Also needed to extend menu vertically
     [theme.breakpoints.up('md')]: {
-      marginLeft: drawerWidth
-    }
+      marginLeft: drawerWidth,
+    },
   },
   alignRight: {
-    marginLeft: 'auto' // right align
-  }
+    marginLeft: 'auto', // right align
+  },
 });
 
 // TODO: break up into components for header, menu, body, etc...
@@ -105,7 +105,7 @@ class App extends React.PureComponent {
     searchStringInput: '',
     showSearch: false,
 
-    showSearchOnMobile: false
+    showSearchOnMobile: false,
 
     // isLoggedIn: false
   };
@@ -119,7 +119,7 @@ class App extends React.PureComponent {
     this.setGlobalOnNavigate();
   }
 
-  onNavigate = callback => {
+  onNavigate = (callback) => {
     // We don't warn about discarding changes when fullScreen, e.g. a login page
     const menuItem = this.state.menuItem;
     if (
@@ -131,7 +131,7 @@ class App extends React.PureComponent {
       // Show a confirmation dialog to see if the user wants to continue
       globals.displayConfirmation({
         title: 'Discard changes?',
-        callback
+        callback,
       });
     } else {
       // Nothing is dirty so allow the navigation to continue
@@ -185,7 +185,7 @@ class App extends React.PureComponent {
     }
   };
 
-  handleConfirmationClose = async yes => {
+  handleConfirmationClose = async (yes) => {
     const { confirmation } = this.props;
     if (confirmation.callback && yes) {
       // Allow/prohibit the route change
@@ -209,7 +209,7 @@ class App extends React.PureComponent {
     }
     return {
       canArchive,
-      canSearch
+      canSearch,
     };
   }
 
@@ -248,8 +248,8 @@ class App extends React.PureComponent {
           route: menu.toRoute({
             parameters,
             queryString: location.search.substr(1),
-            hash: location.hash.substr(1)
-          })
+            hash: location.hash.substr(1),
+          }),
         });
 
         const parentItem = menu.getParent(menuItem.path);
@@ -278,7 +278,7 @@ class App extends React.PureComponent {
               showArchived: false,
               showArchivedToggle: canArchive,
               searchStringInput: '',
-              showSearch: canSearch
+              showSearch: canSearch,
             });
           }
         }
@@ -288,7 +288,7 @@ class App extends React.PureComponent {
     }
   };
 
-  onLocation = location => {
+  onLocation = (location) => {
     globals.set({ path: location.pathname });
   };
 
@@ -320,7 +320,7 @@ class App extends React.PureComponent {
       const menuItem = this.state.menuItem;
       if (menuItem && menuItem.content.has('searchString')) {
         menuItem.content.set({
-          searchString: this.props.searchString
+          searchString: this.props.searchString,
         });
       }
     }
@@ -342,7 +342,7 @@ class App extends React.PureComponent {
     // TODO: is this too inefficient in that it cascades a lot of unecessary events? Instead, could:
     // 1. move more logic to app layer so that only cascade when need new window 2. use something
     // like a global scroll listener that the component can use when it is active
-    window.addEventListener('scroll', e => {
+    window.addEventListener('scroll', (e) => {
       if (this.state.menuItem) {
         this.state.menuItem.content.emit('scroll', e);
       }
@@ -366,7 +366,7 @@ class App extends React.PureComponent {
     this.setState({ snackbarOpen: false });
   };
 
-  handleArchivedChange = event => {
+  handleArchivedChange = (event) => {
     this.setState({ showArchived: event.target.checked });
 
     const { menuItem } = this.state;
@@ -377,25 +377,25 @@ class App extends React.PureComponent {
       // Scroll to the top of the page as otherwise it is confusing to the user as to why they are
       // dumped in some random place within the newly queried data.
       window.scrollTo({
-        top: 0
+        top: 0,
       });
     }
   };
 
-  handleSearchStringInputChange = searchStringInput => {
+  handleSearchStringInputChange = (searchStringInput) => {
     this.setState({
-      searchStringInput
+      searchStringInput,
     });
   };
 
-  handleSearch = searchStringInput => {
+  handleSearch = (searchStringInput) => {
     this.setState(
       {
-        searchStringInput
+        searchStringInput,
       },
       () => {
         globals.set({
-          searchString: searchStringInput ? searchStringInput : null
+          searchString: searchStringInput ? searchStringInput : null,
         });
       }
     );
@@ -544,7 +544,7 @@ class App extends React.PureComponent {
       menuItem,
       snackbarOpen,
       snackbarMessage,
-      confirmationOpen
+      confirmationOpen,
     } = this.state;
 
     const responsive = this.isResponsive();
@@ -575,7 +575,7 @@ class App extends React.PureComponent {
     if (menuItem && menuItem.fullScreen) {
       fullScreenStyle = {
         marginLeft: 0,
-        marginTop: 0
+        marginTop: 0,
       };
     }
 

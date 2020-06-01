@@ -17,7 +17,7 @@ export default class FormCardButtons extends React.PureComponent {
       disabled,
       archivedAt,
       onEdit,
-      onDelete
+      onDelete,
     } = this.props;
 
     // NOTE: using Tooltips below when we have 100 more items leads to a significant latency. In the

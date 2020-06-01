@@ -6,14 +6,14 @@ import Select from '@material-ui/core/Select';
 import Icon from '../icon';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   formControl: {
     // Specify a more appropriate min width so that the field is wide enough to cover most labels
     // minWidth: 120
   },
   flip: {
-    transform: 'scaleY(-1)'
-  }
+    transform: 'scaleY(-1)',
+  },
 });
 
 class SelectOrder extends React.PureComponent {
@@ -22,7 +22,7 @@ class SelectOrder extends React.PureComponent {
     this.props.onChange({ sortOrder });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.props.onChange({ sortBy: event.target.value });
   };
 
@@ -31,7 +31,7 @@ class SelectOrder extends React.PureComponent {
 
     const flipped = sortOrder !== 'DESC';
 
-    const items = options.map(option => {
+    const items = options.map((option) => {
       return (
         <MenuItem value={option.value} key={option.value}>
           {option.label}

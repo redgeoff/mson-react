@@ -10,20 +10,20 @@ import each from 'lodash/each';
 import attach from './attach';
 import ComponentField from 'mson/lib/fields/component-field';
 
-const styles = theme => ({
+const styles = (theme) => ({
   form: {
     overflowY: 'scroll',
     maxHeight: 'calc(100vh - 390px)',
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 });
 
 class FieldEditorForm extends React.PureComponent {
   state = {
-    field: null
+    field: null,
   };
 
-  handleValueChange = value => {
+  handleValueChange = (value) => {
     const form = this.props.component;
     let { field } = this.state;
     let component = null;
@@ -37,7 +37,7 @@ class FieldEditorForm extends React.PureComponent {
 
       if (value.componentName) {
         component = compiler.newComponent({
-          component: value.componentName
+          component: value.componentName,
         });
 
         // Is the component a field?
