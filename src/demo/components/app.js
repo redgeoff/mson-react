@@ -88,6 +88,28 @@ export default {
           component: 'app.Grid',
         },
       },
+      {
+        path: '/router',
+        label: 'Router',
+        content: {
+          component: 'Action',
+          actions: [
+            {
+              component: 'Redirect',
+              path:
+                '/router/person/p123/message/m456?first=Trevor&last=Noah#hash123',
+            },
+          ],
+        },
+      },
+      {
+        path: '/router/person/:personId/message/:messageId',
+        label: 'Router',
+        content: {
+          component: 'app.Router',
+        },
+        hidden: true, // Register route, but don't expose it in the menu
+      },
     ],
   },
 };
