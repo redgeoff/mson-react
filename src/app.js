@@ -70,7 +70,7 @@ const styles = (theme) => ({
       marginTop: 64,
     },
 
-    // Disable Chrome's Scroll Anchoring as it causes problems with inifinite scrolling when
+    // Disable Chrome's Scroll Anchoring as it causes problems with infinite scrolling when
     // scrolling up. Specifically, the scroll location is locked after items are prepended to the
     // top of the list before the spacer is resized.
     overflowAnchor: 'none',
@@ -228,8 +228,8 @@ class App extends React.PureComponent {
   }
 
   switchContent = async (menuItem, parameters) => {
-    // Prevent inifinite recursion when menuItem is null by making sure that the menuItem is
-    // changing before changing anything, especially the state
+    // Prevent infinite recursion when menuItem is null by making sure that the menuItem is
+    // changing before changing anything else; especially the state
     if (menuItem !== this.state.menuItem) {
       if (this.component) {
         // Emit an unload event so that the component can unload any data, etc...
