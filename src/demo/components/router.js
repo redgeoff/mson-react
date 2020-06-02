@@ -65,7 +65,7 @@ export default {
         {
           component: 'Redirect',
           path:
-            '/router/person/{{fields.personId.value}}/message/{{fields.messageId.value?first={{fields.first.value}}&last={{fields.last.value}}#{{fields.hash.value}}',
+            '/router/person/{{fields.personId.value}}/message/{{fields.messageId.value}}?first={{fields.first.value}}&last={{fields.last.value}}#{{fields.hash.value}}',
         },
       ],
     },
