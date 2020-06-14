@@ -1,13 +1,8 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/Menu/MenuItem';
-// import ListItemIcon from '@material-ui/core/List/ListItemIcon';
-// import ListItemText from '@material-ui/core/List/ListItemText';
-import Icon from './icon';
+import IconButton from './icon-button';
 import Grid from '@material-ui/core/Grid';
-// import Tooltip from '@material-ui/core/Tooltip';
 
+// FUTURE: support for hamburger menus
 export default class FormCardButtons extends React.PureComponent {
   render() {
     const {
@@ -20,27 +15,18 @@ export default class FormCardButtons extends React.PureComponent {
       onDelete,
     } = this.props;
 
-    // NOTE: using Tooltips below when we have 100 more items leads to a significant latency. In the
-    // future, if we wish to support tooltips then we'll probably need to lazy load the tooltip on
-    // mouse over.
-
     let updateButton = null;
     if (!forbidUpdate) {
-      // <Tooltip title="Edit">
       updateButton = (
-        <IconButton onClick={onEdit}>
-          <Icon icon="Edit" />
-        </IconButton>
+        <IconButton onClick={onEdit} icon="Edit" tooltipTitle="Edit" />
       );
-      // </Tooltip>
     }
 
     let deleteButton = null;
     if (!forbidDelete) {
+      const title = archivedAt ? 'Restore' : 'Delete';
       deleteButton = (
-        <IconButton onClick={onDelete}>
-          <Icon icon={archivedAt ? 'Restore' : 'Delete'} />
-        </IconButton>
+        <IconButton onClick={onDelete} icon={title} tooltipTitle={title} />
       );
     }
 
@@ -49,41 +35,6 @@ export default class FormCardButtons extends React.PureComponent {
         <Grid item>
           {updateButton}
           {deleteButton}
-          {/* TODO: make the more menu optional
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={this.handleMoreClose}
-          >
-            <MenuItem
-              className={classes.menuItem}
-              onClick={event => this.handleEdit(event)}
-            >
-              <ListItemIcon className={classes.icon}>
-                <Icon icon="Edit" />
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.primary }}
-                inset
-                primary="Edit"
-              />
-            </MenuItem>
-            <MenuItem
-              className={classes.menuItem}
-              onClick={event => this.handleDelete(event)}
-            >
-              <ListItemIcon className={classes.icon}>
-                <Icon icon="Delete" />
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.primary }}
-                inset
-                primary="Delete"
-              />
-            </MenuItem>
-          </Menu>
-          */}
         </Grid>
       );
     } else {
