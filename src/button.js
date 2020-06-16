@@ -1,26 +1,8 @@
 import React from 'react';
-import ButtonMui from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Icon from './icon';
-
-const useStyles = makeStyles((theme) => ({
-  leftIcon: {
-    marginRight: theme.spacing(1),
-  },
-  marginTop: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const handleClick = (onClick) => {
-  if (onClick) {
-    onClick();
-  }
-};
+import IconButton from './icon-button';
+import LabelButton from './label-button';
 
 const Button = (props) => {
-  const classes = useStyles();
-
   const {
     type,
     disabled,
@@ -30,24 +12,25 @@ const Button = (props) => {
     variant,
     marginTop,
     onClick,
+    tooltip,
   } = props;
 
-  const className = marginTop !== false ? classes.marginTop : null;
-
-  return (
-    <ButtonMui
-      className={className}
-      type={type}
-      color="primary"
-      disabled={disabled}
-      onClick={() => handleClick(onClick)}
-      fullWidth={fullWidth}
-      variant={variant}
-    >
-      {icon ? <Icon className={classes.leftIcon} icon={icon} /> : null}
-      {label}
-    </ButtonMui>
-  );
+  if (label || !icon) {
+    return (
+      <LabelButton
+        type={type}
+        disabled={disabled}
+        label={label}
+        icon={icon}
+        fullWidth={fullWidth}
+        variant={variant}
+        marginTop={marginTop}
+        onClick={onClick}
+      />
+    );
+  } else {
+    return <IconButton onClick={onClick} icon={icon} tooltip={tooltip} />;
+  }
 };
 
 export default Button;

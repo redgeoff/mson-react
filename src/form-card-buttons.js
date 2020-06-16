@@ -1,5 +1,5 @@
 import React from 'react';
-import TooltipIconButton from './tooltip-icon-button';
+import IconButton from './icon-button';
 import Grid from '@material-ui/core/Grid';
 
 // FUTURE: support for hamburger menus
@@ -17,20 +17,14 @@ export default class FormCardButtons extends React.PureComponent {
 
     let updateButton = null;
     if (!forbidUpdate) {
-      updateButton = (
-        <TooltipIconButton onClick={onEdit} icon="Edit" tooltipTitle="Edit" />
-      );
+      updateButton = <IconButton onClick={onEdit} icon="Edit" tooltip="Edit" />;
     }
 
     let deleteButton = null;
     if (!forbidDelete) {
       const title = archivedAt ? 'Restore' : 'Delete';
       deleteButton = (
-        <TooltipIconButton
-          onClick={onDelete}
-          icon={title}
-          tooltipTitle={title}
-        />
+        <IconButton onClick={onDelete} icon={title} tooltip={title} />
       );
     }
 

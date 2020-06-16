@@ -14,7 +14,15 @@ class ButtonField extends React.PureComponent {
   };
 
   render() {
-    const { label, type, disabled, icon, fullWidth, variant } = this.props;
+    const {
+      label,
+      type,
+      disabled,
+      icon,
+      fullWidth,
+      variant,
+      tooltip,
+    } = this.props;
     return (
       <Button
         type={type}
@@ -24,6 +32,7 @@ class ButtonField extends React.PureComponent {
         icon={icon}
         fullWidth={fullWidth}
         variant={variant}
+        tooltip={tooltip}
       />
     );
   }
@@ -36,4 +45,5 @@ export default attach([
   'icon',
   'fullWidth',
   'variant',
+  'tooltip',
 ])(ButtonField);
