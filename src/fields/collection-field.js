@@ -243,6 +243,7 @@ class CollectionField extends React.PureComponent {
             forbidDelete={forbidDelete || !canArchive || useDisplayValue}
             editable={editable}
             disabled={disabled}
+            buttons={component.get('buttons')}
           />
         </Grid>
       );
@@ -554,5 +555,6 @@ CollectionField = attach([
   'preventReadAction',
   'preventUpdate',
   'preventDeleteAction',
+  'buttons',
 ])(CollectionField);
 export default CollectionField;
