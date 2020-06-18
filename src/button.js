@@ -1,53 +1,36 @@
 import React from 'react';
-import ButtonMui from '@material-ui/core/Button';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Icon from './icon';
+import IconButton from './icon-button';
+import LabelButton from './label-button';
 
-const styles = (theme) => ({
-  leftIcon: {
-    marginRight: theme.spacing(1),
-  },
-  marginTop: {
-    marginTop: theme.spacing(3),
-  },
-});
+const Button = (props) => {
+  const {
+    type,
+    disabled,
+    label,
+    icon,
+    fullWidth,
+    variant,
+    marginTop,
+    onClick,
+    tooltip,
+  } = props;
 
-class Button extends React.PureComponent {
-  handleClick = () => {
-    if (this.props.onClick) {
-      this.props.onClick();
-    }
-  };
-
-  render() {
-    const {
-      classes,
-      type,
-      disabled,
-      label,
-      icon,
-      fullWidth,
-      variant,
-      marginTop,
-    } = this.props;
-
-    const className = marginTop !== false ? classes.marginTop : null;
-
+  if (label || !icon) {
     return (
-      <ButtonMui
-        className={className}
+      <LabelButton
         type={type}
-        color="primary"
         disabled={disabled}
-        onClick={this.handleClick}
+        label={label}
+        icon={icon}
         fullWidth={fullWidth}
         variant={variant}
-      >
-        {icon ? <Icon className={classes.leftIcon} icon={icon} /> : null}
-        {label}
-      </ButtonMui>
+        marginTop={marginTop}
+        onClick={onClick}
+      />
     );
+  } else {
+    return <IconButton onClick={onClick} icon={icon} tooltip={tooltip} />;
   }
-}
+};
 
-export default withStyles(styles)(Button);
+export default Button;

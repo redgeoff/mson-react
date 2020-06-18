@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import IconButtonMui from '@material-ui/core/IconButton';
 import Icon from './icon';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const TooltipIconButton = (props) => {
-  const { onClick, icon, tooltipTitle } = props;
+const IconButton = (props) => {
+  const { onClick, icon, tooltip } = props;
 
   const [hovered, setHovered] = useState(false);
 
@@ -12,16 +12,16 @@ const TooltipIconButton = (props) => {
   // this by only loading the tooltip on the initial mouse over.
 
   const button = (
-    <IconButton onClick={onClick} onMouseEnter={() => setHovered(true)}>
+    <IconButtonMui onClick={onClick} onMouseEnter={() => setHovered(true)}>
       <Icon icon={icon} />
-    </IconButton>
+    </IconButtonMui>
   );
 
-  if (hovered) {
-    return <Tooltip title={tooltipTitle}>{button}</Tooltip>;
+  if (hovered && tooltip) {
+    return <Tooltip title={tooltip}>{button}</Tooltip>;
   } else {
     return button;
   }
 };
 
-export default TooltipIconButton;
+export default IconButton;

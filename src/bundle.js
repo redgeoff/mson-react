@@ -1,4 +1,4 @@
-// Note: this file is named bundle.js and not index.js so that it doesn't interfer with
+// Note: this file is named bundle.js and not index.js so that it doesn't interfere with
 // react-scripts' expectation of an index.js when running `yarn start`. We should rename bundle.js
 // to index.js if we decide to move away from react-scripts.
 
