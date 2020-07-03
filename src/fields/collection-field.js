@@ -232,6 +232,8 @@ class CollectionField extends React.PureComponent {
       // for things like infinite loading.
       const id = component.getUniqueItemId(form.getValue('id'));
 
+      const formExtras = component.getFormExtras(form);
+
       const item = (
         <Grid item xs={12} sm={maxGrids} lg={maxGrids} key={key} id={id}>
           <FormCard
@@ -243,7 +245,7 @@ class CollectionField extends React.PureComponent {
             forbidDelete={forbidDelete || !canArchive || useDisplayValue}
             editable={editable}
             disabled={disabled}
-            buttons={component.get('buttons')}
+            buttons={formExtras?.buttons}
           />
         </Grid>
       );
@@ -555,6 +557,6 @@ CollectionField = attach([
   'preventReadAction',
   'preventUpdate',
   'preventDeleteAction',
-  'buttons',
+  'buttonsFactory',
 ])(CollectionField);
 export default CollectionField;
