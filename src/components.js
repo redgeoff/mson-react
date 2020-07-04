@@ -9,6 +9,7 @@ import DateField from './fields/date-field';
 import Field from './fields/field';
 import Form from './form';
 import FormField from './fields/form-field';
+import Fragment from './fragment';
 import Grid from './grid';
 import GridItem from './grid-item';
 import CollectionField from './fields/collection-field';
@@ -33,6 +34,7 @@ export default {
   Field,
   Form,
   FormField,
+  Fragment,
   Grid,
   GridItem,
   CollectionField,
