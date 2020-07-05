@@ -114,14 +114,9 @@ class CollectionField extends React.PureComponent {
     await this.props.component.save();
   };
 
-  isOpen() {
-    return !!this.props.mode;
-  }
-
   handleDelete = async (formToDelete) => {
     const { component } = this.props;
 
-    const open = this.isOpen();
     if (formToDelete) {
       component.set({
         currentForm: formToDelete,
