@@ -61,7 +61,6 @@ const styles = (theme) => ({
 
 class CollectionField extends React.PureComponent {
   state = {
-    confirmationOpen: false,
     sortBy: '',
     sortOrder: 'ASC',
   };
@@ -115,14 +114,9 @@ class CollectionField extends React.PureComponent {
     await this.props.component.save();
   };
 
-  isOpen() {
-    return !!this.props.mode;
-  }
-
   handleDelete = async (formToDelete) => {
-    const { component, preventDeleteAction } = this.props;
+    const { component } = this.props;
 
-    const open = this.isOpen();
     if (formToDelete) {
       component.set({
         currentForm: formToDelete,
@@ -138,30 +132,16 @@ class CollectionField extends React.PureComponent {
     // Are we restoring?
     if (archivedAt) {
       await component.restore(formToDelete);
-
-      // Is the dialog open?
-      if (open) {
-        // Close it
-        component.set({ mode: null });
-      }
-    } else {
-      if (!preventDeleteAction) {
-        this.setState({
-          confirmationOpen: true,
-          // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
-          confirmationTitle: 'Delete this?',
-        });
-      }
       component.set({ mode: null });
     }
   };
 
   handleConfirmationClose = async (yes) => {
+    const { component } = this.props;
     if (yes) {
-      const { component } = this.props;
       await component.archive(component.get('form'));
     }
-    this.setState({ confirmationOpen: false });
+    component.set({ mode: null });
   };
 
   canCreate() {
@@ -232,6 +212,8 @@ class CollectionField extends React.PureComponent {
       // for things like infinite loading.
       const id = component.getUniqueItemId(form.getValue('id'));
 
+      const formExtras = component.getFormExtras(form);
+
       const item = (
         <Grid item xs={12} sm={maxGrids} lg={maxGrids} key={key} id={id}>
           <FormCard
@@ -243,6 +225,7 @@ class CollectionField extends React.PureComponent {
             forbidDelete={forbidDelete || !canArchive || useDisplayValue}
             editable={editable}
             disabled={disabled}
+            buttons={formExtras?.buttons}
           />
         </Grid>
       );
@@ -406,11 +389,23 @@ class CollectionField extends React.PureComponent {
       theme,
       preventUpdate,
       preventDeleteAction,
+      mode,
     } = this.props;
 
     const dis = accessEditable === false || disabled;
 
-    const { confirmationOpen, confirmationTitle } = this.state;
+    let confirmationOpen = false;
+    let confirmationTitle = null;
+    if (
+      !preventDeleteAction &&
+      currentForm &&
+      mode === CollectionFieldCore.MODES.DELETE &&
+      !currentForm.getValue('archivedAt')
+    ) {
+      confirmationOpen = true;
+      // confirmationTitle: `Are you sure you want to delete this ${singularLabel}?`
+      confirmationTitle = 'Delete this?';
+    }
 
     const label = component.get('label').toLowerCase();
 
@@ -554,5 +549,6 @@ CollectionField = attach([
   'preventReadAction',
   'preventUpdate',
   'preventDeleteAction',
+  'buttonsFactory',
 ])(CollectionField);
 export default CollectionField;

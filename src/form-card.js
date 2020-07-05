@@ -47,7 +47,25 @@ class FormCard extends React.PureComponent {
       editable,
       disabled,
       value,
+      buttons,
     } = this.props;
+
+    let cardButtons;
+    if (buttons) {
+      cardButtons = <Component component={buttons} />;
+    } else {
+      cardButtons = (
+        <FormCardButtons
+          forbidUpdate={forbidUpdate}
+          forbidDelete={forbidDelete}
+          editable={editable}
+          disabled={disabled}
+          archivedAt={value.archivedAt}
+          onEdit={(event) => this.handleEdit(event)}
+          onDelete={(event) => this.handleDelete(event)}
+        />
+      );
+    }
 
     return (
       <div>
@@ -60,15 +78,7 @@ class FormCard extends React.PureComponent {
             >
               <Component component={component} formTag={false} mode="read" />
             </Grid>
-            <FormCardButtons
-              forbidUpdate={forbidUpdate}
-              forbidDelete={forbidDelete}
-              editable={editable}
-              disabled={disabled}
-              archivedAt={value.archivedAt}
-              onEdit={(event) => this.handleEdit(event)}
-              onDelete={(event) => this.handleDelete(event)}
-            />
+            {cardButtons}
           </Grid>
         </Paper>
       </div>
