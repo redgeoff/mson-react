@@ -1,8 +1,5 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import Component from './component';
-// import compiler from 'mson/lib/compiler';
-// import { render, wait, fireEvent } from '@testing-library/react';
 import { render } from '@testing-library/react';
 
 it('should render items', async () => {
