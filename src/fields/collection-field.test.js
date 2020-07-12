@@ -43,10 +43,14 @@ it('should list', async () => {
 
   component.setValue(contacts);
 
-  const { findAllByText } = render(<Component component={component} />);
+  const { findAllByLabelText } = render(<Component component={component} />);
 
-  const items = await findAllByText(/First Name/);
-  expect(items).toHaveLength(3);
+  const nodes = await findAllByLabelText(/First Name/, { selector: 'span' });
+  expect(nodes.map((node) => node.textContent)).toEqual([
+    'Daenerys',
+    'Jon',
+    'Tyrion',
+  ]);
 });
 
 // TODO: create

@@ -10,11 +10,16 @@ const styles = (theme) => ({
 
 class DisplayValueTypography extends React.PureComponent {
   render() {
-    const { children, classes } = this.props;
+    const { children, classes, id } = this.props;
 
     // We use a span tag so that the element is inline
     return (
-      <Typography variant="subtitle1" component="span" className={classes.root}>
+      <Typography
+        variant="subtitle1"
+        component="span"
+        className={classes.root}
+        id={id}
+      >
         {children}
       </Typography>
     );
