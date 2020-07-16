@@ -1,13 +1,13 @@
 import React from 'react';
 import Component from '../component';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import compiler from 'mson/lib/compiler';
 
 const definition = {
   component: 'CollectionField',
   name: 'contacts',
   label: 'Contacts',
-  help: 'You contacts',
+  help: 'Your contacts',
   formFactory: {
     component: 'Factory',
     product: {
@@ -38,9 +38,11 @@ const contacts = [
   },
 ];
 
-const expectContactsToEqual = async (findAllByLabelText, contacts) => {
-  const nodes = await findAllByLabelText(/First Name/);
-  expect(nodes.map((node) => node.textContent)).toEqual(contacts);
+const expectContactsToEqual = async (getAllByLabelText, contacts) => {
+  await waitFor(() => {
+    const nodes = getAllByLabelText(/First Name/);
+    expect(nodes.map((node) => node.textContent)).toEqual(contacts);
+  });
 };
 
 it('should list', async () => {
@@ -48,19 +50,15 @@ it('should list', async () => {
 
   component.setValue(contacts);
 
-  const { findAllByLabelText } = render(<Component component={component} />);
+  const { getAllByLabelText } = render(<Component component={component} />);
 
-  await expectContactsToEqual(findAllByLabelText, [
-    'Daenerys',
-    'Jon',
-    'Tyrion',
-  ]);
+  await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
 });
 
 it('should create', async () => {
   const component = compiler.newComponent(definition);
 
-  const { findByLabelText, getByRole, findAllByLabelText } = render(
+  const { findByLabelText, getByRole, getAllByLabelText } = render(
     <Component component={component} />
   );
 
@@ -77,7 +75,7 @@ it('should create', async () => {
   fireEvent.click(save);
 
   // Verify that the contact now appears in the list
-  await expectContactsToEqual(findAllByLabelText, ['Ray']);
+  await expectContactsToEqual(getAllByLabelText, ['Ray']);
 });
 
 // TODO: view

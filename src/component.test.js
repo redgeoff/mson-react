@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Component from './component';
 import compiler from 'mson/lib/compiler';
-import { render, wait, fireEvent } from '@testing-library/react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
 
 const definition = {
   name: 'firstName',
@@ -30,13 +30,13 @@ const shouldListenToEvents = async (jsx) => {
   const field = getByLabelText('First Name');
 
   // Wait for initial value
-  await wait(() => expect(field.value).toEqual('Bob'));
+  await waitFor(() => expect(field.value).toEqual('Bob'));
 
   // Fill in Ella
   fireEvent.change(field, { target: { value: 'Ella' } });
 
   // Wait for change to Lauryn
-  await wait(() => expect(field.value).toEqual('Lauryn'));
+  await waitFor(() => expect(field.value).toEqual('Lauryn'));
 
   // Unmount
   unmount();
@@ -122,7 +122,7 @@ const shouldChangeComponent = async (props1, props2) => {
   fireEvent.change(field, { target: { value: '50' } });
 
   // Wait for change
-  await wait(() => expect(field.value).toEqual('40'));
+  await waitFor(() => expect(field.value).toEqual('40'));
 
   // Rerender with the same component
   rerender(<Component {...props2} />);
