@@ -88,6 +88,11 @@
       "src/**/*.{js,jsx}",
       "!**/demo/**"
     ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "register-service-worker.js",
+      "index.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 0,
