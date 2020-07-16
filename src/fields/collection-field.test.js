@@ -1,13 +1,13 @@
 import React from 'react';
 import Component from '../component';
-import { render } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import compiler from 'mson/lib/compiler';
 
 const definition = {
   component: 'CollectionField',
   name: 'contacts',
   label: 'Contacts',
-  help: 'You contacts',
+  help: 'Your contacts',
   formFactory: {
     component: 'Factory',
     product: {
@@ -38,22 +38,45 @@ const contacts = [
   },
 ];
 
+const expectContactsToEqual = async (getAllByLabelText, contacts) => {
+  await waitFor(() => {
+    const nodes = getAllByLabelText(/First Name/);
+    expect(nodes.map((node) => node.textContent)).toEqual(contacts);
+  });
+};
+
 it('should list', async () => {
   const component = compiler.newComponent(definition);
 
   component.setValue(contacts);
 
-  const { findAllByLabelText } = render(<Component component={component} />);
+  const { getAllByLabelText } = render(<Component component={component} />);
 
-  const nodes = await findAllByLabelText(/First Name/, { selector: 'span' });
-  expect(nodes.map((node) => node.textContent)).toEqual([
-    'Daenerys',
-    'Jon',
-    'Tyrion',
-  ]);
+  await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
 });
 
-// TODO: create
+it('should create', async () => {
+  const component = compiler.newComponent(definition);
+
+  const { findByLabelText, getByRole, getAllByLabelText } = render(
+    <Component component={component} />
+  );
+
+  // Click "New Contact" button
+  const newContact = getByRole('button', { name: /New Contact/i });
+  fireEvent.click(newContact);
+
+  // Fill in First Name
+  const firstName = await findByLabelText(/First Name/);
+  fireEvent.change(firstName, { target: { value: 'Ray' } });
+
+  // Save the form
+  const save = getByRole('button', { name: /Save/i });
+  fireEvent.click(save);
+
+  // Verify that the contact now appears in the list
+  await expectContactsToEqual(getAllByLabelText, ['Ray']);
+});
 
 // TODO: view
 
