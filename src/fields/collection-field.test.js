@@ -78,7 +78,29 @@ it('should create', async () => {
   await expectContactsToEqual(getAllByLabelText, ['Ray']);
 });
 
-// TODO: view
+it('should view', async () => {
+  const component = compiler.newComponent(definition);
+
+  // Populate list
+  component.setValue(contacts);
+  const { getAllByLabelText, getByRole, findByLabelText } = render(
+    <Component component={component} />
+  );
+  await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
+
+  // Click to view first item
+  const view = getByRole('button', { name: /View.*daenerys/i });
+  fireEvent.click(view);
+
+  // Verify that item is being displayed. The extra "Daenerys" is the contact displayed in the
+  // FormDialog. TODO: is there a better way to perform this check?
+  await expectContactsToEqual(getAllByLabelText, [
+    'Daenerys',
+    'Jon',
+    'Tyrion',
+    'Daenerys',
+  ]);
+});
 
 // TODO: update
 
