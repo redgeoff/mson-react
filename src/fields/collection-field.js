@@ -210,7 +210,7 @@ class CollectionField extends React.PureComponent {
       // Note: we use an id instead of ref so that more of our logic can be reused across different
       // frameworks. We use the form id so that we have a consistent way of referencing the element
       // for things like infinite loading.
-      const id = component.getUniqueItemId(form.getValue('id'));
+      const id = component.getUniqueItemId(component._getFormKey(form));
 
       const formExtras = component.getFormExtras(form);
 
@@ -226,6 +226,8 @@ class CollectionField extends React.PureComponent {
             editable={editable}
             disabled={disabled}
             buttons={formExtras?.buttons}
+            id={id}
+            aria-label={`View ${id}`}
           />
         </Grid>
       );

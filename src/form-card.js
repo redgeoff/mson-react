@@ -75,6 +75,9 @@ class FormCard extends React.PureComponent {
               item
               className={classes.content}
               onClick={(event) => this.handleClick(event)}
+              role="button"
+              aria-label={this.props['aria-label']}
+              id={this.props['id']}
             >
               <Component component={component} formTag={false} mode="read" />
             </Grid>
