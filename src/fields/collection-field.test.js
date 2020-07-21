@@ -83,7 +83,7 @@ it('should view', async () => {
 
   // Populate list
   component.setValue(contacts);
-  const { getAllByLabelText, getByRole, findByLabelText } = render(
+  const { getAllByLabelText, getByRole } = render(
     <Component component={component} />
   );
   await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
