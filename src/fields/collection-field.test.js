@@ -78,15 +78,19 @@ it('should create', async () => {
   await expectContactsToEqual(getAllByLabelText, ['Ray']);
 });
 
-it('should view', async () => {
+const populateList = async () => {
   const component = compiler.newComponent(definition);
 
   // Populate list
   component.setValue(contacts);
-  const { getAllByLabelText, getByRole } = render(
-    <Component component={component} />
-  );
+  const renderResult = render(<Component component={component} />);
+  const { getAllByLabelText, getByRole } = renderResult;
   await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
+  return renderResult;
+};
+
+it('should view', async () => {
+  const { getAllByLabelText, getByRole } = await populateList();
 
   // Click to view first item
   const view = getByRole('button', { name: /View.*daenerys/i });
@@ -102,7 +106,28 @@ it('should view', async () => {
   ]);
 });
 
-// TODO: update
+it('should edit', async () => {
+  const {
+    getAllByLabelText,
+    getByRole,
+    findByLabelText,
+  } = await populateList();
+
+  // Edit item
+  const edit = getByRole('button', { name: /Edit.*daenerys/i });
+  fireEvent.click(edit);
+
+  // Fill in First Name
+  const firstName = await findByLabelText(/First Name/, { selector: 'input' });
+  fireEvent.change(firstName, { target: { value: 'Sansa' } });
+
+  // Save the form
+  const save = getByRole('button', { name: /Save/i });
+  fireEvent.click(save);
+
+  // Verify that the contact now appears in the list
+  await expectContactsToEqual(getAllByLabelText, ['Sansa', 'Jon', 'Tyrion']);
+});
 
 // TODO: archive
 
@@ -113,3 +138,7 @@ it('should view', async () => {
 // TODO: sort (including according by a non-default attribute)
 
 // TODO: search
+
+// TODO: edit, delete, close from view popup
+
+// TODO: cancel from edit popup

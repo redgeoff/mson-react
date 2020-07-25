@@ -48,6 +48,7 @@ class FormCard extends React.PureComponent {
       disabled,
       value,
       buttons,
+      id,
     } = this.props;
 
     let cardButtons;
@@ -63,6 +64,7 @@ class FormCard extends React.PureComponent {
           archivedAt={value.archivedAt}
           onEdit={(event) => this.handleEdit(event)}
           onDelete={(event) => this.handleDelete(event)}
+          id={id}
         />
       );
     }
@@ -77,7 +79,7 @@ class FormCard extends React.PureComponent {
               onClick={(event) => this.handleClick(event)}
               role="button"
               aria-label={this.props['aria-label']}
-              id={this.props['id']}
+              id={id}
             >
               <Component component={component} formTag={false} mode="read" />
             </Grid>
