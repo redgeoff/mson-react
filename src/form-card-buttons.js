@@ -13,18 +13,31 @@ export default class FormCardButtons extends React.PureComponent {
       archivedAt,
       onEdit,
       onDelete,
+      id,
     } = this.props;
 
     let updateButton = null;
     if (!forbidUpdate) {
-      updateButton = <IconButton onClick={onEdit} icon="Edit" tooltip="Edit" />;
+      updateButton = (
+        <IconButton
+          onClick={onEdit}
+          icon="Edit"
+          tooltip="Edit"
+          aria-label={`Edit ${id}`}
+        />
+      );
     }
 
     let deleteButton = null;
     if (!forbidDelete) {
       const title = archivedAt ? 'Restore' : 'Delete';
       deleteButton = (
-        <IconButton onClick={onDelete} icon={title} tooltip={title} />
+        <IconButton
+          onClick={onDelete}
+          icon={title}
+          tooltip={title}
+          aria-label={`Delete ${id}`}
+        />
       );
     }
 

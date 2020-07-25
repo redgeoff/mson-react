@@ -12,7 +12,11 @@ const IconButton = (props) => {
   // this by only loading the tooltip on the initial mouse over.
 
   const button = (
-    <IconButtonMui onClick={onClick} onMouseEnter={() => setHovered(true)}>
+    <IconButtonMui
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      aria-label={props['aria-label']}
+    >
       <Icon icon={icon} />
     </IconButtonMui>
   );
