@@ -66,6 +66,7 @@ class DateField extends React.PureComponent {
               onClose={this.handleBlur}
               fullWidth={fullWidth}
               disabled={dis}
+              id={component.getUniqueId()}
               // format="M/d/YYYY h:m a"
             />
           </span>
