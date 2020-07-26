@@ -1,7 +1,5 @@
-import React from 'react';
-import Component from '../component';
-import { render, fireEvent } from '@testing-library/react';
-import compiler from 'mson/lib/compiler';
+import { fireEvent } from '@testing-library/react';
+import { compileAndRender } from '../test-utils';
 
 const definition = {
   component: 'DateField',
@@ -11,11 +9,7 @@ const definition = {
 };
 
 it('should pick date', async () => {
-  const component = compiler.newComponent(definition);
-
-  const { getByLabelText, getByRole } = render(
-    <Component component={component} />
-  );
+  const { getByLabelText, getByRole } = compileAndRender(definition);
 
   // Click text field--this will launch the picker
   const textField = getByLabelText(/Date/, { selector: 'input' });
