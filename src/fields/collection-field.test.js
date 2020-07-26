@@ -1,7 +1,5 @@
-import React from 'react';
-import Component from '../component';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import compiler from 'mson/lib/compiler';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { compileAndRender } from '../test-utils';
 
 const definition = {
   component: 'CollectionField',
@@ -46,20 +44,14 @@ const expectContactsToEqual = async (getAllByLabelText, contacts) => {
 };
 
 it('should list', async () => {
-  const component = compiler.newComponent(definition);
-
-  component.setValue(contacts);
-
-  const { getAllByLabelText } = render(<Component component={component} />);
+  const { getAllByLabelText } = compileAndRender(definition, contacts);
 
   await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
 });
 
 it('should create', async () => {
-  const component = compiler.newComponent(definition);
-
-  const { findByLabelText, getByRole, getAllByLabelText } = render(
-    <Component component={component} />
+  const { findByLabelText, getByRole, getAllByLabelText } = compileAndRender(
+    definition
   );
 
   // Click "New Contact" button
@@ -79,11 +71,7 @@ it('should create', async () => {
 });
 
 const populateList = async () => {
-  const component = compiler.newComponent(definition);
-
-  // Populate list
-  component.setValue(contacts);
-  const renderResult = render(<Component component={component} />);
+  const renderResult = compileAndRender(definition, contacts);
   const { getAllByLabelText } = renderResult;
   await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
   return renderResult;
