@@ -28,6 +28,18 @@ it('should pick date', async () => {
   expect(textField).toHaveValue(`${month} 17th`);
 });
 
-// it('should initialize picker', async () => {
+it('should initialize picker', async () => {
+  // Initialize with the current date
+  const now = new Date();
+  const timestamp = now.getTime();
+  const { getByLabelText, getByRole } = compileAndRender(definition, timestamp);
 
-// });
+  // Click text field--this will launch the picker
+  const textField = getByLabelText(/Date/, { selector: 'input' });
+  fireEvent.click(textField);
+
+  // Verify that today is selected
+  const day = now.getDate();
+  const today = getByRole('button', { name: RegExp(`^${day}$`) });
+  expect(today.className).toContain('daySelected');
+});
