@@ -10209,6 +10209,11 @@ react-async-script@^1.1.1:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.5.0"
 
+react-beautiful-dnd-test-utils@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd-test-utils/-/react-beautiful-dnd-test-utils-3.2.1.tgz#68756a763f26b23216b439949e9c1aa6aedfee15"
+  integrity sha512-qMOs5gKF88P0VshkzUlkC8ju2shSX8+xL4GDlJeuhXWsxA5Xh4haaRMSXD007xhMlRalz+SCMMX5mJbPTJtqgQ==
+
 react-beautiful-dnd@^11.0.5:
   version "11.0.5"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-11.0.5.tgz#16b1dbd4d6493de0cb3f842cad57c7e9e1ff5fe7"

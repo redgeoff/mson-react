@@ -245,6 +245,7 @@ class CollectionField extends React.PureComponent {
                   provided.draggableProps.style,
                   theme
                 )}
+                aria-label={`Drag ${id}`}
               >
                 {item}
               </div>
