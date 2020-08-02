@@ -38,10 +38,16 @@ const contacts = [
 ];
 
 const expectContactsToEqual = async (getAllByLabelText, contacts) => {
-  await waitFor(() => {
-    const nodes = getAllByLabelText(/First Name/);
-    expect(nodes.map((node) => node.textContent)).toEqual(contacts);
-  });
+  await waitFor(
+    () => {
+      const nodes = getAllByLabelText(/First Name/);
+      expect(nodes.map((node) => node.textContent)).toEqual(contacts);
+    },
+    {
+      // When tests are running concurrently, it sometimes takes up to 2s for the results to settle
+      timeout: 2000,
+    }
+  );
 };
 
 it('should list', async () => {
