@@ -32,7 +32,10 @@ it('should initialize picker', async () => {
   // Initialize with the current date
   const now = new Date();
   const timestamp = now.getTime();
-  const { getByLabelText, getByRole } = compileAndRender(definition, timestamp);
+  const { getByLabelText, getAllByRole } = compileAndRender(
+    definition,
+    timestamp
+  );
 
   // Click text field--this will launch the picker
   const textField = getByLabelText(/Date/, { selector: 'input' });
@@ -40,6 +43,11 @@ it('should initialize picker', async () => {
 
   // Verify that today is selected
   const day = now.getDate();
-  const today = getByRole('button', { name: RegExp(`^${day}$`) });
-  expect(today.className).toContain('daySelected');
+  // Note: we can have multiple buttons with this day, as some can be hidden. Only one should have
+  // the daySelected class.
+  const days = getAllByRole('button', { name: RegExp(`^${day}$`) });
+  const selectedDays = days.filter((day) =>
+    day.className.includes('daySelected')
+  );
+  expect(selectedDays).toHaveLength(1);
 });
