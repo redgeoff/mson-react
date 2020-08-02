@@ -1,5 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { compileAndRender } from '../test-utils';
+import { makeDnd, DND_DIRECTION_DOWN } from 'react-beautiful-dnd-test-utils';
 
 const definition = {
   component: 'CollectionField',
@@ -70,8 +71,11 @@ it('should create', async () => {
   await expectContactsToEqual(getAllByLabelText, ['Ray']);
 });
 
-const populateList = async () => {
-  const renderResult = compileAndRender(definition, contacts);
+const populateList = async (def) => {
+  const renderResult = compileAndRender(
+    def === undefined ? definition : def,
+    contacts
+  );
   const { getAllByLabelText } = renderResult;
   await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
   return renderResult;
@@ -117,11 +121,26 @@ it('should edit', async () => {
   await expectContactsToEqual(getAllByLabelText, ['Sansa', 'Jon', 'Tyrion']);
 });
 
+it('should reorder', async () => {
+  const { getAllByLabelText, getByText, getByLabelText } = await populateList({
+    ...definition,
+    forbidOrder: false,
+  });
+
+  // Drag daenerys down by one position
+  await makeDnd({
+    getByText,
+    getDragEl: () => getByLabelText(/Drag.*daenerys/i),
+    direction: DND_DIRECTION_DOWN,
+    positions: 1,
+  });
+
+  await expectContactsToEqual(getAllByLabelText, ['Jon', 'Daenerys', 'Tyrion']);
+});
+
 // TODO: archive
 
 // TODO: restore
-
-// TODO: reorder
 
 // TODO: sort (including according by a non-default attribute)
 

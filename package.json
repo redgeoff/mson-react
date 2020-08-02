@@ -52,6 +52,7 @@
     "prettier": "^2.0.5",
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
+    "react-beautiful-dnd-test-utils": "^3.2.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "style-loader": "^1.2.1",
