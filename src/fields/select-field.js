@@ -155,6 +155,7 @@ class SelectField extends React.PureComponent {
 
         fld = (
           <AutoCompleteSelect
+            id={component.getUniqueId()}
             options={options}
             isClearable={true}
             placeholder=""
@@ -170,6 +171,7 @@ class SelectField extends React.PureComponent {
       } else {
         fld = (
           <Select
+            id={component.getUniqueId()}
             multiple={multiple}
             error={touched && err ? true : false}
             onChange={(event) => this.handleChange(event.target.value)}

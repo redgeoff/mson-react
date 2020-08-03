@@ -210,6 +210,7 @@ class AutoCompleteSelect extends React.Component {
       isDisabled,
       fullWidth,
       isMulti,
+      id,
     } = this.props;
 
     const selectStyles = {
@@ -231,6 +232,7 @@ class AutoCompleteSelect extends React.Component {
 
     return (
       <Select
+        id={id}
         className={classNames(classes.root, fullWidth && classes.fullWidth)}
         classes={classes}
         styles={selectStyles}
