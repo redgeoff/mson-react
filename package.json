@@ -44,7 +44,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.2",
     "css-mediaquery": "^0.1.2",
-    "date-fns": "^2.15.0",
+    "date-fns": "^2.16.1",
     "gh-pages": "^3.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.3.0",
