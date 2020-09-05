@@ -11,5 +11,5 @@ const definition = {
 globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
 
 it('should render', async () => {
-  const { getByText } = compileAndRender(definition);
+  compileAndRender(definition);
 });
