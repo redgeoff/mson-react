@@ -132,6 +132,7 @@ class SelectField extends React.PureComponent {
     const optionalProps = {};
 
     let fld = null;
+    const ariaLabel = component.get('label');
     if (editable && !useDisplayValue) {
       if (autocomplete) {
         let autocompleteValue = null;
@@ -166,6 +167,7 @@ class SelectField extends React.PureComponent {
             isDisabled={dis}
             fullWidth={fullWidth}
             isMulti={multiple}
+            aria-label={ariaLabel}
           />
         );
       } else {
@@ -182,6 +184,7 @@ class SelectField extends React.PureComponent {
             disabled={dis}
             fullWidth={fullWidth}
             className={classes.formControl}
+            aria-label={ariaLabel}
           >
             {this.renderOptions()}
           </Select>
@@ -200,7 +203,11 @@ class SelectField extends React.PureComponent {
       } else {
         displayValue = component.getDisplayValue();
       }
-      fld = <DisplayValueTypography>{displayValue}</DisplayValueTypography>;
+      fld = (
+        <DisplayValueTypography aria-label={ariaLabel}>
+          {displayValue}
+        </DisplayValueTypography>
+      );
     }
 
     return (

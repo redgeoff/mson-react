@@ -19,6 +19,7 @@ class DisplayValueTypography extends React.PureComponent {
         component="span"
         className={classes.root}
         id={id}
+        aria-label={this.props['aria-label']}
       >
         {children}
       </Typography>

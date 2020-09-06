@@ -98,6 +98,9 @@ function Control(props) {
           className: props.selectProps.classes.input,
           inputRef: props.innerRef,
           children: props.children,
+          // We need to specify the aria-label so that this element is the one that receives focus
+          // for the target field label
+          'aria-label': props.selectProps.ariaLabel,
           ...props.innerProps,
         },
       }}
@@ -251,6 +254,9 @@ class AutoCompleteSelect extends React.Component {
         // Needed so that the menu is not clipped by the app's root level overflow:hidden or when it
         // appears in a dialog window
         menuPortalTarget={document.body}
+        // Specify ariaLabel instead of aria-label as it is the Control that needs to render the
+        // aria-label
+        ariaLabel={this.props['aria-label']}
       />
     );
   }

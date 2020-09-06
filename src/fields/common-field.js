@@ -55,6 +55,7 @@ class CommonField extends React.PureComponent {
 
         lbl = (
           <FormLabel
+            id={`label-${id}`}
             htmlFor={id}
             error={touched && err ? true : false}
             required={required && !useDisplayValue && editable}
