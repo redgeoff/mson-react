@@ -97,7 +97,10 @@ class TextField extends React.PureComponent {
       );
     } else {
       fld = (
-        <DisplayValueTypography id={component.getUniqueId()}>
+        <DisplayValueTypography
+          id={component.getUniqueId()}
+          aria-label={component.get('label')}
+        >
           {displayValue ? displayValue : component.getDisplayValue()}
         </DisplayValueTypography>
       );
