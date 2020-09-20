@@ -76,6 +76,9 @@ it('should remove option when multi field', async () => {
   // Select the first option
   fireEvent.keyDown(field, { key: 'Enter', code: 'Enter' });
 
+  // Verify that the values was set
+  expect(field).toHaveTextContent('Red');
+
   // Remove
   const remove = getByRole('button', { name: /Remove/i });
   fireEvent.click(remove);
