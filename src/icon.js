@@ -22,12 +22,18 @@ export default class Icon extends React.PureComponent {
   }
 
   render() {
-    const { className, icon } = this.props;
+    const { className, icon, role } = this.props;
 
     const iconContents = icon ? this.toFontIconName(icon) : null;
 
     return (
-      <IconMui className={className} onClick={this.handleClick}>
+      <IconMui
+        className={className}
+        onClick={this.handleClick}
+        aria-hidden={this.props['aria-hidden']}
+        aria-label={this.props['aria-label']}
+        role={role}
+      >
         {iconContents}
       </IconMui>
     );
