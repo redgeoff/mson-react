@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mainMaxBytes=355000
+mainMaxBytes=395000
 chunkMaxBytes=1300000
 
 if [ $(wc -c < build/static/js/main.*.js) -gt ${mainMaxBytes} ]; then
