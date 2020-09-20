@@ -33,7 +33,7 @@ class SelectField extends React.PureComponent {
   handleAutocompleteChange(value) {
     const { multiple } = this.props;
     if (multiple) {
-      this.handleChange(value.map((val) => val.value));
+      this.handleChange(value ? value.map((val) => val.value) : null);
     } else {
       this.handleChange(value && (value.value ? value.value : null));
     }

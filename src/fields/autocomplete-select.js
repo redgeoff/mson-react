@@ -170,7 +170,14 @@ function MultiValue(props) {
         [props.selectProps.classes.disabled]: props.selectProps.isDisabled,
       })}
       onDelete={props.removeProps.onClick}
-      deleteIcon={<Icon icon="Cancel" />}
+      deleteIcon={
+        <Icon
+          icon="Cancel"
+          aria-label="Remove"
+          role="button"
+          aria-hidden="false"
+        />
+      }
     />
   );
 }

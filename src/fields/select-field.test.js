@@ -62,6 +62,28 @@ it('should select multiple options with focus and key presses', async () => {
   expect(field).toHaveTextContent('Green');
 });
 
+it('should remove option when multi field', async () => {
+  const { getByLabelText, getByRole } = compileAndRender({
+    ...definition,
+    multiple: true,
+  });
+
+  // Display the drop down
+  const field = getByLabelText(/Color/);
+  fireEvent.focus(field);
+  fireEvent.keyDown(field, { key: 'ArrowDown', code: 'ArrowDown' });
+
+  // Select the first option
+  fireEvent.keyDown(field, { key: 'Enter', code: 'Enter' });
+
+  // Remove
+  const remove = getByRole('button', { name: /Remove/i });
+  fireEvent.click(remove);
+
+  // Verify that values were set
+  expect(field).not.toHaveTextContent('Red');
+});
+
 // TODO: should initialize
 
 // TODO: should select when not autocomplete
