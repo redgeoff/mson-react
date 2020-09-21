@@ -8642,10 +8642,10 @@ ms@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
 
-mson@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-1.5.0.tgz#4b166aa1176f4f2a2336614cb5efb0315cc7d13c"
-  integrity sha512-5+HaZ0aD7dMr+ZMjzj8YXPJ1ZPRjTW5OtcXw4pFnTjLdWTp7UgbfoaWoW4wrpeBW083FB+GTOvVh1mW6OXpppQ==
+mson@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-1.5.1.tgz#73fd2791c9d4e3a25a61b09f878d5ac5e97dd810"
+  integrity sha512-TZbVJjd9wtGudRchGqWKFL4jS6KAx9yw2w5WUHkZjrAIS57D+n3DIHbw95Y+wlRDRUQBQQbthDpLMRyZZ5ALfQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     country-telephone-data "^0.6.2"
