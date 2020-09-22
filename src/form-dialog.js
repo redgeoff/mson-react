@@ -56,7 +56,10 @@ class FormDialog extends React.PureComponent {
 
   isOpen() {
     const { mode } = this.props;
-    if (mode === CollectionFieldCore.MODES.DELETE) {
+    if (
+      mode === CollectionFieldCore.MODES.DELETE ||
+      mode === CollectionFieldCore.MODES.RESTORE
+    ) {
       // Don't show the dialog when restoring
       return false;
     } else {
