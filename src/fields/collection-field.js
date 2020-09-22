@@ -117,22 +117,21 @@ class CollectionField extends React.PureComponent {
   handleDelete = async (formToDelete) => {
     const { component } = this.props;
 
-    if (formToDelete) {
+    const form = formToDelete ? formToDelete : component.get('form');
+
+    const archivedAt = form.getValue('archivedAt');
+
+    // Are we restoring?
+    if (archivedAt) {
+      component.set({
+        currentForm: form,
+        mode: CollectionFieldCore.MODES.RESTORE,
+      });
+    } else if (formToDelete) {
       component.set({
         currentForm: formToDelete,
         mode: CollectionFieldCore.MODES.DELETE,
       });
-    } else {
-      // Are we already focussed on this form
-      formToDelete = component.get('form');
-    }
-
-    const archivedAt = formToDelete.getValue('archivedAt');
-
-    // Are we restoring?
-    if (archivedAt) {
-      await component.restore(formToDelete);
-      component.set({ mode: null });
     }
   };
 
