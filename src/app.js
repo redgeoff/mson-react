@@ -28,6 +28,7 @@ import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
+import Factory from 'mson/lib/component/factory';
 
 const drawerWidth = 240;
 
@@ -124,8 +125,8 @@ class App extends React.PureComponent {
     const menuItem = this.state.menuItem;
     if (
       menuItem &&
-      menuItem.content.has('dirty') &&
-      menuItem.content.get('dirty') &&
+      menuItem.producedContent.has('dirty') &&
+      menuItem.producedContent.get('dirty') &&
       !menuItem.fullScreen
     ) {
       // Show a confirmation dialog to see if the user wants to continue
@@ -177,9 +178,9 @@ class App extends React.PureComponent {
 
   handleNavigate = async (menuItem, force) => {
     // Is the next item just an action?
-    if (menuItem.content instanceof Action) {
+    if (menuItem.producedContent instanceof Action) {
       // Execute the actions
-      await menuItem.content.run();
+      await menuItem.producedContent.run();
     } else {
       this.props.history.push(menuItem.path);
     }
@@ -236,12 +237,27 @@ class App extends React.PureComponent {
         this.component.emitUnload();
       }
 
-      // Note: menuItem can be null if there is no content on the landing page
-      const isAction = menuItem && menuItem.content instanceof Action;
-
-      // Note: menuItem.content can be an action if the user goes directly to a route where the
-      // content is an action
+      let producedContent = null;
       if (menuItem && menuItem.content) {
+        if (menuItem.content instanceof Factory) {
+          // The menuItem content is a Factory so we need to produce a component. This allows us to
+          // dynamically create components when a route is changed.
+          producedContent = menuItem.content.produce();
+        } else {
+          producedContent = menuItem.content;
+        }
+
+        // TODO: we are mutating the menuItem object directory. Would it be better to promote the
+        // MenuItem to a component and set the producedContent there?
+        menuItem.producedContent = producedContent;
+      }
+
+      // Note: menuItem can be null if there is no content on the landing page
+      const isAction = producedContent instanceof Action;
+
+      // Note: producedContent can be an action if the user goes directly to a route where the
+      // content is an action
+      if (producedContent) {
         const { location, component } = this.props;
         const menu = component.get('menu');
         globals.set({
@@ -259,11 +275,11 @@ class App extends React.PureComponent {
         ) {
           if (isAction) {
             // Execute the actions
-            await menuItem.content.run();
+            await producedContent.run();
           } else {
             // Instantiate form
-            // this.component = compiler.newComponent(menuItem.content.component);
-            this.component = menuItem.content;
+            // this.component = compiler.newComponent(producedContent.component);
+            this.component = producedContent;
 
             // Emit a load event so that the component can load any initial data, etc...
             this.component.emitLoad();
@@ -318,8 +334,8 @@ class App extends React.PureComponent {
     if (this.props.searchString !== prevProps.searchString) {
       // Pass search string down to current component
       const menuItem = this.state.menuItem;
-      if (menuItem && menuItem.content.has('searchString')) {
-        menuItem.content.set({
+      if (menuItem && menuItem.producedContent.has('searchString')) {
+        menuItem.producedContent.set({
           searchString: this.props.searchString,
         });
       }
@@ -343,8 +359,9 @@ class App extends React.PureComponent {
     // 1. move more logic to app layer so that only cascade when need new window 2. use something
     // like a global scroll listener that the component can use when it is active
     window.addEventListener('scroll', (e) => {
-      if (this.state.menuItem) {
-        this.state.menuItem.content.emit('scroll', e);
+      const { menuItem } = this.state;
+      if (menuItem) {
+        menuItem.producedContent.emit('scroll', e);
       }
     });
 
@@ -372,7 +389,7 @@ class App extends React.PureComponent {
     const { menuItem } = this.state;
 
     if (menuItem) {
-      menuItem.content.set({ showArchived: event.target.checked });
+      menuItem.producedContent.set({ showArchived: event.target.checked });
 
       // Scroll to the top of the page as otherwise it is confusing to the user as to why they are
       // dumped in some random place within the newly queried data.
