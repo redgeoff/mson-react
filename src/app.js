@@ -28,7 +28,6 @@ import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
-import Factory from 'mson/lib/component/factory';
 
 const drawerWidth = 240;
 
@@ -237,27 +236,10 @@ class App extends React.PureComponent {
         this.component.emitUnload();
       }
 
-      let producedContent = null;
-      if (menuItem && menuItem.content) {
-        if (menuItem.content instanceof Factory) {
-          // The menuItem content is a Factory so we need to produce a component. This allows us to
-          // dynamically create components when a route is changed.
-          producedContent = menuItem.content.produce();
-        } else {
-          producedContent = menuItem.content;
-        }
-
-        // TODO: we are mutating the menuItem object directory. Would it be better to promote the
-        // MenuItem to a component and set the producedContent there?
-        menuItem.producedContent = producedContent;
-      }
-
       // Note: menuItem can be null if there is no content on the landing page
-      const isAction = producedContent instanceof Action;
+      const content = menuItem && menuItem.content;
 
-      // Note: producedContent can be an action if the user goes directly to a route where the
-      // content is an action
-      if (producedContent) {
+      if (content) {
         const { location, component } = this.props;
         const menu = component.get('menu');
         globals.set({
@@ -273,10 +255,22 @@ class App extends React.PureComponent {
           this.requireAccess(menuItem.roles) &&
           (!parentItem || this.requireAccess(parentItem.roles))
         ) {
-          if (isAction) {
+          let producedContent = null;
+
+          if (content instanceof Action) {
             // Execute the actions
-            await producedContent.run();
+            producedContent = await content.run();
           } else {
+            producedContent = content;
+          }
+
+          // producedContent can be null if content is an action and which doesn't generate a
+          // component
+          if (producedContent) {
+            // TODO: we are mutating the menuItem object directory. Would it be better to promote
+            // the MenuItem to a component and set the producedContent there?
+            menuItem.producedContent = producedContent;
+
             // Instantiate form
             // this.component = compiler.newComponent(producedContent.component);
             this.component = producedContent;
