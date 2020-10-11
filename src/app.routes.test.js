@@ -100,6 +100,13 @@ it('should route to component', async () => {
   await findByText(/Route to Component Text/);
 });
 
-// it('should redirect', async () => {})
+it('should redirect', async () => {
+  const { getByRole, findByText } = render(<AppContainer component={app} />);
+
+  const redirect = getByRole('button', { name: /^Redirect$/i });
+  fireEvent.click(redirect);
+
+  await findByText(/Redirect Landing Text/);
+});
 
 // it('should generate component', async () => {})
