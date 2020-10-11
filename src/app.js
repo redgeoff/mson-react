@@ -176,15 +176,8 @@ class App extends React.PureComponent {
     }
   }
 
-  handleNavigate = async (menuItem, force) => {
-    // TODO: how to handle when action yields component?
-    // Is the next item just an action?
-    if (menuItem.producedContent instanceof Action) {
-      // Execute the actions
-      await menuItem.producedContent.run();
-    } else {
-      this.props.history.push(menuItem.path);
-    }
+  handleNavigate = async (menuItem) => {
+    this.props.history.push(menuItem.path);
   };
 
   handleConfirmationClose = async (yes) => {
