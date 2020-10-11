@@ -1,7 +1,7 @@
 import React from 'react';
 import AppContainer from './app-container';
 import compiler from 'mson/lib/compiler';
-import { render, waitFor, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 const definition = {
   name: 'app.App',
