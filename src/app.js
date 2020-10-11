@@ -14,6 +14,7 @@ import Menu from './menu';
 import SearchBar from './search-bar';
 import { Switch, Route } from 'react-router-dom';
 import Component from './component';
+import ComponentMSON from 'mson/lib/component';
 // import compiler from 'mson/lib/compiler';
 import { withRouter } from 'react-router';
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
@@ -176,6 +177,7 @@ class App extends React.PureComponent {
   }
 
   handleNavigate = async (menuItem, force) => {
+    // TODO: how to handle when action yields component?
     // Is the next item just an action?
     if (menuItem.producedContent instanceof Action) {
       // Execute the actions
@@ -264,15 +266,14 @@ class App extends React.PureComponent {
             producedContent = content;
           }
 
-          // producedContent can be null if content is an action and which doesn't generate a
-          // component
-          if (producedContent) {
+          // producedContent can be null if content is an action, which doesn't generate a
+          // component. And, producedContent can also be something other than a Component if content
+          // is an action that returns a non-component
+          if (producedContent && producedContent instanceof ComponentMSON) {
             // TODO: we are mutating the menuItem object directory. Would it be better to promote
             // the MenuItem to a component and set the producedContent there?
             menuItem.producedContent = producedContent;
 
-            // Instantiate form
-            // this.component = compiler.newComponent(producedContent.component);
             this.component = producedContent;
 
             // Emit a load event so that the component can load any initial data, etc...
