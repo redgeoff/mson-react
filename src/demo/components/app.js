@@ -91,16 +91,29 @@ export default {
       {
         path: '/router',
         label: 'Router',
-        content: {
-          component: 'Action',
-          actions: [
-            {
-              component: 'Redirect',
-              path:
-                '/router/person/p123/message/m456?first=Trevor&last=Noah#hash123',
+        items: [
+          {
+            path: '/router/redirect',
+            label: 'Redirect',
+            content: {
+              component: 'Action',
+              actions: [
+                {
+                  component: 'Redirect',
+                  path:
+                    '/router/person/p123/message/m456?first=Trevor&last=Noah#hash123',
+                },
+              ],
             },
-          ],
-        },
+          },
+          {
+            path: '/router/generate-component',
+            label: 'Generate Component',
+            content: {
+              component: 'app.GenerateComponent',
+            },
+          },
+        ],
       },
       {
         path: '/router/person/:personId/message/:messageId',

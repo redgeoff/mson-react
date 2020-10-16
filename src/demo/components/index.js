@@ -7,6 +7,7 @@ import EditContact from './edit-contact';
 import FieldsScreen from './fields-screen';
 import Fields from './fields';
 import FormBuilder from './form-builder';
+import GenerateComponent from './generate-component';
 import Grid from './grid';
 import Home from './home';
 import Tasks from './tasks';
@@ -23,6 +24,7 @@ export {
   FieldsScreen,
   Fields,
   FormBuilder,
+  GenerateComponent,
   Grid,
   Home,
   Tasks,

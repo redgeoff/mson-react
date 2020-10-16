@@ -159,21 +159,10 @@ class App extends React.PureComponent {
   }
 
   navigateTo(path) {
-    const { menuItem } = this.state;
     const { component } = this.props;
     const menu = component.get('menu');
-
-    // if (path === '/home') {
-    //   // Redirect so that user sees the actual path and not /home
-    //   history.push(menu.getFirstItem().path);
-    // } else
-    if (!menuItem || path !== menuItem.path) {
-      // if (this.requireAccess(menu.get('roles'))) {
-      // The route is changing
-      const item = menu.getItemAndParsePath(path);
-      return this.switchContent(item.item, item.params);
-      // }
-    }
+    const item = menu.getItemAndParsePath(path);
+    return this.switchContent(item.item, item.params);
   }
 
   handleNavigate = async (menuItem) => {
@@ -189,11 +178,11 @@ class App extends React.PureComponent {
     this.setState({ confirmationOpen: false });
   };
 
-  canArchive() {
+  canArchive(currentComponent) {
     let canArchive = false;
     let canSearch = false;
-    if (this.component && this.component instanceof Form) {
-      for (const field of this.component.getFields()) {
+    if (currentComponent && currentComponent instanceof Form) {
+      for (const field of currentComponent.getFields()) {
         if (field instanceof CollectionField) {
           canArchive =
             !field.get('forbidViewArchived') &&
@@ -223,72 +212,73 @@ class App extends React.PureComponent {
   }
 
   switchContent = async (menuItem, parameters) => {
+    const { currentComponent } = this.state;
+
     // Prevent infinite recursion when menuItem is null by making sure that the menuItem is
     // changing before changing anything else; especially the state
-    if (menuItem !== this.state.menuItem) {
-      if (this.component) {
-        // Emit an unload event so that the component can unload any data, etc...
-        this.component.emitUnload();
-      }
+    if (currentComponent) {
+      // Emit an unload event so that the component can unload any data, etc...
+      currentComponent.emitUnload();
+    }
 
-      // Note: menuItem can be null if there is no content on the landing page
-      const content = menuItem && menuItem.content;
+    // Note: menuItem can be null if there is no content on the landing page
+    const content = menuItem && menuItem.content;
 
-      if (content) {
-        const { location, component } = this.props;
-        const menu = component.get('menu');
-        globals.set({
-          route: menu.toRoute({
-            parameters,
-            queryString: location.search.substr(1),
-            hash: location.hash.substr(1),
-          }),
-        });
+    if (content) {
+      const { location, component } = this.props;
+      const menu = component.get('menu');
+      globals.set({
+        route: menu.toRoute({
+          parameters,
+          queryString: location.search.substr(1),
+          hash: location.hash.substr(1),
+        }),
+      });
 
-        const parentItem = menu.getParent(menuItem.path);
-        if (
-          this.requireAccess(menuItem.roles) &&
-          (!parentItem || this.requireAccess(parentItem.roles))
-        ) {
-          let producedContent = null;
+      const parentItem = menu.getParent(menuItem.path);
+      if (
+        this.requireAccess(menuItem.roles) &&
+        (!parentItem || this.requireAccess(parentItem.roles))
+      ) {
+        let producedContent = null;
 
-          if (content instanceof Action) {
-            // Execute the actions
-            producedContent = await content.run();
-          } else {
-            producedContent = content;
-          }
-
-          // producedContent can be null if content is an action, which doesn't generate a
-          // component. And, producedContent can also be something other than a Component if content
-          // is an action that returns a non-component
-          if (producedContent && producedContent instanceof ComponentMSON) {
-            // TODO: we are mutating the menuItem object directory. Would it be better to promote
-            // the MenuItem to a component and set the producedContent there?
-            menuItem.producedContent = producedContent;
-
-            this.component = producedContent;
-
-            // Emit a load event so that the component can load any initial data, etc...
-            this.component.emitLoad();
-
-            const { canArchive, canSearch } = this.canArchive();
-
-            globals.set({ searchString: null });
-
-            // Set showArchived to false whenever we change the route
-            this.setState({
-              menuItem,
-              showArchived: false,
-              showArchivedToggle: canArchive,
-              searchStringInput: '',
-              showSearch: canSearch,
-            });
-          }
+        if (content instanceof Action) {
+          // Execute the actions
+          producedContent = await content.run({ component: content });
+        } else {
+          producedContent = content;
         }
-      } else {
-        this.component = null;
+
+        // producedContent can be null if content is an action, which doesn't generate a
+        // component. And, producedContent can also be something other than a Component if content
+        // is an action that returns a non-component
+        if (producedContent && producedContent instanceof ComponentMSON) {
+          // TODO: we are mutating the menuItem object directory. Would it be better to promote
+          // the MenuItem to a component and set the producedContent there?
+          menuItem.producedContent = producedContent;
+
+          const newComponent = producedContent;
+
+          // Emit a load event so that the component can load any initial data, etc...
+          newComponent.emitLoad();
+
+          const { canArchive, canSearch } = this.canArchive(newComponent);
+
+          globals.set({ searchString: null });
+
+          // Set showArchived to false whenever we change the route
+          this.setState({
+            menuItem,
+            showArchived: false,
+            showArchivedToggle: canArchive,
+            searchStringInput: '',
+            showSearch: canSearch,
+            currentComponent: newComponent,
+          });
+        }
       }
+    } else {
+      this.setState({ currentComponent: null });
     }
   };
 
@@ -310,7 +300,12 @@ class App extends React.PureComponent {
       this.redirect(this.props.redirectPath);
     }
 
-    if (this.props.path !== prevProps.path) {
+    // location.key changes whenever any part of the path changes, e.g. query string, hash, etc...
+    // changes
+    if (
+      this.props.path !== prevProps.path ||
+      this.props.location.key !== prevProps.location.key
+    ) {
       this.navigateTo(this.props.path);
     }
 
@@ -550,6 +545,7 @@ class App extends React.PureComponent {
       snackbarOpen,
       snackbarMessage,
       confirmationOpen,
+      currentComponent,
     } = this.state;
 
     const responsive = this.isResponsive();
@@ -559,8 +555,8 @@ class App extends React.PureComponent {
     // Use the path from the location prop as this.state.path may not be up to date
     const path = this.props.location.pathname;
 
-    const comp = this.component ? (
-      <Component component={this.component} />
+    const comp = currentComponent ? (
+      <Component component={currentComponent} />
     ) : null;
 
     const appBar = this.appBar();
