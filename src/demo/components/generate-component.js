@@ -13,10 +13,6 @@ export default {
     ],
   },
   actions: [
-    // {
-    //   component: 'ConsoleLog',
-    //   message: 'componentType={{componentType}}'
-    // },
     {
       component: 'Action',
       if: {
@@ -37,10 +33,6 @@ export default {
         },
       ],
     },
-    // {
-    //   component: 'ConsoleLog',
-    //   message: 'componentType={{componentType}}'
-    // },
     {
       component: 'GenerateComponent',
       definition: JSON.stringify({
@@ -49,6 +41,7 @@ export default {
           {
             name: 'type',
             component: 'SelectField',
+            label: 'Field Type',
             options: [
               { value: 'TextField', label: 'TextField' },
               { value: 'PersonFullNameField', label: 'PersonFullNameField' },
