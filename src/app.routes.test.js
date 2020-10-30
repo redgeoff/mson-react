@@ -216,3 +216,58 @@ it('should generate complex component', async () => {
   fireEvent.keyDown(typeField, { key: 'Enter', code: 'Enter' });
   await findByLabelText(/TextField Label/);
 });
+
+it('should handle browser back button', async () => {
+  const { getByRole, findByRole, findByText } = render(
+    <AppContainer component={app} />
+  );
+
+  // Get started by routing to the first page
+  const routeToComponent = getByRole('button', { name: /Route to Component/i });
+  fireEvent.click(routeToComponent);
+  await findByText(/Route to Component Text/);
+
+  // Route to the second page
+  const redirect = getByRole('button', { name: /Generate Complex Component/i });
+  fireEvent.click(redirect);
+
+  // Ensure that the default field (a ButtonField) is displayed
+  await findByRole('button', { name: /ButtonField Label/i });
+
+  // Now, simulate the browser's back button
+  window.history.back();
+
+  // Ensure that we have rendered the first page
+  await findByText(/Route to Component Text/);
+});
+
+it('should handle browser back button when only query string changes', async () => {
+  const { getByRole, findByRole, findByLabelText, findByText } = render(
+    <AppContainer component={app} />
+  );
+
+  // Get started by routing to the first page
+  const redirect = getByRole('button', { name: /Generate Complex Component/i });
+  fireEvent.click(redirect);
+
+  // Ensure that the default field (a ButtonField) is displayed
+  await findByRole('button', { name: /ButtonField Label/i });
+
+  // Now, select TextField and make sure it is displayed
+  let typeField = await findByLabelText(/Field Type/);
+  fireEvent.focus(typeField);
+  fireEvent.keyDown(typeField, { key: 'ArrowDown', code: 'ArrowDown' });
+  fireEvent.keyDown(typeField, { key: 'Enter', code: 'Enter' });
+  await findByLabelText(/TextField Label/);
+
+  // Now, route to second page
+  const routeToComponent = getByRole('button', { name: /Route to Component/i });
+  fireEvent.click(routeToComponent);
+  await findByText(/Route to Component Text/);
+
+  // Simulate the browser's back button
+  window.history.back();
+
+  // Ensure that we have rendered the first page
+  await findByLabelText(/TextField Label/);
+});
