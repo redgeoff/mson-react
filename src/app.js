@@ -283,7 +283,11 @@ class App extends React.PureComponent {
   };
 
   onLocation = (location) => {
-    globals.set({ path: location.pathname });
+    globals.set({
+      path: location.pathname,
+      pathHash: location.hash,
+      pathSearch: location.search,
+    });
   };
 
   componentDidUpdate(prevProps) {
@@ -300,11 +304,10 @@ class App extends React.PureComponent {
       this.redirect(this.props.redirectPath);
     }
 
-    // location.key changes whenever any part of the path changes, e.g. query string, hash, etc...
-    // changes
     if (
       this.props.path !== prevProps.path ||
-      this.props.location.key !== prevProps.location.key
+      this.props.pathHash !== prevProps.pathHash ||
+      this.props.pathSearch !== prevProps.pathSearch
     ) {
       this.navigateTo(this.props.path);
     }
@@ -623,7 +626,15 @@ App = withWidth()(App);
 App = withRouter(App);
 App = attach(['menuAlwaysTemporary'])(App);
 App = attach(
-  ['path', 'redirectPath', 'snackbarMessage', 'confirmation', 'searchString'],
+  [
+    'path',
+    'pathHash',
+    'pathSearch',
+    'redirectPath',
+    'snackbarMessage',
+    'confirmation',
+    'searchString',
+  ],
   globals
 )(App);
 export default App;
