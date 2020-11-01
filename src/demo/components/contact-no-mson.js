@@ -52,6 +52,9 @@ class ContactNoMSON extends Form {
       globals.displaySnackbar(
         `Submitted ${values.firstName} ${values.lastName}`
       );
+
+      // Clear the values, in case we return to the Contact form later
+      this.reset();
     });
 
     this.on('cancel', () => {
