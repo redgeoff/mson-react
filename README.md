@@ -9,6 +9,10 @@ UI Rendering Layer for React and Material-UI
 
 The best way to get started with MSON is to play with the [Getting Started App](https://github.com/redgeoff/mson-getting-started). In just a few lines of MSON, you'll generate an app that can list, edit, filter and sort a list of contacts. And, for extra fun, you can use Firebase to make it real-time capable.
 
+### Autogenerate forms in React and Material-UI with MSON
+
+Implementing great forms can be a real time-waster. With just a few lines of JSON, you can [use MSON to generate forms](https://redgeoff.com/posts/mson-react-material-ui-form/) that perform real-time validation and have a consistent layout.
+
 ### Adding MSON-React to Your Existing React Project
 
   - `yarn add @date-io/date-fns @material-ui/core date-fns @material-ui/pickers mson mson-react typeface-roboto`
