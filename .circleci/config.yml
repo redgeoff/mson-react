@@ -64,6 +64,7 @@ jobs:
             eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
             git config --global user.email "redgeoff@gmail.com"
             git config --global user.name "Geoff Cox"
+            yarn bundle
             yarn deploy
 
 workflows:
