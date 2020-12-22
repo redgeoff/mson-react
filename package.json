@@ -1,6 +1,6 @@
 {
   "name": "mson-react",
-  "version": "1.5.1",
+  "version": "0.0.0-development",
   "description": "UI Rendering Layer for React and Material-UI",
   "author": "Geoff Cox",
   "license": "Apache-2.0",
@@ -57,6 +57,7 @@
     "react-beautiful-dnd-test-utils": "^3.2.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.3",
+    "semantic-release": "^17.3.0",
     "style-loader": "^1.2.1",
     "typeface-roboto": "^0.0.75",
     "wait-on": "^5.2.0",
@@ -81,7 +82,9 @@
     "touch": "find src -exec touch {} \\;",
     "analyze-bundle": "webpack --profile --json > ./dist/stats.json && webpack-bundle-analyzer ./dist/stats.json",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prepublishOnly": "yarn compile && yarn bundle && yarn deploy",
+    "semantic-release": "semantic-release"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -107,6 +110,10 @@
       "pre-commit": "lint-staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redgeoff/mson-react.git"
   },
   "browserslist": [
     ">0.2%",
