@@ -35,6 +35,29 @@ jobs:
           key: mson-dependencies-v2-{{ checksum "package.json" }}
       - run: yarn link mson
 
+      # TMP
+      - add_ssh_keys:
+          fingerprints:
+            - "09:ce:0e:63:a8:64:37:97:d6:0a:86:b8:4f:4a:59:05"
+      - run:
+          name: publish pages
+          command: |
+            eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
+            git config --global user.email "redgeoff@gmail.com"
+            git config --global user.name "Geoff Cox"
+            yarn deploy
+
+      # TMP
+      - add_ssh_keys:
+          fingerprints:
+            - "09:ce:0e:63:a8:64:37:97:d6:0a:86:b8:4f:4a:59:05"
+      - run: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
+      - run: git config --global user.email "redgeoff@gmail.com"
+      - run: git config --global user.name "Geoff Cox"
+      - run:
+          name: publish pages
+          command: yarn deploy
+
       - run: CI=true yarn test
 
       # Check bundle size
@@ -42,17 +65,6 @@ jobs:
 
       # Sanity check compilation as compilation uses custom babel settings
       - run: yarn compile
-
-      # TMP
-      - add_ssh_keys:
-          fingerprints:
-            - "aa:2e:77:d7:0f:4a:5a:9d:4e:d1:4a:17:2d:b9:13:ee"
-      - run: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
-      - run: git config --global user.email "redgeoff@gmail.com"
-      - run: git config --global user.name "Geoff Cox"
-      - run:
-          name: publish pages
-          command: yarn deploy
 
   publish:
     docker:
@@ -68,7 +80,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "aa:2e:77:d7:0f:4a:5a:9d:4e:d1:4a:17:2d:b9:13:ee"
+            - "09:ce:0e:63:a8:64:37:97:d6:0a:86:b8:4f:4a:59:05"
       - run: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
       - run: git config --global user.email "redgeoff@gmail.com"
       - run: git config --global user.name "Geoff Cox"
