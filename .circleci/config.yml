@@ -47,6 +47,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "aa:2e:77:d7:0f:4a:5a:9d:4e:d1:4a:17:2d:b9:13:ee"
+      - run: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
       - run: git config --global user.email "redgeoff@gmail.com"
       - run: git config --global user.name "Geoff Cox"
       - run:
@@ -64,9 +65,11 @@ jobs:
       - run:
           name: release
           command: npm run semantic-release || true
+
       - add_ssh_keys:
           fingerprints:
             - "aa:2e:77:d7:0f:4a:5a:9d:4e:d1:4a:17:2d:b9:13:ee"
+      - run: eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_*
       - run: git config --global user.email "redgeoff@gmail.com"
       - run: git config --global user.name "Geoff Cox"
       - run:
