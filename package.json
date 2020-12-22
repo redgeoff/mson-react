@@ -42,7 +42,7 @@
     "babel-loader": "8.1.0",
     "commitizen": "^4.2.2",
     "copyfiles": "^2.4.1",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^4.2.2",
     "css-mediaquery": "^0.1.2",
     "cz-conventional-changelog": "^3.3.0",
