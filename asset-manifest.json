@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/mson-react/static/css/main.13cef582.chunk.css",
-    "main.js": "/mson-react/static/js/main.93fcd872.chunk.js",
-    "main.js.map": "/mson-react/static/js/main.93fcd872.chunk.js.map",
+    "main.css": "/mson-react/static/css/main.e10e4d63.chunk.css",
+    "main.js": "/mson-react/static/js/main.8b9f864a.chunk.js",
+    "main.js.map": "/mson-react/static/js/main.8b9f864a.chunk.js.map",
     "runtime-main.js": "/mson-react/static/js/runtime-main.48fe9710.js",
     "runtime-main.js.map": "/mson-react/static/js/runtime-main.48fe9710.js.map",
-    "static/css/2.530bf939.chunk.css": "/mson-react/static/css/2.530bf939.chunk.css",
-    "static/js/2.17d87efa.chunk.js": "/mson-react/static/js/2.17d87efa.chunk.js",
-    "static/js/2.17d87efa.chunk.js.map": "/mson-react/static/js/2.17d87efa.chunk.js.map",
+    "static/css/2.41729b02.chunk.css": "/mson-react/static/css/2.41729b02.chunk.css",
+    "static/js/2.94b1a5de.chunk.js": "/mson-react/static/js/2.94b1a5de.chunk.js",
+    "static/js/2.94b1a5de.chunk.js.map": "/mson-react/static/js/2.94b1a5de.chunk.js.map",
     "index.html": "/mson-react/index.html",
-    "precache-manifest.fc249a7677715d7b1d9a0cb46576e25f.js": "/mson-react/precache-manifest.fc249a7677715d7b1d9a0cb46576e25f.js",
+    "precache-manifest.5f0a93990740f9bc97b9bbeb3c6ed67e.js": "/mson-react/precache-manifest.5f0a93990740f9bc97b9bbeb3c6ed67e.js",
     "service-worker.js": "/mson-react/service-worker.js",
-    "static/css/2.530bf939.chunk.css.map": "/mson-react/static/css/2.530bf939.chunk.css.map",
-    "static/css/main.13cef582.chunk.css.map": "/mson-react/static/css/main.13cef582.chunk.css.map",
-    "static/js/2.17d87efa.chunk.js.LICENSE.txt": "/mson-react/static/js/2.17d87efa.chunk.js.LICENSE.txt",
+    "static/css/2.41729b02.chunk.css.map": "/mson-react/static/css/2.41729b02.chunk.css.map",
+    "static/css/main.e10e4d63.chunk.css.map": "/mson-react/static/css/main.e10e4d63.chunk.css.map",
+    "static/js/2.94b1a5de.chunk.js.LICENSE.txt": "/mson-react/static/js/2.94b1a5de.chunk.js.LICENSE.txt",
     "static/media/index.css": "/mson-react/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.48fe9710.js",
-    "static/css/2.530bf939.chunk.css",
-    "static/js/2.17d87efa.chunk.js",
-    "static/css/main.13cef582.chunk.css",
-    "static/js/main.93fcd872.chunk.js"
+    "static/css/2.41729b02.chunk.css",
+    "static/js/2.94b1a5de.chunk.js",
+    "static/css/main.e10e4d63.chunk.css",
+    "static/js/main.8b9f864a.chunk.js"
   ]
 }
