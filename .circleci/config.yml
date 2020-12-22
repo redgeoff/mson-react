@@ -54,6 +54,9 @@ jobs:
       - run:
           name: release
           command: npm run semantic-release || true
+      - run:
+          name: publish pages
+          command: yarn deploy
 
 workflows:
   version: 2
