@@ -1,4 +1,4 @@
-export default {
+const grid = {
   name: 'app.Grid',
   component: 'Grid',
   items: [
@@ -77,3 +77,5 @@ export default {
     },
   ],
 };
+
+export default grid;

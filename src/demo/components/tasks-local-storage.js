@@ -1,4 +1,4 @@
-export default {
+const tasksLocalStorage = {
   name: 'app.TasksLocalStorage',
   component: 'app.Tasks',
   store: {
@@ -6,3 +6,5 @@ export default {
     storeName: 'tasksLocalStorage',
   },
 };
+
+export default tasksLocalStorage;

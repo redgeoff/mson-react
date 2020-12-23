@@ -1,4 +1,4 @@
-export default {
+const contactsLocalStorage = {
   name: 'app.ContactsLocalStorage',
   component: 'app.Contacts',
   store: {
@@ -6,3 +6,5 @@ export default {
     storeName: 'contactsLocalStorage',
   },
 };
+
+export default contactsLocalStorage;

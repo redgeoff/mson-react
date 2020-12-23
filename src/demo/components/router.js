@@ -1,4 +1,4 @@
-export default {
+const router = {
   name: 'app.Router',
   component: 'Form',
   fields: [
@@ -71,3 +71,5 @@ export default {
     },
   ],
 };
+
+export default router;

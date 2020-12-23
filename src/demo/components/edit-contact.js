@@ -1,4 +1,4 @@
-export default {
+const editContact = {
   name: 'app.EditContact',
   component: 'RecordEditor',
   baseForm: {
@@ -46,3 +46,5 @@ export default {
     id: '1',
   },
 };
+
+export default editContact;

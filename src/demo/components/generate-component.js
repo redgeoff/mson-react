@@ -1,5 +1,5 @@
 // Dynamically generate a field based on a query parameter
-export default {
+const generateComponent = {
   name: 'app.GenerateComponent',
   component: 'Action',
   schema: {
@@ -71,3 +71,5 @@ export default {
     },
   ],
 };
+
+export default generateComponent;

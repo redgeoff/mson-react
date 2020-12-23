@@ -1,4 +1,4 @@
-export default {
+const app = {
   name: 'app.App',
   component: 'App',
   // menuAlwaysTemporary: true,
@@ -126,3 +126,5 @@ export default {
     ],
   },
 };
+
+export default app;

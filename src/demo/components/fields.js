@@ -17,7 +17,7 @@ const chainedSelectOptions = [
   { value: 11, parentValue: 9, label: 'Blue' },
 ];
 
-export default {
+const fields = {
   name: 'app.Fields',
   component: 'Form',
   fields: [
@@ -381,3 +381,5 @@ export default {
     },
   ],
 };
+
+export default fields;

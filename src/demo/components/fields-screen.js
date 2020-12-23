@@ -1,4 +1,4 @@
-export default {
+const fieldsScreen = {
   name: 'app.FieldsScreen',
   component: 'app.Fields',
   fields: [
@@ -316,3 +316,5 @@ export default {
     },
   ],
 };
+
+export default fieldsScreen;

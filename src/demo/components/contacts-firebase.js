@@ -1,4 +1,4 @@
-export default {
+const contactsFirebase = {
   name: 'app.ContactsFirebase',
   component: 'app.Contacts',
   store: {
@@ -9,3 +9,5 @@ export default {
     collection: 'contacts',
   },
 };
+
+export default contactsFirebase;
