@@ -1,4 +1,4 @@
-export default {
+const tasks = {
   name: 'app.Tasks',
   component: 'Form',
   schema: {
@@ -52,3 +52,5 @@ export default {
     },
   ],
 };
+
+export default tasks;

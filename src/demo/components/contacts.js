@@ -1,4 +1,4 @@
-export default {
+const contacts = {
   name: 'app.Contacts',
   component: 'Form',
   schema: {
@@ -51,3 +51,5 @@ export default {
     },
   ],
 };
+
+export default contacts;

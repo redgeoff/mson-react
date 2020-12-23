@@ -1,4 +1,4 @@
-export default {
+const formBuilder = {
   name: 'app.FormBuilder',
   component: 'FormBuilder',
   'fields.form.form.fields.fields.store': {
@@ -6,3 +6,5 @@ export default {
     storeName: 'myForm',
   },
 };
+
+export default formBuilder;

@@ -1,4 +1,4 @@
-export default {
+const tasksFirebase = {
   name: 'app.TasksFirebase',
   component: 'app.Tasks',
   store: {
@@ -9,3 +9,5 @@ export default {
     collection: 'tasks',
   },
 };
+
+export default tasksFirebase;

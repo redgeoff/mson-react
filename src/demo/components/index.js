@@ -15,7 +15,7 @@ import TasksLocalStorage from './tasks-local-storage';
 import TasksFirebase from './tasks-firebase';
 import Router from './router';
 
-export {
+const components = {
   App,
   Contacts,
   ContactsLocalStorage,
@@ -32,3 +32,5 @@ export {
   TasksFirebase,
   Router,
 };
+
+export default components;
