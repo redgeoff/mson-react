@@ -1,5 +1,5 @@
 import compiler from 'mson/lib/compiler';
-import * as components from './components';
+import components from './components';
 import globals from 'mson/lib/globals';
 import uiComponents from '../components';
 import FieldEditorForm from 'mson/lib/form/field-editor-form';

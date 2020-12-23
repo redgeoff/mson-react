@@ -4,7 +4,7 @@ import AppContainer from './app-container';
 import registrar from 'mson/lib/compiler/registrar';
 import registerServiceWorker from './register-service-worker';
 
-export default async (app) => {
+const render = async (app) => {
   // Was the client registered?
   if (registrar.client) {
     // Make sure we load the session before doing any rendering so that components can do their
@@ -18,3 +18,5 @@ export default async (app) => {
   );
   registerServiceWorker();
 };
+
+export default render;

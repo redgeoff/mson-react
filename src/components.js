@@ -22,7 +22,7 @@ import Text from './text';
 import TextField from './fields/text-field';
 import URLField from './fields/url-field';
 
-export default {
+const components = {
   ButtonField,
   BooleanField,
   Card,
@@ -55,3 +55,5 @@ export default {
   URLField,
   User: Form,
 };
+
+export default components;
