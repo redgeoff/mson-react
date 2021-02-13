@@ -22,7 +22,7 @@ jobs:
             - node_modules
           key: dependencies-v3-{{ checksum "package.json" }}
 
-      # Test against master so that we can develop new features without building a new MSON release
+      # Test against main so that we can develop new features without building a new MSON release
       - run: git clone https://github.com/redgeoff/mson ../mson
       - restore_cache:
           keys:
