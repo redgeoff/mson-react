@@ -39,6 +39,7 @@ class DateField extends React.PureComponent {
       fullWidth,
       disabled,
       accessEditable,
+      format,
     } = this.props;
 
     const dis = accessEditable === false || disabled;
@@ -67,7 +68,7 @@ class DateField extends React.PureComponent {
               fullWidth={fullWidth}
               disabled={dis}
               id={component.getUniqueId()}
-              // format="M/d/YYYY h:m a"
+              format={format}
             />
           </span>
         </MuiPickersUtilsProvider>
@@ -99,4 +100,5 @@ export default attach([
   'maxDate',
   'fullWidth',
   'disabled',
+  'format',
 ])(DateField);
