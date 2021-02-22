@@ -1,5 +1,6 @@
 import { fireEvent } from '@testing-library/react';
 import { compileAndRender } from '../test-utils';
+import format from 'date-fns/format';
 
 const definition = {
   component: 'DateField',
@@ -8,7 +9,7 @@ const definition = {
   help: 'Date help',
 };
 
-it('should pick date', async () => {
+const shouldPickDate = (definition, expectedValue) => {
   const { getByLabelText, getByRole } = compileAndRender(definition);
 
   // Click text field--this will launch the picker
@@ -24,8 +25,23 @@ it('should pick date', async () => {
   fireEvent.click(ok);
 
   // Verify that the input has been updated accordingly
+  expect(textField).toHaveValue(expectedValue);
+};
+
+it('should pick date', async () => {
   const month = new Date().toLocaleString('default', { month: 'long' });
-  expect(textField).toHaveValue(`${month} 17th`);
+  shouldPickDate(definition, `${month} 17th`);
+});
+
+it('should pick date with custom format', async () => {
+  const yearMonth = format(new Date(), 'yyyy-MM');
+  shouldPickDate(
+    {
+      ...definition,
+      format: 'yyyy-MM-dd',
+    },
+    `${yearMonth}-17`
+  );
 });
 
 it('should initialize picker', async () => {
