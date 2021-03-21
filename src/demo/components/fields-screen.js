@@ -91,11 +91,11 @@ const fieldsScreen = {
             'fields.formField.value': {
               github: 'github.com/redgeoff',
               medium: 'medium.com/@redgeoff',
-              twitter: 'twitter.com/redgeoff7',
+              twitter: 'twitter.com/coxgeoffrey',
             },
             // 'fields.github.value': 'github.com/redgeoff',
             // 'fields.medium.value': 'medium.com/@redgeoff',
-            // 'fields.twitter.value': 'twitter.com/redgeoff7',
+            // 'fields.twitter.value': 'twitter.com/coxgeoffrey',
             'fields.idField.value': 'id-123',
             'fields.integerField.value': 123,
             'fields.listFieldEmail.value': [
