@@ -23,17 +23,17 @@ jobs:
           key: dependencies-v3-{{ checksum "package.json" }}
 
       # Test against main so that we can develop new features without building a new MSON release
-      - run: git clone https://github.com/redgeoff/mson ../mson
-      - restore_cache:
-          keys:
-          - mson-dependencies-v3-{{ checksum "package.json" }}
-          - mson-dependencies-v3-
-      - run: cd ../mson && yarn install && yarn compile && yarn link
-      - save_cache:
-          paths:
-            - ../mson/node_modules
-          key: mson-dependencies-v3-{{ checksum "package.json" }}
-      - run: yarn link mson
+      # - run: git clone https://github.com/redgeoff/mson ../mson
+      # - restore_cache:
+      #     keys:
+      #     - mson-dependencies-v3-{{ checksum "package.json" }}
+      #     - mson-dependencies-v3-
+      # - run: cd ../mson && yarn install && yarn compile && yarn link
+      # - save_cache:
+      #     paths:
+      #       - ../mson/node_modules
+      #     key: mson-dependencies-v3-{{ checksum "package.json" }}
+      # - run: yarn link mson
 
       - run: CI=true yarn test
 
