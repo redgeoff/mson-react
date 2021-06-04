@@ -23,6 +23,21 @@ Implementing great forms can be a real time-waster. With just a few lines of JSO
     ```
     Note: MSON-React uses font icons as the user can specify any Icon during runtime and the alternative of bundling all the icons as SVG icons would make your JS bundle **huge**
 
+### MSON Demo
+
+You may find it useful to fire up the [MSON demo](https://redgeoff.github.io/mson-react) locally:
+
+  - $ `git clone https://github.com/redgeoff/mson-react && cd mson-react && yarn install`
+  - $ `yarn start`
+  - Visit http://localhost:3000 in a web browser
+
+You can also run the demo with a local version of MSON, if you want to experiment with local changes to MSON:
+
+  - $ `git clone https://github.com/redgeoff/mson && cd mson && yarn install && yarn compile && yarn link && cd ..`
+  - $ `git clone https://github.com/redgeoff/mson-react && cd mson-react && yarn install && yarn link mson`
+  - $ `yarn start`
+  - Visit http://localhost:3000 in a web browser
+
 ## More info
 
 See [MSON](https://github.com/redgeoff/mson) for details
