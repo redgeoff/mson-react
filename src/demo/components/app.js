@@ -123,6 +123,15 @@ const app = {
         },
         hidden: true, // Register route, but don't expose it in the menu
       },
+      {
+        path: '/custom-component',
+        label: 'Custom Component',
+        content: {
+          component: 'CustomComponent',
+          name: 'my-custom-component',
+          label: 'My Custom Component',
+        },
+      },
     ],
   },
 };
