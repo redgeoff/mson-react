@@ -1,9 +1,10 @@
 import React from 'react';
+import attach from '../../attach';
+import Typography from '@material-ui/core/Typography';
+
 import UIComponent from 'mson/lib/ui-component';
 import Form from 'mson/lib/form';
 import TextField from 'mson/lib/fields/text-field';
-import attach from '../../attach';
-import Typography from '@material-ui/core/Typography';
 
 class CustomComponent extends UIComponent {
   _className = 'CustomComponent';
@@ -25,6 +26,28 @@ class CustomComponent extends UIComponent {
     });
   }
 }
+
+// Or, you can use MSON instead of JS
+//
+// import compiler from 'mson/lib/compiler';
+//
+// const CustomComponent = compiler.compile({
+//   component: 'UIComponent',
+//   name: 'CustomComponent',
+//   schema: {
+//     component: 'Form',
+//     fields: [
+//       {
+//         component: 'TextField',
+//         name: 'name'
+//       },
+//       {
+//         component: 'TextField',
+//         name: 'label'
+//       }
+//     ]
+//   }
+// });
 
 let CustomComponentUI = (props) => {
   const { name, label } = props;
