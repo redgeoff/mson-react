@@ -7,6 +7,10 @@ import FieldEditorFormUI from '../field-editor-form';
 import FormEditor from 'mson/lib/form/form-editor';
 import FormEditorUI from '../form-editor';
 import FormBuilder from 'mson/lib/form/form-builder';
+import {
+  CustomComponent,
+  CustomComponentUI,
+} from './components/custom-component';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
@@ -17,6 +21,10 @@ uiComponents.FieldEditorForm = FieldEditorFormUI;
 compiler.registerComponent('FormEditor', FormEditor);
 uiComponents.FormEditor = FormEditorUI;
 compiler.registerComponent('FormBuilder', FormBuilder);
+
+// Register any custom components written in JS and not MSON
+compiler.registerComponent('CustomComponent', CustomComponent);
+uiComponents.CustomComponent = CustomComponentUI;
 
 // Register all the components
 for (let name in components) {
