@@ -7,10 +7,10 @@ import Form from 'mson/lib/form';
 import TextField from 'mson/lib/fields/text-field';
 
 class CustomComponent extends UIComponent {
-  _className = 'CustomComponent';
+  className = 'CustomComponent';
 
-  _create(props) {
-    super._create(props);
+  create(props) {
+    super.create(props);
 
     this.set({
       schema: new Form({
