@@ -21,7 +21,7 @@ const CustomComponent = compile({
   },
 });
 
-let CustomComponentUI = (props) => {
+let ReactCustomComponent = (props) => {
   const { name, label } = props;
   return (
     <div>
@@ -32,6 +32,6 @@ let CustomComponentUI = (props) => {
 };
 
 // Bind React props to MSON component props
-CustomComponentUI = attach(['name', 'label'])(CustomComponentUI);
+ReactCustomComponent = attach(['name', 'label'])(ReactCustomComponent);
 
-export { CustomComponent, CustomComponentUI };
+export { CustomComponent, ReactCustomComponent };

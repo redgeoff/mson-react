@@ -28,7 +28,7 @@ class CustomComponentJS extends UIComponent {
   }
 }
 
-let CustomComponentJSUI = (props) => {
+let ReactCustomComponentJS = (props) => {
   const { name, label } = props;
   return (
     <div>
@@ -39,6 +39,6 @@ let CustomComponentJSUI = (props) => {
 };
 
 // Bind React props to MSON component props
-CustomComponentJSUI = attach(['name', 'label'])(CustomComponentJSUI);
+ReactCustomComponentJS = attach(['name', 'label'])(ReactCustomComponentJS);
 
-export { CustomComponentJS, CustomComponentJSUI };
+export { CustomComponentJS, ReactCustomComponentJS };

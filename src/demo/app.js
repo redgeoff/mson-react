@@ -9,11 +9,11 @@ import FormEditorUI from '../form-editor';
 import FormBuilder from 'mson/lib/form/form-builder';
 import {
   CustomComponent,
-  CustomComponentUI,
+  ReactCustomComponent,
 } from './components/custom-component';
 import {
   CustomComponentJS,
-  CustomComponentJSUI,
+  ReactCustomComponentJS,
 } from './components/custom-component-js';
 
 // Set the site key when using the ReCAPTCHAField
@@ -28,9 +28,9 @@ compiler.registerComponent('FormBuilder', FormBuilder);
 
 // Register any custom components written in JS and not MSON
 compiler.registerComponent('CustomComponent', CustomComponent);
-uiComponents.CustomComponent = CustomComponentUI;
+uiComponents.CustomComponent = ReactCustomComponent;
 compiler.registerComponent('CustomComponentJS', CustomComponentJS);
-uiComponents.CustomComponentJS = CustomComponentJSUI;
+uiComponents.CustomComponentJS = ReactCustomComponentJS;
 
 // Register all the components
 for (let name in components) {
