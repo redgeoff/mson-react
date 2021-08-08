@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { compile } from 'mson/lib';
+import compile from 'mson/lib/compiler/compile';
 
 const CustomComponentNoProps = compile({
   component: 'UIComponent',

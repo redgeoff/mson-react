@@ -1,7 +1,7 @@
 import React from 'react';
 import attach from '../../attach';
 import Typography from '@material-ui/core/Typography';
-import { compile } from 'mson/lib';
+import compile from 'mson/lib/compiler/compile';
 
 const CustomComponent = compile({
   component: 'UIComponent',
