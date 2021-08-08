@@ -126,11 +126,26 @@ const app = {
       {
         path: '/custom-component',
         label: 'Custom Component',
-        content: {
-          component: 'CustomComponent',
-          name: 'my-custom-component',
-          label: 'My Custom Component',
-        },
+        items: [
+          {
+            path: '/custom-component/mson',
+            label: 'Custom Component',
+            content: {
+              component: 'CustomComponent',
+              name: 'my-custom-component',
+              label: 'My Custom Component',
+            },
+          },
+          {
+            path: '/custom-component/js',
+            label: 'Custom Component JS',
+            content: {
+              component: 'CustomComponentJS',
+              name: 'my-custom-component-js',
+              label: 'My Custom Component JS',
+            },
+          },
+        ],
       },
     ],
   },

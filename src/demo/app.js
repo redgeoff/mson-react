@@ -11,6 +11,10 @@ import {
   CustomComponent,
   CustomComponentUI,
 } from './components/custom-component';
+import {
+  CustomComponentJS,
+  CustomComponentJSUI,
+} from './components/custom-component-js';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
@@ -25,6 +29,8 @@ compiler.registerComponent('FormBuilder', FormBuilder);
 // Register any custom components written in JS and not MSON
 compiler.registerComponent('CustomComponent', CustomComponent);
 uiComponents.CustomComponent = CustomComponentUI;
+compiler.registerComponent('CustomComponentJS', CustomComponentJS);
+uiComponents.CustomComponentJS = CustomComponentJSUI;
 
 // Register all the components
 for (let name in components) {
