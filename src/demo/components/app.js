@@ -139,6 +139,13 @@ const app = {
             },
           },
           {
+            path: '/custom-components/no-props',
+            label: 'Custom Component No Props',
+            content: {
+              component: 'CustomComponentNoProps',
+            },
+          },
+          {
             path: '/custom-components/contact-no-mson',
             label: 'Contact No MSON',
             content: {
