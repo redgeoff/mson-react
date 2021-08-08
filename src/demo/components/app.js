@@ -75,13 +75,6 @@ const app = {
         },
       },
       {
-        path: '/contact-no-mson',
-        label: 'Contact No MSON',
-        content: {
-          component: 'app.ContactNoMSON',
-        },
-      },
-      {
         path: '/grid',
         label: 'Grid',
         content: {
@@ -124,13 +117,42 @@ const app = {
         hidden: true, // Register route, but don't expose it in the menu
       },
       {
-        path: '/custom-component',
-        label: 'Custom Component',
-        content: {
-          component: 'CustomComponent',
-          name: 'my-custom-component',
-          label: 'My Custom Component',
-        },
+        path: '/custom-components',
+        label: 'Custom Components',
+        items: [
+          {
+            path: '/custom-components/mson',
+            label: 'Custom Component',
+            content: {
+              component: 'CustomComponent',
+              name: 'my-custom-component',
+              label: 'My Custom Component',
+            },
+          },
+          {
+            path: '/custom-components/js',
+            label: 'Custom Component JS',
+            content: {
+              component: 'CustomComponentJS',
+              name: 'my-custom-component-js',
+              label: 'My Custom Component JS',
+            },
+          },
+          {
+            path: '/custom-components/no-props',
+            label: 'Custom Component No Props',
+            content: {
+              component: 'CustomComponentNoProps',
+            },
+          },
+          {
+            path: '/custom-components/contact-no-mson',
+            label: 'Contact No MSON',
+            content: {
+              component: 'app.ContactNoMSON',
+            },
+          },
+        ],
       },
     ],
   },
