@@ -3,22 +3,22 @@ import { useState, useEffect } from 'react';
 export default function useComponent(component, watchProps) {
   const [props, setProps] = useState(null);
 
+  // The component can be created at any time, e.g. when the definition is set. Therefore, we need
+  // to handle a missing component until the component is present.
+  function hasComponent() {
+    return !!component;
+  }
+
   useEffect(() => {
-    // TODO: is this still needed?
-    //
-    // The component can be created at any time, e.g. when the definition is set. Therefore, we need
-    // to handle a missing component until the component is present.
-    function hasComponent() {
-      return !!component;
-    }
+    let wasMounted = true;
 
     function handleFieldChange(name, value) {
       if (watchProps.indexOf(name) !== -1) {
         // Is the component mounted? Prevent a race condition where the handler tries to set the
         // state after the component has been unmounted.
-        // if (this.wasMounted) {
-        setProps({ [name]: value });
-        // }
+        if (wasMounted) {
+          setProps({ [name]: value });
+        }
       }
     }
 
@@ -34,15 +34,23 @@ export default function useComponent(component, watchProps) {
       }
     }
 
+    // TODO: what happens when component set later?
     addListener();
-    return removeListener;
+    return () => {
+      removeListener();
+      wasMounted = false;
+    };
   });
 
   if (props === null) {
-    // TODO: zip or better way?
-    const initialProps = {};
-    watchProps.forEach((prop) => (initialProps[prop] = undefined));
-    return initialProps;
+    if (hasComponent()) {
+      return component.get(watchProps);
+    } else {
+      // TODO: zip or better way?
+      const initialProps = {};
+      watchProps.forEach((prop) => (initialProps[prop] = undefined));
+      return initialProps;
+    }
   } else {
     return props;
   }
