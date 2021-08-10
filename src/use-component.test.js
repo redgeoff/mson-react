@@ -33,7 +33,14 @@ const ReactContact = (props) => {
   );
 };
 
-it('should useComponent for happy path', () => {
+const expectNameToEqual = (first, last) => {
+  const firstName = screen.getByText(/First Name/);
+  expect(firstName).toHaveTextContent(`First Name: ${firstName}`);
+  const lastName = screen.getByText(/Last Name/);
+  expect(lastName).toHaveTextContent(`Last Name: ${last}`);
+};
+
+const isShouldTestHappyPath = () => {
   const contact = new Contact({
     firstName: 'Jerry',
     lastName: 'Garcia',
@@ -41,12 +48,26 @@ it('should useComponent for happy path', () => {
 
   render(<ReactContact component={contact} />);
 
-  const firstName = screen.getByText(/First Name/);
-  expect(firstName).toHaveTextContent('First Name: Jerry');
-  const lastName = screen.getByText(/Last Name/);
-  expect(lastName).toHaveTextContent('Last Name: Garcia');
+  expectNameToEqual('Jerry', 'Garcia');
+
+  return contact;
+};
+
+it('should useComponent for happy path', () => {
+  isShouldTestHappyPath();
 });
 
-// it('should useComponent when props change sequentially', async () => {})
+it('should useComponent when props change sequentially', async () => {
+  const contact = isShouldTestHappyPath();
 
+  // Change the first name
+  contact.set({ firstName: 'Gerry' });
+  await waitFor(() => expectNameToEqual('Gerry', 'Garcia'));
+
+  // Change the last name
+  contact.set({ lastName: 'Jarcia' });
+  await waitFor(() => expectNameToEqual('Gerry', 'Jarcia'));
+});
+
+// TODO: don't forget case when component not defined
 // it('should useComponent when component changes', async () => {})
