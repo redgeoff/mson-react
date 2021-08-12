@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 export default function useComponent(component, watchProps) {
-  const [props, setProps] = useState(null);
+  const [props, setProps] = useState(
+    component ? component.get(watchProps) : {}
+  );
 
   // The component can be created at any time, e.g. when the definition is set. Therefore, we need
   // to handle a missing component until the component is present.
@@ -17,7 +19,7 @@ export default function useComponent(component, watchProps) {
         // Is the component mounted? Prevent a race condition where the handler tries to set the
         // state after the component has been unmounted.
         if (wasMounted) {
-          setProps({ [name]: value });
+          setProps({ ...props, [name]: value });
         }
       }
     }
@@ -40,18 +42,7 @@ export default function useComponent(component, watchProps) {
       removeListener();
       wasMounted = false;
     };
-  });
+  }, [component]); // Only rerun if component changes
 
-  if (props === null) {
-    if (hasComponent()) {
-      return component.get(watchProps);
-    } else {
-      // TODO: zip or better way?
-      const initialProps = {};
-      watchProps.forEach((prop) => (initialProps[prop] = undefined));
-      return initialProps;
-    }
-  } else {
-    return props;
-  }
+  return props;
 }

@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen, act } from '@testing-library/react';
 import compile from 'mson/lib/compiler/compile';
 import useComponent from './use-component';
 
@@ -35,12 +35,12 @@ const ReactContact = (props) => {
 
 const expectNameToEqual = (first, last) => {
   const firstName = screen.getByText(/First Name/);
-  expect(firstName).toHaveTextContent(`First Name: ${firstName}`);
+  expect(firstName).toHaveTextContent(`First Name: ${first}`);
   const lastName = screen.getByText(/Last Name/);
   expect(lastName).toHaveTextContent(`Last Name: ${last}`);
 };
 
-const isShouldTestHappyPath = () => {
+const shouldTestHappyPath = () => {
   const contact = new Contact({
     firstName: 'Jerry',
     lastName: 'Garcia',
@@ -54,18 +54,18 @@ const isShouldTestHappyPath = () => {
 };
 
 it('should useComponent for happy path', () => {
-  isShouldTestHappyPath();
+  shouldTestHappyPath();
 });
 
 it('should useComponent when props change sequentially', async () => {
-  const contact = isShouldTestHappyPath();
+  const contact = shouldTestHappyPath();
 
   // Change the first name
-  contact.set({ firstName: 'Gerry' });
+  act(() => contact.set({ firstName: 'Gerry' }));
   await waitFor(() => expectNameToEqual('Gerry', 'Garcia'));
 
   // Change the last name
-  contact.set({ lastName: 'Jarcia' });
+  act(() => contact.set({ lastName: 'Jarcia' }));
   await waitFor(() => expectNameToEqual('Gerry', 'Jarcia'));
 });
 
