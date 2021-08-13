@@ -71,3 +71,5 @@ it('should useComponent when props change sequentially', async () => {
 
 // TODO: don't forget case when component not defined
 // it('should useComponent when component changes', async () => {})
+
+// it('useComponent ignores changes when unmounted', async () => {})

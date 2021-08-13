@@ -19,7 +19,7 @@ export default function useComponent(component, watchProps) {
         // Is the component mounted? Prevent a race condition where the handler tries to set the
         // state after the component has been unmounted.
         if (wasMounted) {
-          setProps({ ...props, [name]: value });
+          setProps((prevProps) => ({ ...prevProps, [name]: value }));
         }
       }
     }
