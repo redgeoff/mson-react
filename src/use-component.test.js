@@ -27,17 +27,17 @@ const ReactContact = (props) => {
   ]);
   return (
     <div>
-      <div>First Name: {firstName}</div>
-      <div>Last Name: {lastName}</div>
+      <div>First Name:{firstName}</div>
+      <div>Last Name:{lastName}</div>
     </div>
   );
 };
 
 const expectNameToEqual = (first, last) => {
   const firstName = screen.getByText(/First Name/);
-  expect(firstName).toHaveTextContent(`First Name: ${first}`);
+  expect(firstName).toHaveTextContent(`First Name:${first}`);
   const lastName = screen.getByText(/Last Name/);
-  expect(lastName).toHaveTextContent(`Last Name: ${last}`);
+  expect(lastName).toHaveTextContent(`Last Name:${last}`);
 };
 
 const shouldTestHappyPath = () => {
@@ -69,7 +69,20 @@ it('should useComponent when props change sequentially', async () => {
   await waitFor(() => expectNameToEqual('Gerry', 'Jarcia'));
 });
 
-// TODO: don't forget case when component not defined
-// it('should useComponent when component changes', async () => {})
+it('should useComponent when component changes', async () => {
+  // ReactContact is first rendered with a MSON component
+  const { rerender } = render(<ReactContact />);
+  expectNameToEqual('', '');
+
+  // Set component
+  const contact = new Contact({
+    firstName: 'Jerry',
+    lastName: 'Garcia',
+  });
+  rerender(<ReactContact component={contact} />);
+  expectNameToEqual('Jerry', 'Garcia');
+
+  // TODO: change component
+});
 
 // it('useComponent ignores changes when unmounted', async () => {})
