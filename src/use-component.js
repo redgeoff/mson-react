@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function useComponent(component, watchProps) {
-  const [props, setProps] = useState(
-    component ? component.get(watchProps) : {}
-  );
+  const [props, setProps] = useState({});
 
   // The component can be created at any time, e.g. when the definition is set. Therefore, we need
   // to handle a missing component until the component is present.
@@ -12,7 +10,7 @@ export default function useComponent(component, watchProps) {
   }
 
   useEffect(() => {
-    let wasMounted = true;
+    let wasMounted = false;
 
     function handleFieldChange(name, value) {
       if (watchProps.indexOf(name) !== -1) {
@@ -27,6 +25,9 @@ export default function useComponent(component, watchProps) {
     function addListener() {
       if (hasComponent()) {
         component.on('$change', handleFieldChange);
+
+        // Initialize the props using the component's values
+        setProps(component.get(watchProps));
       }
     }
 
@@ -36,8 +37,8 @@ export default function useComponent(component, watchProps) {
       }
     }
 
-    // TODO: what happens when component set later?
     addListener();
+    wasMounted = true;
     return () => {
       removeListener();
       wasMounted = false;
