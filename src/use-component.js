@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 export default function useComponent(component, watchProps) {
   const [props, setProps] = useState({});
 
-  // The component can be created at any time, e.g. when the definition is set. Therefore, we need
-  // to handle a missing component until the component is present.
-  function hasComponent() {
-    return !!component;
-  }
-
   useEffect(() => {
+    // The component can be created at any time, e.g. when the definition is set. Therefore, we need
+    // to handle a missing component until the component is present.
+    function hasComponent() {
+      return !!component;
+    }
+
     function handleFieldChange(name, value) {
       if (watchProps.indexOf(name) !== -1) {
         setProps((prevProps) => ({ ...prevProps, [name]: value }));
