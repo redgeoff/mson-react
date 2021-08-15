@@ -10,15 +10,9 @@ export default function useComponent(component, watchProps) {
   }
 
   useEffect(() => {
-    let wasMounted = false;
-
     function handleFieldChange(name, value) {
       if (watchProps.indexOf(name) !== -1) {
-        // Is the component mounted? Prevent a race condition where the handler tries to set the
-        // state after the component has been unmounted.
-        if (wasMounted) {
-          setProps((prevProps) => ({ ...prevProps, [name]: value }));
-        }
+        setProps((prevProps) => ({ ...prevProps, [name]: value }));
       }
     }
 
@@ -38,11 +32,7 @@ export default function useComponent(component, watchProps) {
     }
 
     addListener();
-    wasMounted = true;
-    return () => {
-      removeListener();
-      wasMounted = false;
-    };
+    return () => removeListener();
   }, [component]); // Only rerun if component changes
 
   return props;

@@ -40,11 +40,14 @@ const expectNameToEqual = (first, last) => {
   expect(lastName).toHaveTextContent(`Last Name:${last}`);
 };
 
-const shouldTestHappyPath = () => {
-  const contact = new Contact({
+const createJerry = () =>
+  new Contact({
     firstName: 'Jerry',
     lastName: 'Garcia',
   });
+
+const shouldTestHappyPath = () => {
+  const contact = createJerry();
 
   render(<ReactContact component={contact} />);
 
@@ -75,10 +78,7 @@ it('should useComponent when component changes', async () => {
   expectNameToEqual('', '');
 
   // Set component
-  const jerry = new Contact({
-    firstName: 'Jerry',
-    lastName: 'Garcia',
-  });
+  const jerry = createJerry();
   rerender(<ReactContact component={jerry} />);
   expectNameToEqual('Jerry', 'Garcia');
 
@@ -91,4 +91,14 @@ it('should useComponent when component changes', async () => {
   expectNameToEqual('Bob', 'Weir');
 });
 
-// it('useComponent ignores changes when unmounted', async () => {})
+it('useComponent should remove listener when unmounting', async () => {
+  const jerry = createJerry();
+  const on = jest.spyOn(jerry, 'on');
+  const removeListener = jest.spyOn(jerry, 'removeListener');
+  const { unmount } = render(<ReactContact component={jerry} />);
+  expect(on.mock.calls[0][0]).toEqual('$change');
+  expectNameToEqual('Jerry', 'Garcia');
+
+  unmount();
+  expect(removeListener.mock.calls[0][0]).toEqual('$change');
+});
