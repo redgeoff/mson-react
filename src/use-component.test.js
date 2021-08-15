@@ -70,19 +70,25 @@ it('should useComponent when props change sequentially', async () => {
 });
 
 it('should useComponent when component changes', async () => {
-  // ReactContact is first rendered with a MSON component
+  // Render without a MSON component
   const { rerender } = render(<ReactContact />);
   expectNameToEqual('', '');
 
   // Set component
-  const contact = new Contact({
+  const jerry = new Contact({
     firstName: 'Jerry',
     lastName: 'Garcia',
   });
-  rerender(<ReactContact component={contact} />);
+  rerender(<ReactContact component={jerry} />);
   expectNameToEqual('Jerry', 'Garcia');
 
-  // TODO: change component
+  // Change the component
+  const bob = new Contact({
+    firstName: 'Bob',
+    lastName: 'Weir',
+  });
+  rerender(<ReactContact component={bob} />);
+  expectNameToEqual('Bob', 'Weir');
 });
 
 // it('useComponent ignores changes when unmounted', async () => {})
