@@ -20,6 +20,10 @@ import {
   CustomComponentNoProps,
   ReactCustomComponentNoProps,
 } from './components/custom-component-no-props';
+import {
+  CustomComponentAttach,
+  ReactCustomComponentAttach,
+} from './components/custom-component-attach';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
@@ -38,6 +42,8 @@ compiler.registerComponent('CustomComponentJS', CustomComponentJS);
 uiComponents.CustomComponentJS = ReactCustomComponentJS;
 compiler.registerComponent('CustomComponentNoProps', CustomComponentNoProps);
 uiComponents.CustomComponentNoProps = ReactCustomComponentNoProps;
+compiler.registerComponent('CustomComponentAttach', CustomComponentAttach);
+uiComponents.CustomComponentAttach = ReactCustomComponentAttach;
 
 // Register all the components
 for (let name in components) {

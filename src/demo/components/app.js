@@ -146,6 +146,15 @@ const app = {
             },
           },
           {
+            path: '/custom-components/attach',
+            label: 'Custom Component Attach',
+            content: {
+              component: 'CustomComponentAttach',
+              name: 'my-custom-component-attach',
+              label: 'My Custom Component Attach',
+            },
+          },
+          {
             path: '/custom-components/contact-no-mson',
             label: 'Contact No MSON',
             content: {
