@@ -1,11 +1,9 @@
-// TODO: wire up to demo
-
 import React from 'react';
 import attach from '../../attach';
 import Typography from '@material-ui/core/Typography';
 import compile from 'mson/lib/compiler/compile';
 
-const CustomComponent = compile({
+const CustomComponentAttach = compile({
   component: 'UIComponent',
   name: 'CustomComponent',
   schema: {
@@ -23,7 +21,7 @@ const CustomComponent = compile({
   },
 });
 
-let ReactCustomComponent = (props) => {
+let ReactCustomComponentAttach = (props) => {
   const { name, label } = props;
   return (
     <div>
@@ -34,6 +32,8 @@ let ReactCustomComponent = (props) => {
 };
 
 // Bind React props to MSON component props
-ReactCustomComponent = attach(['name', 'label'])(ReactCustomComponent);
+ReactCustomComponentAttach = attach(['name', 'label'])(
+  ReactCustomComponentAttach
+);
 
-export { CustomComponent, ReactCustomComponent };
+export { CustomComponentAttach, ReactCustomComponentAttach };
