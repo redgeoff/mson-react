@@ -16,14 +16,8 @@ import {
   CustomComponentJS,
   ReactCustomComponentJS,
 } from './components/custom-component-js';
-import {
-  CustomComponentNoProps,
-  ReactCustomComponentNoProps,
-} from './components/custom-component-no-props';
-import {
-  CustomComponentAttach,
-  ReactCustomComponentAttach,
-} from './components/custom-component-attach';
+import { CustomComponentNoProps } from './components/custom-component-no-props';
+import { CustomComponentAttach } from './components/custom-component-attach';
 
 // Set the site key when using the ReCAPTCHAField
 globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
@@ -35,15 +29,15 @@ compiler.registerComponent('FormEditor', FormEditor);
 uiComponents.FormEditor = FormEditorUI;
 compiler.registerComponent('FormBuilder', FormBuilder);
 
-// Register any custom components written in JS and not MSON
+// You can register custom components with the backend and frontend separately
 compiler.registerComponent('CustomComponent', CustomComponent);
 uiComponents.CustomComponent = ReactCustomComponent;
 compiler.registerComponent('CustomComponentJS', CustomComponentJS);
 uiComponents.CustomComponentJS = ReactCustomComponentJS;
+
+// You can also register UIComponents that bundle the frontend and backend together
 compiler.registerComponent('CustomComponentNoProps', CustomComponentNoProps);
-uiComponents.CustomComponentNoProps = ReactCustomComponentNoProps;
 compiler.registerComponent('CustomComponentAttach', CustomComponentAttach);
-uiComponents.CustomComponentAttach = ReactCustomComponentAttach;
 
 // Register all the components
 for (let name in components) {

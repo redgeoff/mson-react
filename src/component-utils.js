@@ -5,7 +5,9 @@ class Utils {
   getUIComponent(component) {
     const name = component.getClassName();
     const Component = components[name];
-    if (Component !== undefined) {
+    if (component.get('render')) {
+      return component.get('render');
+    } else if (Component !== undefined) {
       return Component;
     } else if (compiler.isCompiled(compiler.getComponent(name))) {
       const Parent = Object.getPrototypeOf(component.constructor);
