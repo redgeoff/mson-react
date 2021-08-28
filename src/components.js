@@ -56,4 +56,8 @@ const components = {
   User: Form,
 };
 
+export const register = (name, component) => {
+  components[name] = component;
+};
+
 export default components;

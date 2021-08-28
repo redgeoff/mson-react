@@ -2,7 +2,7 @@ import compiler from 'mson/lib/compiler';
 import register from 'mson/lib/compiler/register';
 import components from './components';
 import globals from 'mson/lib/globals';
-import uiComponents from '../components';
+import { register as uiRegister } from '../components';
 import FieldEditorForm from 'mson/lib/form/field-editor-form';
 import FieldEditorFormUI from '../field-editor-form';
 import FormEditor from 'mson/lib/form/form-editor';
@@ -25,16 +25,16 @@ globals.set({ reCAPTCHASiteKey: '6LdIbGMUAAAAAJnipR9t-SnWzCbn0ZX2myXBIauh' });
 
 // Register optional core components
 register('FieldEditorForm', FieldEditorForm);
-uiComponents.FieldEditorForm = FieldEditorFormUI;
+uiRegister('FieldEditorForm', FieldEditorFormUI);
 register('FormEditor', FormEditor);
-uiComponents.FormEditor = FormEditorUI;
+uiRegister('FormEditor', FormEditorUI);
 register('FormBuilder', FormBuilder);
 
 // You can register custom components with the backend and frontend separately
 register('CustomComponent', CustomComponent);
-uiComponents.CustomComponent = ReactCustomComponent;
+uiRegister('CustomComponent', ReactCustomComponent);
 register('CustomComponentJS', CustomComponentJS);
-uiComponents.CustomComponentJS = ReactCustomComponentJS;
+uiRegister('CustomComponentJS', ReactCustomComponentJS);
 
 // You can also register UIComponents that bundle the frontend and backend together
 register('CustomComponentNoProps', CustomComponentNoProps);
