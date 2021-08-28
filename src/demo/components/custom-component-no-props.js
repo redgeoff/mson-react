@@ -2,11 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import compile from 'mson/lib/compiler/compile';
 
-const CustomComponentNoProps = compile({
-  component: 'UIComponent',
-  name: 'CustomComponentNoProps',
-});
-
 const ReactCustomComponentNoProps = (/* props */) => {
   const text = 'This text is private to the React component';
   return (
@@ -16,4 +11,10 @@ const ReactCustomComponentNoProps = (/* props */) => {
   );
 };
 
-export { CustomComponentNoProps, ReactCustomComponentNoProps };
+const CustomComponentNoProps = compile({
+  component: 'UIComponent',
+  name: 'CustomComponentNoProps',
+  render: ReactCustomComponentNoProps,
+});
+
+export { CustomComponentNoProps };
