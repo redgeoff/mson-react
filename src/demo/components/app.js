@@ -5,6 +5,10 @@ const app = {
   basename: '/mson-react', // Root of site is https://redgeoff.github.io/mson-react
   menu: {
     component: 'Menu',
+    header: {
+      component: 'Text',
+      text: '**MSON Demo**',
+    },
     items: [
       {
         path: '/',
