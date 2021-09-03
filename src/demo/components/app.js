@@ -7,7 +7,7 @@ const app = {
     component: 'Menu',
     header: {
       component: 'Text',
-      text: '**MSON Demo**',
+      text: '### &nbsp;&nbsp;&nbsp;MSON Demo',
     },
     items: [
       {
