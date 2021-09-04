@@ -7,16 +7,14 @@ import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import Submenu from './submenu';
 import attach from './attach';
-import Typography from '@material-ui/core/Typography';
 import registrar from 'mson/lib/compiler/registrar';
+import Component from './component';
 
 const drawerWidth = 240;
 
 const styles = (theme) => ({
   drawerHeader: {
-    ...theme.mixins.toolbar,
-    paddingLeft: theme.spacing(3),
-    paddingTop: theme.spacing(1),
+    // Blank so that header component defines styling
   },
   drawerPaper: {
     width: 250,
@@ -74,18 +72,24 @@ class Menu extends React.PureComponent {
   }
 
   render() {
-    const { classes, theme, mobileOpen, responsive /*, roles*/ } = this.props;
+    const {
+      classes,
+      theme,
+      mobileOpen,
+      responsive,
+      header /*, roles*/,
+    } = this.props;
 
     let items = null;
     // if (!roles || (registrar.client && registrar.client.user.hasRole(roles))) {
     items = this.items();
     // }
 
+    const headerElement = header && <Component component={header} />;
+
     const drawer = (
       <div>
-        <div className={classes.drawerHeader}>
-          <Typography variant="h4">Logo</Typography>
-        </div>
+        <div className={classes.drawerHeader}>{headerElement}</div>
         <Divider />
         {items}
       </div>
@@ -138,5 +142,5 @@ class Menu extends React.PureComponent {
 }
 
 Menu = withStyles(styles, { withTheme: true })(Menu);
-Menu = attach(['items' /*, 'roles'*/])(Menu);
+Menu = attach(['items', 'header' /*, 'roles'*/])(Menu);
 export default Menu;
