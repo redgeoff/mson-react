@@ -1,21 +1,70 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from './button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import DialogContent from '@material-ui/core/DialogContent';
 import Component from './component';
-import attach from './attach';
+import useComponent from './use-component';
 import CollectionFieldCore from 'mson/lib/fields/collection-field';
 
-class FormDialog extends React.PureComponent {
-  state = { saveClicked: false, previousMode: null };
+// TODO: move to shared space
+// Credit: https://usehooks.com/usePrevious/
+function usePrevious(value) {
+  // The ref object is a generic container whose current property is mutable ...
+  // ... and can hold any value, similar to an instance property on a class
+  const ref = useRef();
 
-  handleClose = (withCancelButton) => {
+  // Store current value in ref
+  useEffect(() => {
+    ref.current = value;
+  }, [value]); // Only re-run if value changes
+
+  // Return previous value (happens before update in useEffect above)
+  return ref.current;
+}
+
+const { CREATE, UPDATE, DELETE, RESTORE } = CollectionFieldCore.MODES;
+
+function FormDialog(props) {
+  const [saveClicked, setSaveClicked] = useState(false);
+  const [previousMode, setPreviousMode] = useState(false);
+  const {
+    onClose,
+    onCancel,
+    currentForm,
+    onEdit,
+    onSave,
+    onDelete,
+    component,
+    forbidUpdate,
+    forbidDelete,
+  } = props;
+  const { err, dirty, value, mode, disableSubmit } = useComponent(component, [
+    'err',
+    'dirty',
+    'value',
+    'mode',
+    'disableSubmit',
+  ]);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const prevMode = usePrevious(mode);
+
+  useEffect(() => {
+    // If the mode or err changes then allow the user to click save
+    setSaveClicked(false);
+  }, [mode, err]);
+
+  useEffect(() => {
+    setPreviousMode(prevMode);
+  }, [mode, prevMode]);
+
+  function handleClose(withCancelButton) {
     // Prevent the user from losing data when pressing esc or clicking outside dialog
-    const { mode, onClose, onCancel, currentForm } = this.props;
-    if (withCancelButton || mode !== 'update') {
-      if (mode === 'update') {
+    if (withCancelButton || mode !== UPDATE) {
+      if (mode === UPDATE) {
         if (onCancel) {
           onCancel(currentForm);
         }
@@ -25,41 +74,37 @@ class FormDialog extends React.PureComponent {
         }
       }
     }
-  };
+  }
 
-  handleEdit = () => {
-    if (this.props.onEdit) {
-      this.props.onEdit(this.props.currentForm);
+  function handleEdit() {
+    if (onEdit) {
+      onEdit(currentForm);
     }
-  };
+  }
 
-  handleSave = (event) => {
+  function handleSave(event) {
     // Stop the form from refreshing the page
     event.preventDefault();
 
     // Should the submit action be disabled? For example, we may be editing in a nested dialog
-    if (!this.props.disableSubmit) {
-      if (this.props.onSave) {
-        this.props.onSave();
+    if (!disableSubmit) {
+      if (onSave) {
+        onSave();
       }
 
       // Disable the save button so that the user sees that something is being processed
-      this.setState({ saveClicked: true });
+      setSaveClicked(true);
     }
-  };
+  }
 
-  handleDelete = () => {
-    if (this.props.onDelete) {
-      this.props.onDelete(this.props.currentForm);
+  function handleDelete() {
+    if (onDelete) {
+      onDelete(currentForm);
     }
-  };
+  }
 
-  isOpen() {
-    const { mode } = this.props;
-    if (
-      mode === CollectionFieldCore.MODES.DELETE ||
-      mode === CollectionFieldCore.MODES.RESTORE
-    ) {
+  function isOpen() {
+    if (mode === DELETE || mode === RESTORE) {
       // Don't show the dialog when restoring
       return false;
     } else {
@@ -67,113 +112,70 @@ class FormDialog extends React.PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    // If the mode or err changes then allow the user to click save
-    if (
-      this.props.mode !== prevProps.mode ||
-      this.props.err !== prevProps.err
-    ) {
-      this.setState({ saveClicked: false });
-    }
+  const disableSave =
+    component.hasErrorForTouchedField() || !dirty || saveClicked;
 
-    if (this.props.mode !== prevProps.mode) {
-      this.setState({ previousMode: prevProps.mode });
-    }
-  }
+  const open = isOpen();
 
-  render() {
-    const {
-      mode,
-      component,
-      forbidUpdate,
-      forbidDelete,
-      value,
-      fullScreen,
-    } = this.props;
+  let buttons = null;
 
-    const { saveClicked, previousMode } = this.state;
-
-    const disableSave =
-      component.hasErrorForTouchedField() ||
-      !component.get('dirty') ||
-      saveClicked;
-
-    const open = this.isOpen();
-
-    let buttons = null;
-
-    // Note: we analyze the previousMode so that the user isn't flashed with new buttons immediately
-    // after they click save or close the dialog
-    if (
-      mode === 'update' ||
-      mode === 'create' ||
-      (mode === null &&
-        (previousMode === 'update' || previousMode === 'create'))
-    ) {
-      buttons = (
-        <div>
-          {/* We use type=submit so that the form is submitted when the user presses enter */}
+  // Note: we analyze the previousMode so that the user isn't flashed with new buttons immediately
+  // after they click save or close the dialog
+  if (
+    mode === UPDATE ||
+    mode === CREATE ||
+    (mode === null && (previousMode === UPDATE || previousMode === CREATE))
+  ) {
+    buttons = (
+      <div>
+        {/* We use type=submit so that the form is submitted when the user presses enter */}
+        <Button type="submit" label="Save" icon="Save" disabled={disableSave} />
+        <Button
+          label="Cancel"
+          icon="Cancel"
+          onClick={() => handleClose(true)}
+        />
+      </div>
+    );
+  } else if (!forbidUpdate || !forbidDelete) {
+    buttons = (
+      <div>
+        {forbidUpdate ? (
+          ''
+        ) : (
+          <Button label="Edit" icon="Edit" onClick={handleEdit} />
+        )}
+        {forbidDelete ? (
+          ''
+        ) : (
           <Button
-            type="submit"
-            label="Save"
-            icon="Save"
-            disabled={disableSave}
+            label={value.archivedAt ? 'Restore' : 'Delete'}
+            icon={value.archivedAt ? 'Restore' : 'Delete'}
+            onClick={handleDelete}
           />
-          <Button
-            label="Cancel"
-            icon="Cancel"
-            onClick={() => this.handleClose(true)}
-          />
-        </div>
-      );
-    } else if (!forbidUpdate || !forbidDelete) {
-      buttons = (
-        <div>
-          {forbidUpdate ? (
-            ''
-          ) : (
-            <Button label="Edit" icon="Edit" onClick={this.handleEdit} />
-          )}
-          {forbidDelete ? (
-            ''
-          ) : (
-            <Button
-              label={value.archivedAt ? 'Restore' : 'Delete'}
-              icon={value.archivedAt ? 'Restore' : 'Delete'}
-              onClick={this.handleDelete}
-            />
-          )}
-          <Button
-            label="Close"
-            icon="Cancel"
-            onClick={() => this.handleClose(true)}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <Dialog
-        // fullScreen will be true on a small screen
-        fullScreen={fullScreen}
-        open={open}
-        onClose={() => this.handleClose(false)}
-        aria-labelledby="form-dialog-title"
-      >
-        {/* We use a form element so that we can submit the form on enter */}
-        <form onSubmit={this.handleSave}>
-          <DialogContent>
-            <Component component={component} formTag={false} mode={mode} />
-          </DialogContent>
-          {buttons ? <DialogActions>{buttons}</DialogActions> : ''}
-        </form>
-      </Dialog>
+        )}
+        <Button label="Close" icon="Cancel" onClick={() => handleClose(true)} />
+      </div>
     );
   }
+
+  return (
+    <Dialog
+      // fullScreen will be true on a small screen
+      fullScreen={fullScreen}
+      open={open}
+      onClose={() => handleClose(false)}
+      aria-labelledby="form-dialog-title"
+    >
+      {/* We use a form element so that we can submit the form on enter */}
+      <form onSubmit={handleSave}>
+        <DialogContent>
+          <Component component={component} formTag={false} mode={mode} />
+        </DialogContent>
+        {buttons ? <DialogActions>{buttons}</DialogActions> : ''}
+      </form>
+    </Dialog>
+  );
 }
 
-FormDialog = withMobileDialog()(FormDialog);
-FormDialog = attach(['err', 'dirty', 'value', 'mode', 'disableSubmit'])(
-  FormDialog
-);
 export default FormDialog;
