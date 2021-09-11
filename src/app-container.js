@@ -2,14 +2,14 @@ import React from 'react';
 import AppUI from './app';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { createTheme } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import { BrowserRouter, Prompt } from 'react-router-dom';
 import globals from 'mson/lib/globals';
 import attach from './attach';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: blueGrey,
     // primary: blue,
