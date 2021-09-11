@@ -15,8 +15,7 @@ Implementing great forms can be a real time-waster. With just a few lines of JSO
 
 ### Adding MSON-React to Your Existing React Project
 
-  - `yarn add @date-io/date-fns @material-ui/core date-fns @material-ui/pickers mson mson-react typeface-roboto`
-    - Note: this is needed as MSON and MSON-React are libraries that work in conjunction with React, Material UI and Date-IO. As such, these dependencies are peer dependencies.
+  - `yarn add mson-react` or `npm install mson-react`
   - Add the following to the head section of your index.html:
     ```html
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

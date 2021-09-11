@@ -4,13 +4,8 @@ import attach from '../attach';
 
 class URLField extends React.PureComponent {
   render() {
-    const {
-      component,
-      value,
-      editable,
-      useDisplayValue,
-      newWindow,
-    } = this.props;
+    const { component, value, editable, useDisplayValue, newWindow } =
+      this.props;
 
     let displayValue = null;
 
@@ -20,8 +15,11 @@ class URLField extends React.PureComponent {
       if (href.indexOf('http') !== 0) {
         href = 'http://' + href;
       }
+
+      // Using target=_blank without rel=noreferrer is a security risk:
+      // https://html.spec.whatwg.org/multipage/links.html#link-type-noopener
       displayValue = (
-        <a href={href} target={newWindow ? '_blank' : '_self'}>
+        <a href={href} rel="noreferrer" target={newWindow ? '_blank' : '_self'}>
           {value}
         </a>
       );
