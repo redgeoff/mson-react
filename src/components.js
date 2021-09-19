@@ -1,5 +1,6 @@
 // NOTE: this file should only contain the component registrations
 
+import Alert from './alert';
 import ButtonField from './fields/button-field';
 import BooleanField from './fields/boolean-field';
 import Card from './card';
@@ -24,6 +25,7 @@ import TextField from './fields/text-field';
 import URLField from './fields/url-field';
 
 const components = {
+  Alert,
   ButtonField,
   BooleanField,
   Card,
