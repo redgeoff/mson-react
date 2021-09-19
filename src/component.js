@@ -7,9 +7,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const getOrZero = (value) => (value ? value : 0);
 
 const useStyles = makeStyles((theme) => ({
-  root: (props) => ({
-    marginTop: theme.spacing(getOrZero(props.marginTop)),
-  }),
+  root: (props) => {
+    const { marginTop, marginRight, marginBottom, marginLeft } = props;
+    return {
+      marginTop: theme.spacing(getOrZero(marginTop)),
+      marginRight: theme.spacing(getOrZero(marginRight)),
+      marginBottom: theme.spacing(getOrZero(marginBottom)),
+      marginLeft: theme.spacing(getOrZero(marginLeft)),
+    };
+  },
 }));
 
 export default function Component(props) {
