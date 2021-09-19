@@ -13,6 +13,7 @@ import Fragment from './fragment';
 import Grid from './grid';
 import GridItem from './grid-item';
 import CollectionField from './fields/collection-field';
+import Container from './container';
 import ListField from './fields/list-field';
 import ReCAPTCHAField from './fields/re-captcha-field';
 import SelectField from './fields/select-field';
@@ -38,6 +39,7 @@ const components = {
   Grid,
   GridItem,
   CollectionField,
+  Container,
   IdField: TextField,
   IntegerField: TextField,
   ListField,
