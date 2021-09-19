@@ -2,11 +2,23 @@ import React, { useState, useEffect } from 'react';
 import InnerComponent from './inner-component';
 import compiler from 'mson/lib/compiler';
 import useComponent from './use-component';
+import { makeStyles } from '@material-ui/core/styles';
+
+const getOrZero = (value) => (value ? value : 0);
+
+const useStyles = makeStyles((theme) => ({
+  root: (props) => ({
+    marginTop: theme.spacing(getOrZero(props.marginTop)),
+  }),
+}));
 
 export default function Component(props) {
   const { component, definition, ...childProps } = props;
   const [compiledComponent, setCompiledComponent] = useState(null);
-  const { hidden } = useComponent(component, ['hidden']);
+
+  const { hidden, styles } = useComponent(component, ['hidden', 'styles']);
+  const styleProps = styles ? styles.get() : {};
+  const classes = useStyles(styleProps);
 
   // Should we use the component generated from the definition?
   const comp = component ? component : compiledComponent;
@@ -36,6 +48,12 @@ export default function Component(props) {
   if (comp && hidden) {
     return null;
   } else {
-    return <InnerComponent component={comp} {...childProps} />;
+    // As a slight optimization, only display a span tag if styles is truthy
+    const innerComponent = <InnerComponent component={comp} {...childProps} />;
+    if (styles) {
+      return <span className={classes.root}>{innerComponent}</span>;
+    } else {
+      return innerComponent;
+    }
   }
 }
