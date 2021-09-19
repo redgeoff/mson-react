@@ -4,5 +4,9 @@ import Component from './component';
 
 export default function Container(props) {
   const { content } = useComponent(props.component, ['content']);
-  return <Component component={content} />;
+  if (content) {
+    return <Component component={content} />;
+  } else {
+    return null;
+  }
 }
