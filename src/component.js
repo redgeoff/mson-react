@@ -51,7 +51,8 @@ export default function Component(props) {
     // As a slight optimization, only display a span tag if styles is truthy
     const innerComponent = <InnerComponent component={comp} {...childProps} />;
     if (styles) {
-      return <span className={classes.root}>{innerComponent}</span>;
+      // Use a div so that we have a block-level element that supports vertical margins
+      return <div className={classes.root}>{innerComponent}</div>;
     } else {
       return innerComponent;
     }
