@@ -1,5 +1,6 @@
 // NOTE: this file should only contain the component registrations
 
+import Alert from './alert';
 import ButtonField from './fields/button-field';
 import BooleanField from './fields/boolean-field';
 import Card from './card';
@@ -13,6 +14,7 @@ import Fragment from './fragment';
 import Grid from './grid';
 import GridItem from './grid-item';
 import CollectionField from './fields/collection-field';
+import Container from './container';
 import ListField from './fields/list-field';
 import ReCAPTCHAField from './fields/re-captcha-field';
 import SelectField from './fields/select-field';
@@ -23,6 +25,7 @@ import TextField from './fields/text-field';
 import URLField from './fields/url-field';
 
 const components = {
+  Alert,
   ButtonField,
   BooleanField,
   Card,
@@ -38,6 +41,7 @@ const components = {
   Grid,
   GridItem,
   CollectionField,
+  Container,
   IdField: TextField,
   IntegerField: TextField,
   ListField,
