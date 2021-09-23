@@ -1,24 +1,20 @@
 {
   "files": {
     "main.css": "/mson-react/static/css/main.cbccf775.chunk.css",
-    "main.js": "/mson-react/static/js/main.14dd6b5c.chunk.js",
-    "main.js.map": "/mson-react/static/js/main.14dd6b5c.chunk.js.map",
+    "main.js": "/mson-react/static/js/main.a2519fca.chunk.js",
+    "main.js.map": "/mson-react/static/js/main.a2519fca.chunk.js.map",
     "runtime-main.js": "/mson-react/static/js/runtime-main.bebc2bcb.js",
     "runtime-main.js.map": "/mson-react/static/js/runtime-main.bebc2bcb.js.map",
-    "static/css/2.a51fa732.chunk.css": "/mson-react/static/css/2.a51fa732.chunk.css",
-    "static/js/2.60e8f24b.chunk.js": "/mson-react/static/js/2.60e8f24b.chunk.js",
-    "static/js/2.60e8f24b.chunk.js.map": "/mson-react/static/js/2.60e8f24b.chunk.js.map",
+    "static/js/2.2558a662.chunk.js": "/mson-react/static/js/2.2558a662.chunk.js",
+    "static/js/2.2558a662.chunk.js.map": "/mson-react/static/js/2.2558a662.chunk.js.map",
     "index.html": "/mson-react/index.html",
-    "static/css/2.a51fa732.chunk.css.map": "/mson-react/static/css/2.a51fa732.chunk.css.map",
     "static/css/main.cbccf775.chunk.css.map": "/mson-react/static/css/main.cbccf775.chunk.css.map",
-    "static/js/2.60e8f24b.chunk.js.LICENSE.txt": "/mson-react/static/js/2.60e8f24b.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/mson-react/static/media/roboto-latin-900italic.cb5ad999.woff2"
+    "static/js/2.2558a662.chunk.js.LICENSE.txt": "/mson-react/static/js/2.2558a662.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.bebc2bcb.js",
-    "static/css/2.a51fa732.chunk.css",
-    "static/js/2.60e8f24b.chunk.js",
+    "static/js/2.2558a662.chunk.js",
     "static/css/main.cbccf775.chunk.css",
-    "static/js/main.14dd6b5c.chunk.js"
+    "static/js/main.a2519fca.chunk.js"
   ]
 }
