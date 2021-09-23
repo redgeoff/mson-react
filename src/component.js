@@ -47,7 +47,7 @@ export default function Component(props) {
         comp.destroy();
       }
     };
-  }, []);
+  }, [comp]);
 
   // Note: the component can be falsy, e.g. it has not yet been defined
   if (comp && hidden) {
