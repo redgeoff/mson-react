@@ -491,6 +491,7 @@ class CollectionField extends React.PureComponent {
             useDisplayValue ||
             preventDeleteAction
           }
+          mode={mode} // Use mode at CollectionField layer and not form. Or, should this be done at the currentForm layer?
         />
 
         <ConfirmationDialog
