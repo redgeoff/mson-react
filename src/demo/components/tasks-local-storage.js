@@ -1,9 +1,12 @@
 const tasksLocalStorage = {
   name: 'app.TasksLocalStorage',
   component: 'app.Tasks',
+  // store: {
+  //   component: 'LocalStorageStore',
+  //   storeName: 'tasksLocalStorage',
+  // },
   store: {
-    component: 'LocalStorageStore',
-    storeName: 'tasksLocalStorage',
+    component: 'MemoryStore',
   },
 };
 
