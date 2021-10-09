@@ -56,28 +56,30 @@ it('should list', async () => {
   await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion']);
 });
 
-const shouldCreate = async () => {
-  const renderResult = compileAndRender(definition);
-
+const create = async (firstName) => {
   // Click "New Contact" button
   const newContact = screen.getByRole('button', { name: /New Contact/i });
   fireEvent.click(newContact);
 
   // Fill in First Name
-  const firstName = await screen.findByLabelText(/First Name/);
-  fireEvent.change(firstName, { target: { value: 'Ray' } });
+  const first = await screen.findByLabelText(/First Name/);
+  fireEvent.change(first, { target: { value: firstName } });
 
   // Save the form
   const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
+};
+
+const shouldCreate = async () => {
+  await create('Ray');
 
   // Verify that the contact now appears in the list
   await expectContactsToEqual(['Ray']);
-
-  return renderResult;
 };
 
 it('should create', async () => {
+  compileAndRender(definition);
+
   await shouldCreate();
 });
 
@@ -128,7 +130,9 @@ it('should edit', async () => {
 });
 
 it('should create and edit first time', async () => {
-  const { component } = await shouldCreate();
+  const { component } = compileAndRender(definition);
+
+  await shouldCreate();
 
   const id = component.getValue()[0].id;
 
