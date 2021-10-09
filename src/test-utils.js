@@ -10,5 +10,5 @@ export const compileAndRender = (definition, value) => {
     component.setValue(value);
   }
 
-  return render(<Component component={component} />);
+  return { ...render(<Component component={component} />), component };
 };

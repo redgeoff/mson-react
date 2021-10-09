@@ -43,8 +43,12 @@ export default function Component(props) {
         // Fire the unmount before we destroy the component so that the event is not lost
         comp.emitChange('unmount');
 
-        // Remove all listeners to prevent listener leaks
-        comp.destroy();
+        // We don't want to destroy the component as this could remove listeners that were not
+        // created in the React layer. For example, a form listens to all its fields and destroying
+        // the form will cause it to stop listening to its fields. Instead, the React layer should
+        // only remove listeners that it creates.
+        //
+        // comp.destroy();
       }
     };
   }, [comp]);
