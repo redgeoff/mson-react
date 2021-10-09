@@ -40,12 +40,12 @@ function FormDialog(props) {
     component,
     forbidUpdate,
     forbidDelete,
+    mode,
   } = props;
-  const { err, dirty, value, mode, disableSubmit } = useComponent(component, [
+  const { err, dirty, value, disableSubmit } = useComponent(component, [
     'err',
     'dirty',
     'value',
-    'mode',
     'disableSubmit',
   ]);
   const theme = useTheme();
