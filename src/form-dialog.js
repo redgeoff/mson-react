@@ -82,14 +82,8 @@ class FormDialog extends React.PureComponent {
   }
 
   render() {
-    const {
-      mode,
-      component,
-      forbidUpdate,
-      forbidDelete,
-      value,
-      fullScreen,
-    } = this.props;
+    const { mode, component, forbidUpdate, forbidDelete, value, fullScreen } =
+      this.props;
 
     const { saveClicked, previousMode } = this.state;
 
@@ -173,7 +167,5 @@ class FormDialog extends React.PureComponent {
 }
 
 FormDialog = withMobileDialog()(FormDialog);
-FormDialog = attach(['err', 'dirty', 'value', 'mode', 'disableSubmit'])(
-  FormDialog
-);
+FormDialog = attach(['err', 'dirty', 'value', 'disableSubmit'])(FormDialog);
 export default FormDialog;
