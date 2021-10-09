@@ -139,15 +139,15 @@ it('should create and edit first time', async () => {
 });
 
 it('should reorder', async () => {
-  const { getByText, getByLabelText } = await populateList({
+  await populateList({
     ...definition,
     forbidOrder: false,
   });
 
   // Drag daenerys down by one position
   await makeDnd({
-    getByText,
-    getDragEl: () => getByLabelText(/Drag.*daenerys/i),
+    getByText: screen.getByText,
+    getDragEl: () => screen.getByLabelText(/Drag.*daenerys/i),
     direction: DND_DIRECTION_DOWN,
     positions: 1,
   });
