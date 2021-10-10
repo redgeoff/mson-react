@@ -149,8 +149,8 @@ function FormDialog(props) {
           ''
         ) : (
           <Button
-            label={value.archivedAt ? 'Restore' : 'Delete'}
-            icon={value.archivedAt ? 'Restore' : 'Delete'}
+            label={value && value.archivedAt ? 'Restore' : 'Delete'}
+            icon={value && value.archivedAt ? 'Restore' : 'Delete'}
             onClick={handleDelete}
           />
         )}
