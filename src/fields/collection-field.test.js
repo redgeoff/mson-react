@@ -168,13 +168,19 @@ it('should reorder', async () => {
   await expectContactsToEqual(['Jon', 'Daenerys', 'Tyrion']);
 });
 
-it('should reorder after create', async () => {
-  const { component } = compileAndRender(orderedDefinition);
+it('should reorder after create when using store', async () => {
+  const { component } = compileAndRender({
+    ...orderedDefinition,
+    store: {
+      // Using a store introduces asynchronous flows
+      component: 'MemoryStore',
+    },
+  });
 
   await create('Jon');
-  // const jonId = component.getValue()[0].id;
 
   await expectContactsToEqual(['Jon']);
+  // const jonId = component.getValue()[0].id;
 
   await create('Daenerys');
 
