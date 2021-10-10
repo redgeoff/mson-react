@@ -1,6 +1,10 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor, screen } from '@testing-library/react';
 import { compileAndRender } from '../test-utils';
-import { makeDnd, DND_DIRECTION_DOWN } from 'react-beautiful-dnd-test-utils';
+import {
+  makeDnd,
+  DND_DIRECTION_DOWN,
+  DND_DIRECTION_UP,
+} from 'react-beautiful-dnd-test-utils';
 
 const definition = {
   component: 'CollectionField',
@@ -23,6 +27,11 @@ const definition = {
   },
 };
 
+const orderedDefinition = {
+  ...definition,
+  forbidOrder: false,
+};
+
 const contacts = [
   {
     id: 'daenerys',
@@ -37,10 +46,10 @@ const contacts = [
   },
 ];
 
-const expectContactsToEqual = async (getAllByLabelText, contacts) => {
+const expectContactsToEqual = async (contacts) => {
   await waitFor(
     () => {
-      const nodes = getAllByLabelText(/First Name/);
+      const nodes = screen.getAllByLabelText(/First Name/);
       expect(nodes.map((node) => node.textContent)).toEqual(contacts);
     },
     {
@@ -51,30 +60,39 @@ const expectContactsToEqual = async (getAllByLabelText, contacts) => {
 };
 
 it('should list', async () => {
-  const { getAllByLabelText } = compileAndRender(definition, contacts);
+  compileAndRender(definition, contacts);
 
-  await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
+  await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion']);
 });
 
-it('should create', async () => {
-  const { findByLabelText, getByRole, getAllByLabelText } = compileAndRender(
-    definition
-  );
-
+const create = async (firstName) => {
   // Click "New Contact" button
-  const newContact = getByRole('button', { name: /New Contact/i });
+  const newContact = screen.getByRole('button', { name: /New Contact/i });
   fireEvent.click(newContact);
 
   // Fill in First Name
-  const firstName = await findByLabelText(/First Name/);
-  fireEvent.change(firstName, { target: { value: 'Ray' } });
+  const first = await screen.findByLabelText(/First Name/, {
+    // Scope to only input fields as there may be display elements with the same label
+    selector: 'input',
+  });
+  fireEvent.change(first, { target: { value: firstName } });
 
   // Save the form
-  const save = getByRole('button', { name: /Save/i });
+  const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
+};
+
+const shouldCreate = async () => {
+  await create('Ray');
 
   // Verify that the contact now appears in the list
-  await expectContactsToEqual(getAllByLabelText, ['Ray']);
+  await expectContactsToEqual(['Ray']);
+};
+
+it('should create', async () => {
+  compileAndRender(definition);
+
+  await shouldCreate();
 });
 
 const populateList = async (def) => {
@@ -82,66 +100,103 @@ const populateList = async (def) => {
     def === undefined ? definition : def,
     contacts
   );
-  const { getAllByLabelText } = renderResult;
-  await expectContactsToEqual(getAllByLabelText, ['Daenerys', 'Jon', 'Tyrion']);
+  await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion']);
   return renderResult;
 };
 
 it('should view', async () => {
-  const { getAllByLabelText, getByRole } = await populateList();
+  await populateList();
 
   // Click to view first item
-  const view = getByRole('button', { name: /View.*daenerys/i });
+  const view = screen.getByRole('button', { name: /View.*daenerys/i });
   fireEvent.click(view);
 
   // Verify that item is being displayed. The extra "Daenerys" is the contact displayed in the
   // FormDialog. TODO: is there a better way to perform this check?
-  await expectContactsToEqual(getAllByLabelText, [
-    'Daenerys',
-    'Jon',
-    'Tyrion',
-    'Daenerys',
-  ]);
+  await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion', 'Daenerys']);
 });
 
-it('should edit', async () => {
-  const {
-    getAllByLabelText,
-    getByRole,
-    findByLabelText,
-  } = await populateList();
-
+const edit = async (id, firstName) => {
   // Edit item
-  const edit = getByRole('button', { name: /Edit.*daenerys/i });
+  const edit = screen.getByRole('button', { name: RegExp(`Edit.*${id}`, 'i') });
   fireEvent.click(edit);
 
   // Fill in First Name
-  const firstName = await findByLabelText(/First Name/, { selector: 'input' });
-  fireEvent.change(firstName, { target: { value: 'Sansa' } });
+  const first = await screen.findByLabelText(/First Name/, {
+    selector: 'input',
+  });
+  fireEvent.change(first, { target: { value: firstName } });
 
   // Save the form
-  const save = getByRole('button', { name: /Save/i });
+  const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
+};
+
+it('should edit', async () => {
+  await populateList();
+
+  await edit('daenerys', 'Sansa');
 
   // Verify that the contact now appears in the list
-  await expectContactsToEqual(getAllByLabelText, ['Sansa', 'Jon', 'Tyrion']);
+  await expectContactsToEqual(['Sansa', 'Jon', 'Tyrion']);
+});
+
+it('should create and edit first time', async () => {
+  const { component } = compileAndRender(definition);
+
+  await shouldCreate();
+
+  const id = component.getValue()[0].id;
+
+  await edit(id, 'Sansa');
+
+  // Verify that the contact now appears in the list
+  await expectContactsToEqual(['Sansa']);
 });
 
 it('should reorder', async () => {
-  const { getAllByLabelText, getByText, getByLabelText } = await populateList({
-    ...definition,
-    forbidOrder: false,
-  });
+  await populateList(orderedDefinition);
 
   // Drag daenerys down by one position
   await makeDnd({
-    getByText,
-    getDragEl: () => getByLabelText(/Drag.*daenerys/i),
+    getByText: screen.getByText,
+    getDragEl: () => screen.getByLabelText(/Drag.*daenerys/i),
     direction: DND_DIRECTION_DOWN,
     positions: 1,
   });
 
-  await expectContactsToEqual(getAllByLabelText, ['Jon', 'Daenerys', 'Tyrion']);
+  await expectContactsToEqual(['Jon', 'Daenerys', 'Tyrion']);
+});
+
+it('should reorder after create when using store', async () => {
+  const { component } = compileAndRender({
+    ...orderedDefinition,
+    store: {
+      // Using a store introduces asynchronous flows
+      component: 'MemoryStore',
+    },
+  });
+
+  await create('Jon');
+
+  await expectContactsToEqual(['Jon']);
+  // const jonId = component.getValue()[0].id;
+
+  await create('Daenerys');
+
+  await expectContactsToEqual(['Jon', 'Daenerys']);
+
+  const daenerysId = component.getValue()[1].id;
+
+  // Drag daenerys up by one position
+  await makeDnd({
+    getByText: screen.getByText,
+    getDragEl: () => screen.getByLabelText(RegExp(`Drag.*${daenerysId}`, 'i')),
+    direction: DND_DIRECTION_UP,
+    positions: 1,
+  });
+
+  await expectContactsToEqual(['Daenerys', 'Jon']);
 });
 
 // TODO: archive

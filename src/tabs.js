@@ -1,50 +1,45 @@
 import React from 'react';
-import attach from './attach';
 import AppBar from '@material-ui/core/AppBar';
 import TabsMui from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Icon from './icon';
+import useComponent from './use-component';
 
-class Tabs extends React.Component {
-  handleChange = (event, value) => {
-    const { component, items } = this.props;
+export default function Tabs(props) {
+  const { component } = props;
+  const { items, value } = useComponent(component, ['items', 'value']);
+
+  function handleChange(event, value) {
     component.set({ value });
 
     const itemName = items[value].name;
     component.emitChange(itemName);
-  };
+  }
 
-  render() {
-    const { items, value } = this.props;
-
-    // FUTURE: option to make this fixed under the main app bar?
-    return (
-      <AppBar
-        position="static"
-        color="default"
-        elevation={1} // tone down the elevation>
+  // FUTURE: option to make this fixed under the main app bar?
+  return (
+    <AppBar
+      position="static"
+      color="default"
+      elevation={1} // tone down the elevation>
+    >
+      <TabsMui
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+        scrollButtons="auto"
+        variant="fullWidth"
       >
-        <TabsMui
-          value={value}
-          onChange={this.handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          scrollButtons="auto"
-          variant="fullWidth"
-        >
-          {items.map((item, index) => (
+        {items &&
+          items.map((item, index) => (
             <Tab
               label={item.label}
               icon={<Icon icon={item.icon} />}
               key={index}
             />
           ))}
-        </TabsMui>
-      </AppBar>
-    );
-  }
+      </TabsMui>
+    </AppBar>
+  );
 }
-
-Tabs = attach(['items', 'value'])(Tabs);
-
-export default Tabs;
