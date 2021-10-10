@@ -1,6 +1,10 @@
 import { fireEvent, waitFor, screen } from '@testing-library/react';
 import { compileAndRender } from '../test-utils';
-import { makeDnd, DND_DIRECTION_DOWN } from 'react-beautiful-dnd-test-utils';
+import {
+  makeDnd,
+  DND_DIRECTION_DOWN,
+  DND_DIRECTION_UP,
+} from 'react-beautiful-dnd-test-utils';
 
 const definition = {
   component: 'CollectionField',
@@ -21,6 +25,11 @@ const definition = {
       ],
     },
   },
+};
+
+const orderedDefinition = {
+  ...definition,
+  forbidOrder: false,
 };
 
 const contacts = [
@@ -56,28 +65,33 @@ it('should list', async () => {
   await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion']);
 });
 
-const shouldCreate = async () => {
-  const renderResult = compileAndRender(definition);
-
+const create = async (firstName) => {
   // Click "New Contact" button
   const newContact = screen.getByRole('button', { name: /New Contact/i });
   fireEvent.click(newContact);
 
   // Fill in First Name
-  const firstName = await screen.findByLabelText(/First Name/);
-  fireEvent.change(firstName, { target: { value: 'Ray' } });
+  const first = await screen.findByLabelText(/First Name/, {
+    // Scope to only input fields as there may be display elements with the same label
+    selector: 'input',
+  });
+  fireEvent.change(first, { target: { value: firstName } });
 
   // Save the form
   const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
+};
+
+const shouldCreate = async () => {
+  await create('Ray');
 
   // Verify that the contact now appears in the list
   await expectContactsToEqual(['Ray']);
-
-  return renderResult;
 };
 
 it('should create', async () => {
+  compileAndRender(definition);
+
   await shouldCreate();
 });
 
@@ -128,7 +142,9 @@ it('should edit', async () => {
 });
 
 it('should create and edit first time', async () => {
-  const { component } = await shouldCreate();
+  const { component } = compileAndRender(definition);
+
+  await shouldCreate();
 
   const id = component.getValue()[0].id;
 
@@ -139,10 +155,7 @@ it('should create and edit first time', async () => {
 });
 
 it('should reorder', async () => {
-  await populateList({
-    ...definition,
-    forbidOrder: false,
-  });
+  await populateList(orderedDefinition);
 
   // Drag daenerys down by one position
   await makeDnd({
@@ -153,6 +166,37 @@ it('should reorder', async () => {
   });
 
   await expectContactsToEqual(['Jon', 'Daenerys', 'Tyrion']);
+});
+
+it('should reorder after create when using store', async () => {
+  const { component } = compileAndRender({
+    ...orderedDefinition,
+    store: {
+      // Using a store introduces asynchronous flows
+      component: 'MemoryStore',
+    },
+  });
+
+  await create('Jon');
+
+  await expectContactsToEqual(['Jon']);
+  // const jonId = component.getValue()[0].id;
+
+  await create('Daenerys');
+
+  await expectContactsToEqual(['Jon', 'Daenerys']);
+
+  const daenerysId = component.getValue()[1].id;
+
+  // Drag daenerys up by one position
+  await makeDnd({
+    getByText: screen.getByText,
+    getDragEl: () => screen.getByLabelText(RegExp(`Drag.*${daenerysId}`, 'i')),
+    direction: DND_DIRECTION_UP,
+    positions: 1,
+  });
+
+  await expectContactsToEqual(['Daenerys', 'Jon']);
 });
 
 // TODO: archive
