@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,22 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Component from './component';
 import useComponent from './use-component';
 import CollectionFieldCore from 'mson/lib/fields/collection-field';
-
-// TODO: move to shared space
-// Credit: https://usehooks.com/usePrevious/
-function usePrevious(value) {
-  // The ref object is a generic container whose current property is mutable ...
-  // ... and can hold any value, similar to an instance property on a class
-  const ref = useRef();
-
-  // Store current value in ref
-  useEffect(() => {
-    ref.current = value;
-  }, [value]); // Only re-run if value changes
-
-  // Return previous value (happens before update in useEffect above)
-  return ref.current;
-}
+import usePrevious from './use-previous';
 
 const { CREATE, UPDATE, DELETE, RESTORE } = CollectionFieldCore.MODES;
 
@@ -42,24 +27,22 @@ function FormDialog(props) {
     forbidDelete,
     mode,
   } = props;
+
   const { err, dirty, value, disableSubmit } = useComponent(component, [
     'err',
     'dirty',
     'value',
     'disableSubmit',
   ]);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const prevMode = usePrevious(mode);
 
-  useEffect(() => {
-    // If the mode or err changes then allow the user to click save
-    setSaveClicked(false);
-  }, [mode, err]);
+  // If the mode or err changes then allow the user to click save
+  useEffect(() => setSaveClicked(false), [mode, err]);
 
-  useEffect(() => {
-    setPreviousMode(prevMode);
-  }, [mode, prevMode]);
+  useEffect(() => setPreviousMode(prevMode), [mode, prevMode]);
 
   function handleClose(withCancelButton) {
     // Prevent the user from losing data when pressing esc or clicking outside dialog
@@ -104,12 +87,8 @@ function FormDialog(props) {
   }
 
   function isOpen() {
-    if (mode === DELETE || mode === RESTORE) {
-      // Don't show the dialog when restoring
-      return false;
-    } else {
-      return !!mode;
-    }
+    // Don't show the dialog when restoring
+    return mode === DELETE || mode === RESTORE ? false : !!mode;
   }
 
   const disableSave =
