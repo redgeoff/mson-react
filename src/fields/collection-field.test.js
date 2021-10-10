@@ -1,6 +1,10 @@
 import { fireEvent, waitFor, screen } from '@testing-library/react';
 import { compileAndRender } from '../test-utils';
-import { makeDnd, DND_DIRECTION_DOWN } from 'react-beautiful-dnd-test-utils';
+import {
+  makeDnd,
+  DND_DIRECTION_DOWN,
+  DND_DIRECTION_UP,
+} from 'react-beautiful-dnd-test-utils';
 
 const definition = {
   component: 'CollectionField',
@@ -21,6 +25,11 @@ const definition = {
       ],
     },
   },
+};
+
+const orderedDefinition = {
+  ...definition,
+  forbidOrder: false,
 };
 
 const contacts = [
@@ -62,7 +71,10 @@ const create = async (firstName) => {
   fireEvent.click(newContact);
 
   // Fill in First Name
-  const first = await screen.findByLabelText(/First Name/);
+  const first = await screen.findByLabelText(/First Name/, {
+    // Scope to only input fields as there may be display elements with the same label
+    selector: 'input',
+  });
   fireEvent.change(first, { target: { value: firstName } });
 
   // Save the form
@@ -143,10 +155,7 @@ it('should create and edit first time', async () => {
 });
 
 it('should reorder', async () => {
-  await populateList({
-    ...definition,
-    forbidOrder: false,
-  });
+  await populateList(orderedDefinition);
 
   // Drag daenerys down by one position
   await makeDnd({
@@ -157,6 +166,31 @@ it('should reorder', async () => {
   });
 
   await expectContactsToEqual(['Jon', 'Daenerys', 'Tyrion']);
+});
+
+it('should reorder after create', async () => {
+  const { component } = compileAndRender(orderedDefinition);
+
+  await create('Jon');
+  // const jonId = component.getValue()[0].id;
+
+  await expectContactsToEqual(['Jon']);
+
+  await create('Daenerys');
+
+  await expectContactsToEqual(['Jon', 'Daenerys']);
+
+  const daenerysId = component.getValue()[1].id;
+
+  // Drag daenerys up by one position
+  await makeDnd({
+    getByText: screen.getByText,
+    getDragEl: () => screen.getByLabelText(RegExp(`Drag.*${daenerysId}`, 'i')),
+    direction: DND_DIRECTION_UP,
+    positions: 1,
+  });
+
+  await expectContactsToEqual(['Daenerys', 'Jon']);
 });
 
 // TODO: archive
