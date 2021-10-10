@@ -55,6 +55,7 @@ function Buttons(props) {
     onDelete,
     value,
     previousMode,
+    mode,
   } = props;
 
   let buttons = null;
@@ -191,6 +192,7 @@ function FormDialog(props) {
           onDelete={handleDelete}
           value={value}
           previousMode={previousMode}
+          mode={mode}
         />
       </form>
     </Dialog>
