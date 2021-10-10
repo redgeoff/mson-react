@@ -12,6 +12,18 @@ import usePrevious from './use-previous';
 
 const { CREATE, UPDATE, DELETE, RESTORE } = CollectionFieldCore.MODES;
 
+function EditButtons(props) {
+  const { disableSave, onCancel } = props;
+
+  // We use type=submit so that the form is submitted when the user presses enter
+  return (
+    <div>
+      <Button type="submit" label="Save" icon="Save" disabled={disableSave} />
+      <Button label="Cancel" icon="Cancel" onClick={onCancel} />
+    </div>
+  );
+}
+
 function FormDialog(props) {
   const [saveClicked, setSaveClicked] = useState(false);
   const [previousMode, setPreviousMode] = useState(false);
@@ -106,15 +118,10 @@ function FormDialog(props) {
     (mode === null && (previousMode === UPDATE || previousMode === CREATE))
   ) {
     buttons = (
-      <div>
-        {/* We use type=submit so that the form is submitted when the user presses enter */}
-        <Button type="submit" label="Save" icon="Save" disabled={disableSave} />
-        <Button
-          label="Cancel"
-          icon="Cancel"
-          onClick={() => handleClose(true)}
-        />
-      </div>
+      <EditButtons
+        disableSave={disableSave}
+        onCancel={() => handleClose(true)}
+      />
     );
   } else if (!forbidUpdate || !forbidDelete) {
     buttons = (
