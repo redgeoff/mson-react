@@ -24,6 +24,27 @@ function EditButtons(props) {
   );
 }
 
+function ViewButtons(props) {
+  const { forbidUpdate, forbidDelete, onEdit, onDelete, onClose, value } =
+    props;
+
+  return (
+    <div>
+      {forbidUpdate ? '' : <Button label="Edit" icon="Edit" onClick={onEdit} />}
+      {forbidDelete ? (
+        ''
+      ) : (
+        <Button
+          label={value && value.archivedAt ? 'Restore' : 'Delete'}
+          icon={value && value.archivedAt ? 'Restore' : 'Delete'}
+          onClick={onDelete}
+        />
+      )}
+      <Button label="Close" icon="Cancel" onClick={onClose} />
+    </div>
+  );
+}
+
 function FormDialog(props) {
   const [saveClicked, setSaveClicked] = useState(false);
   const [previousMode, setPreviousMode] = useState(false);
@@ -125,23 +146,14 @@ function FormDialog(props) {
     );
   } else if (!forbidUpdate || !forbidDelete) {
     buttons = (
-      <div>
-        {forbidUpdate ? (
-          ''
-        ) : (
-          <Button label="Edit" icon="Edit" onClick={handleEdit} />
-        )}
-        {forbidDelete ? (
-          ''
-        ) : (
-          <Button
-            label={value && value.archivedAt ? 'Restore' : 'Delete'}
-            icon={value && value.archivedAt ? 'Restore' : 'Delete'}
-            onClick={handleDelete}
-          />
-        )}
-        <Button label="Close" icon="Cancel" onClick={() => handleClose(true)} />
-      </div>
+      <ViewButtons
+        forbidUpdate={forbidUpdate}
+        forbidDelete={forbidDelete}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onClose={() => handleClose(true)}
+        value={value}
+      />
     );
   }
 
