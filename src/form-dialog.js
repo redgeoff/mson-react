@@ -25,7 +25,7 @@ function EditButtons(props) {
 }
 
 function ViewButtons(props) {
-  const { forbidUpdate, forbidDelete, onEdit, onDelete, onClose, value } =
+  const { forbidUpdate, forbidDelete, onEdit, onDelete, onCancel, value } =
     props;
 
   return (
@@ -40,14 +40,53 @@ function ViewButtons(props) {
           onClick={onDelete}
         />
       )}
-      <Button label="Close" icon="Cancel" onClick={onClose} />
+      <Button label="Close" icon="Cancel" onClick={onCancel} />
     </div>
   );
+}
+
+function Buttons(props) {
+  const {
+    disableSave,
+    onCancel,
+    forbidUpdate,
+    forbidDelete,
+    onEdit,
+    onDelete,
+    value,
+    previousMode,
+  } = props;
+
+  let buttons = null;
+
+  // Note: we analyze the previousMode so that the user isn't flashed with new buttons immediately
+  // after they click save or close the dialog
+  if (
+    mode === UPDATE ||
+    mode === CREATE ||
+    (mode === null && (previousMode === UPDATE || previousMode === CREATE))
+  ) {
+    buttons = <EditButtons disableSave={disableSave} onCancel={onCancel} />;
+  } else if (!forbidUpdate || !forbidDelete) {
+    buttons = (
+      <ViewButtons
+        forbidUpdate={forbidUpdate}
+        forbidDelete={forbidDelete}
+        onEdit={onEdit}
+        onDelete={onDelete}
+        onCancel={onCancel}
+        value={value}
+      />
+    );
+  }
+
+  return buttons && <DialogActions>{buttons}</DialogActions>;
 }
 
 function FormDialog(props) {
   const [saveClicked, setSaveClicked] = useState(false);
   const [previousMode, setPreviousMode] = useState(false);
+
   const {
     onClose,
     onCancel,
@@ -129,34 +168,6 @@ function FormDialog(props) {
 
   const open = isOpen();
 
-  let buttons = null;
-
-  // Note: we analyze the previousMode so that the user isn't flashed with new buttons immediately
-  // after they click save or close the dialog
-  if (
-    mode === UPDATE ||
-    mode === CREATE ||
-    (mode === null && (previousMode === UPDATE || previousMode === CREATE))
-  ) {
-    buttons = (
-      <EditButtons
-        disableSave={disableSave}
-        onCancel={() => handleClose(true)}
-      />
-    );
-  } else if (!forbidUpdate || !forbidDelete) {
-    buttons = (
-      <ViewButtons
-        forbidUpdate={forbidUpdate}
-        forbidDelete={forbidDelete}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-        onClose={() => handleClose(true)}
-        value={value}
-      />
-    );
-  }
-
   return (
     <Dialog
       // fullScreen will be true on a small screen
@@ -170,7 +181,17 @@ function FormDialog(props) {
         <DialogContent>
           <Component component={component} formTag={false} mode={mode} />
         </DialogContent>
-        {buttons ? <DialogActions>{buttons}</DialogActions> : ''}
+
+        <Buttons
+          disableSave={disableSave}
+          onCancel={() => handleClose(true)}
+          forbidUpdate={forbidUpdate}
+          forbidDelete={forbidDelete}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+          value={value}
+          previousMode={previousMode}
+        />
       </form>
     </Dialog>
   );
