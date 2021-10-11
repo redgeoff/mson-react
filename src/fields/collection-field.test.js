@@ -65,7 +65,7 @@ it('should list', async () => {
   await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion']);
 });
 
-const create = async (firstName) => {
+const create = async (firstName, contacts) => {
   // Click "New Contact" button
   const newContact = screen.getByRole('button', { name: /New Contact/i });
   fireEvent.click(newContact);
@@ -80,19 +80,15 @@ const create = async (firstName) => {
   // Save the form
   const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
-};
 
-const shouldCreate = async () => {
-  await create('Ray');
-
-  // Verify that the contact now appears in the list
-  await expectContactsToEqual(['Ray']);
+  // Wait for the save to have been completed and check the list
+  await expectContactsToEqual(contacts);
 };
 
 it('should create', async () => {
   compileAndRender(definition);
 
-  await shouldCreate();
+  await create('Ray', ['Ray']);
 });
 
 const populateList = async (def) => {
@@ -116,7 +112,7 @@ it('should view', async () => {
   await expectContactsToEqual(['Daenerys', 'Jon', 'Tyrion', 'Daenerys']);
 });
 
-const edit = async (id, firstName) => {
+const edit = async (id, firstName, contacts) => {
   // Edit item
   const edit = screen.getByRole('button', { name: RegExp(`Edit.*${id}`, 'i') });
   fireEvent.click(edit);
@@ -130,28 +126,25 @@ const edit = async (id, firstName) => {
   // Save the form
   const save = screen.getByRole('button', { name: /Save/i });
   fireEvent.click(save);
+
+  // Wait for the save to have been completed and check the list
+  await expectContactsToEqual(contacts);
 };
 
 it('should edit', async () => {
   await populateList();
 
-  await edit('daenerys', 'Sansa');
-
-  // Verify that the contact now appears in the list
-  await expectContactsToEqual(['Sansa', 'Jon', 'Tyrion']);
+  await edit('daenerys', 'Sansa', ['Sansa', 'Jon', 'Tyrion']);
 });
 
 it('should create and edit first time', async () => {
   const { component } = compileAndRender(definition);
 
-  await shouldCreate();
+  await create('Ray', ['Ray']);
 
   const id = component.getValue()[0].id;
 
-  await edit(id, 'Sansa');
-
-  // Verify that the contact now appears in the list
-  await expectContactsToEqual(['Sansa']);
+  await edit(id, 'Sansa', ['Sansa']);
 });
 
 it('should reorder', async () => {
@@ -177,14 +170,10 @@ it('should reorder after create when using store', async () => {
     },
   });
 
-  await create('Jon');
-
-  await expectContactsToEqual(['Jon']);
+  await create('Jon', ['Jon']);
   // const jonId = component.getValue()[0].id;
 
-  await create('Daenerys');
-
-  await expectContactsToEqual(['Jon', 'Daenerys']);
+  await create('Daenerys', ['Jon', 'Daenerys']);
 
   const daenerysId = component.getValue()[1].id;
 
