@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 mainMaxBytes=410000
-chunkMaxBytes=1360000
+chunkMaxBytes=1390000
 
 if [ $(wc -c < build/static/js/main.*.js) -gt ${mainMaxBytes} ]; then
   echo 'Error: main bundle too large!'
