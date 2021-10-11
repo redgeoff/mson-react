@@ -35,7 +35,7 @@
     "@babel/preset-react": "^7.12.10",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^12.1.2",
-    "babel-loader": "8.2.2",
+    "babel-loader": "8.1.0",
     "commitizen": "^4.2.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
