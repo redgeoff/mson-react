@@ -45,7 +45,7 @@
     "gh-pages": "^3.1.0",
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "lint-staged": "^11.2.3",
-    "prettier": "^2.2.1",
+    "prettier": "^2.4.1",
     "prop-types": "^15.6.2",
     "react": "^17.0.1",
     "react-beautiful-dnd-test-utils": "^3.2.1",
