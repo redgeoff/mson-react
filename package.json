@@ -53,7 +53,6 @@
     "react-scripts": "^4.0.1",
     "semantic-release": "^17.3.0",
     "style-loader": "^2.0.0",
-    "wait-on": "^5.2.0",
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.2.0"
   },
