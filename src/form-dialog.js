@@ -30,10 +30,10 @@ function ViewButtons(props) {
 
   return (
     <div>
-      {forbidUpdate ? '' : <Button label="Edit" icon="Edit" onClick={onEdit} />}
-      {forbidDelete ? (
-        ''
-      ) : (
+      {forbidUpdate ? null : (
+        <Button label="Edit" icon="Edit" onClick={onEdit} />
+      )}
+      {forbidDelete ? null : (
         <Button
           label={value && value.archivedAt ? 'Restore' : 'Delete'}
           icon={value && value.archivedAt ? 'Restore' : 'Delete'}
