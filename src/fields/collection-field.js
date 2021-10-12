@@ -1,13 +1,13 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import FormCard from '../form-card';
 import FormDialog from '../form-dialog';
 import attach from '../attach';
 import Button from '../button';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import ConfirmationDialog from '../confirmation-dialog';
 import access from 'mson/lib/access';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 import './collection-field.css';
 import SelectOrder from './select-order';
 import ButtonField from 'mson/lib/fields/button-field';
@@ -20,7 +20,7 @@ const getItemStyle = (isDragging, draggableStyle, theme) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
   padding: theme.spacing(0.125),
-  margin: `0 0 ${theme.spacing(0.125)}px 0`,
+  margin: `0 0 ${theme.spacing(0.125)} 0`,
 
   // change background colour if dragging
   background: isDragging ? theme.palette.secondary[400] : undefined,

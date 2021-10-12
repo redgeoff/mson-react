@@ -1,25 +1,31 @@
 import React from 'react';
 import AppUI from './app';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { createTheme } from '@material-ui/core/styles';
-import blueGrey from '@material-ui/core/colors/blueGrey';
-import lightBlue from '@material-ui/core/colors/lightBlue';
+import CssBaseline from '@mui/material/CssBaseline';
+import {
+  ThemeProvider as MuiThemeProvider,
+  StyledEngineProvider,
+  adaptV4Theme,
+} from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { BrowserRouter, Prompt } from 'react-router-dom';
 import globals from 'mson/lib/globals';
 import attach from './attach';
 
-const theme = createTheme({
-  palette: {
-    primary: blueGrey,
-    // primary: blue,
-    // type: 'dark',
-    // secondary: cyan
-    secondary: lightBlue,
-  },
+import { blueGrey, lightBlue } from '@mui/material/colors';
 
-  // shadows: ['none']
-});
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: blueGrey,
+      // primary: blue,
+      // type: 'dark',
+      // secondary: cyan
+      secondary: lightBlue,
+    },
+
+    // shadows: ['none']
+  })
+);
 
 // Note: BrowserRouter needs to be outside of App so that we can use withRouter
 class AppContainer extends React.Component {
@@ -30,22 +36,24 @@ class AppContainer extends React.Component {
   render() {
     const { component, basename } = this.props;
     return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter
-          getUserConfirmation={this.onNavigate}
-          basename={basename}
-        >
-          {/* Wrapping div required by BrowserRouter */}
-          <div>
-            <AppUI component={component} />
+      <StyledEngineProvider injectFirst>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <BrowserRouter
+            getUserConfirmation={this.onNavigate}
+            basename={basename}
+          >
+            {/* Wrapping div required by BrowserRouter */}
+            <div>
+              <AppUI component={component} />
 
-            {/* A Prompt is needed to capture back/forward button events with ReactRouter. message
-            is required, but the value is arbitrary */}
-            <Prompt message="foo" />
-          </div>
-        </BrowserRouter>
-      </MuiThemeProvider>
+              {/* A Prompt is needed to capture back/forward button events with ReactRouter. message
+              is required, but the value is arbitrary */}
+              <Prompt message="foo" />
+            </div>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </StyledEngineProvider>
     );
   }
 }

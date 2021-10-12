@@ -1,6 +1,6 @@
 import React from 'react';
 import attach from '../../attach';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 import UIComponent from 'mson/lib/ui-component';
 import Form from 'mson/lib/form';

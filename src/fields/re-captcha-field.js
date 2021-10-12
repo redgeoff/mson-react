@@ -1,7 +1,7 @@
 import React from 'react';
 import attach from '../attach';
 import ReCAPTCHA from 'react-google-recaptcha';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 import globals from 'mson/lib/globals';
 
 const styles = (theme) => ({
@@ -16,13 +16,8 @@ class ReCAPTCHAField extends React.PureComponent {
   };
 
   render() {
-    const {
-      disabled,
-      editable,
-      accessEditable,
-      classes,
-      useDisplayValue,
-    } = this.props;
+    const { disabled, editable, accessEditable, classes, useDisplayValue } =
+      this.props;
 
     const isEditable = accessEditable !== false && editable && !disabled;
 

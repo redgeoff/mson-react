@@ -3,7 +3,7 @@ import CommonField from './common-field';
 import Component from '../component';
 import attach from '../attach';
 import FlexBreak from '../flex-break';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = (theme) => ({
   root: {

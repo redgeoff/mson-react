@@ -1,8 +1,8 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import Icon from './icon';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
 export default class UserDropDown extends React.PureComponent {
   state = {
@@ -33,6 +33,7 @@ export default class UserDropDown extends React.PureComponent {
           aria-haspopup="true"
           onClick={this.handleMenu}
           color="inherit"
+          size="large"
         >
           <Icon icon="AccountCircle" />
         </IconButton>

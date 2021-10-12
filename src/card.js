@@ -1,9 +1,9 @@
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import withStyles from '@mui/styles/withStyles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import Component from './component';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 const styles = (theme) => ({
   paper: {
@@ -23,7 +23,7 @@ class Card extends React.PureComponent {
     const title = component.get('title');
 
     return (
-      <Grid container spacing={0} justify="center">
+      <Grid container spacing={0} justifyContent="center">
         <Grid item xs={12} sm={9} md={6} lg={6}>
           <Paper className={classes.paper}>
             <Grid container wrap="nowrap">

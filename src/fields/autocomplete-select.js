@@ -1,14 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
+import { emphasize } from '@mui/material/styles';
+import withStyles from '@mui/styles/withStyles';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import MenuItem from '@mui/material/MenuItem';
 import Icon from '../icon';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = (theme) => ({
   input: {
@@ -27,18 +27,18 @@ const styles = (theme) => ({
     marginTop: theme.spacing(2) + 5,
   },
   chip: {
-    margin: `${theme.spacing(1)}px ${theme.spacing(0.25)}px`,
+    margin: `${theme.spacing(1)} ${theme.spacing(0.25)}`,
   },
   chipFocused: {
     backgroundColor: emphasize(
-      theme.palette.type === 'light'
+      theme.palette.mode === 'light'
         ? theme.palette.grey[300]
         : theme.palette.grey[700],
       0.08
     ),
   },
   noOptionsMessage: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+    padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
   },
   singleValue: {
     fontSize: theme.typography.subtitle1.fontSize,

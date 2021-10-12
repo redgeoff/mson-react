@@ -1,6 +1,6 @@
 import React from 'react';
 import attach from '../../attach';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import compile from 'mson/lib/compiler/compile';
 
 let ReactCustomComponentAttach = (props) => {

@@ -3,12 +3,12 @@
 //     hides title and allows for search string to be entered.
 
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import AppBar from '@material-ui/core/AppBar';
-import Tooltip from '@material-ui/core/Tooltip';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import withStyles from '@mui/styles/withStyles';
+import AppBar from '@mui/material/AppBar';
+import Tooltip from '@mui/material/Tooltip';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import Icon from './icon';
 import Menu from './menu';
 import SearchBar from './search-bar';
@@ -17,18 +17,21 @@ import Component from './component';
 import ComponentMSON from 'mson/lib/component';
 // import compiler from 'mson/lib/compiler';
 import { withRouter } from 'react-router';
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import attach from './attach';
 import globals from 'mson/lib/globals';
 import Snackbar from './snackbar';
 import ConfirmationDialog from './confirmation-dialog';
-import MUISwitch from '@material-ui/core/Switch';
+import MUISwitch from '@mui/material/Switch';
 // import UserMenu from './user-menu';
 import Action from 'mson/lib/actions/action';
 import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
+
+// FIXME checkout https://mui.com/components/use-media-query/#migrating-from-withwidth
+const withWidth = () => (WrappedComponent) => (props) =>
+  <WrappedComponent {...props} width="xs" />;
 
 const drawerWidth = 240;
 
@@ -458,6 +461,7 @@ class App extends React.PureComponent {
         aria-label="open drawer"
         onClick={this.handleDrawerToggle}
         className={responsive ? classes.navIconHide : ''}
+        size="large"
       >
         <Icon icon="Menu" />
       </IconButton>
@@ -490,6 +494,7 @@ class App extends React.PureComponent {
               color="inherit"
               aria-label="close search"
               onClick={this.toggleShowSearch}
+              size="large"
             >
               <Icon icon="ArrowBack" />
             </IconButton>
@@ -507,6 +512,7 @@ class App extends React.PureComponent {
               aria-label="toggle search"
               onClick={this.toggleShowSearch}
               className={classes.alignRight}
+              size="large"
             >
               <Icon icon="Search" />
             </IconButton>

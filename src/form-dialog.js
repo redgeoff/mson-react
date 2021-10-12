@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Button from './button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import DialogContent from '@mui/material/DialogContent';
 import Component from './component';
 import useComponent from './use-component';
 import CollectionFieldCore from 'mson/lib/fields/collection-field';
@@ -109,7 +109,7 @@ function FormDialog(props) {
   ]);
 
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const prevMode = usePrevious(mode);
 
   // If the mode or err changes then allow the user to click save

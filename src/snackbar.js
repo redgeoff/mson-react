@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-// import Button from '@material-ui/core/Button';
-import SnackbarMUI from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
+import withStyles from '@mui/styles/withStyles';
+// import Button from '@mui/material/Button';
+import SnackbarMUI from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
 import Icon from './icon';
 
 const styles = (theme) => ({
@@ -48,6 +48,7 @@ class Snackbar extends React.PureComponent {
             color="inherit"
             className={classes.close}
             onClick={this.handleClose}
+            size="large"
           >
             <Icon icon="Close" />
           </IconButton>,

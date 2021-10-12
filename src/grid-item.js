@@ -1,6 +1,6 @@
 import React from 'react';
 import attach from './attach';
-import GridMui from '@material-ui/core/Grid';
+import GridMui from '@mui/material/Grid';
 import Component from './component';
 
 class GridItem extends React.PureComponent {

@@ -1,6 +1,6 @@
 import React from 'react';
 import useComponent from '../../use-component';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import compile from 'mson/lib/compiler/compile';
 
 const CustomComponent = compile({

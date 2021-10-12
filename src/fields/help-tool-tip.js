@@ -1,8 +1,8 @@
 // TODO: make full width of field include right margin if there is help?
 
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import Icon from '../icon';
 
 export default class HelpToolTip extends React.PureComponent {
@@ -14,7 +14,7 @@ export default class HelpToolTip extends React.PureComponent {
     // click the button to view the tooltip.
     return (
       <Tooltip disableTouchListener title={help}>
-        <IconButton aria-label="Help">
+        <IconButton aria-label="Help" size="large">
           <Icon icon="HelpOutline" />
         </IconButton>
       </Tooltip>

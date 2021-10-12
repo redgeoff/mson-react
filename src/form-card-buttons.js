@@ -1,6 +1,6 @@
 import React from 'react';
 import IconButton from './icon-button';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 
 // FUTURE: support for hamburger menus
 export default class FormCardButtons extends React.PureComponent {
@@ -24,6 +24,7 @@ export default class FormCardButtons extends React.PureComponent {
           icon="Edit"
           tooltip="Edit"
           aria-label={`Edit ${id}`}
+          size="large"
         />
       );
     }
@@ -37,6 +38,7 @@ export default class FormCardButtons extends React.PureComponent {
           icon={title}
           tooltip={title}
           aria-label={`Delete ${id}`}
+          size="large"
         />
       );
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import attach from '../attach';
 import Component from '../component';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = (theme) => ({
   root: {

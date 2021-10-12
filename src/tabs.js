@@ -1,7 +1,7 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import TabsMui from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import AppBar from '@mui/material/AppBar';
+import TabsMui from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Icon from './icon';
 import useComponent from './use-component';
 
