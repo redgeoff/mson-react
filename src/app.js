@@ -426,25 +426,6 @@ class App extends React.PureComponent {
     return archivedToggle;
   }
 
-  searchBox(fullWidth) {
-    const { classes } = this.props;
-    const { searchStringInput, showSearch } = this.state;
-
-    let searchBox = null;
-    if (showSearch) {
-      searchBox = (
-        <SearchBar
-          fullWidth={fullWidth}
-          className={classes.alignRight}
-          searchString={searchStringInput}
-          onChange={this.handleSearchStringInputChange}
-          onSearch={this.handleSearch}
-        />
-      );
-    }
-    return searchBox;
-  }
-
   toggleShowSearch = () => {
     this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
   };
@@ -475,12 +456,28 @@ class App extends React.PureComponent {
 
   appBar() {
     const { classes, width } = this.props;
-    const { showSearchOnMobile } = this.state;
+    const { showSearchOnMobile, searchStringInput, showSearch } = this.state;
 
     const onMobile = isWidthDown('sm', width);
     const responsive = this.isResponsive();
 
     let bar = null;
+
+    const searchBox = (fullWidth) => {
+      let searchBox = null;
+      if (showSearch) {
+        searchBox = (
+          <SearchBar
+            fullWidth={fullWidth}
+            className={classes.alignRight}
+            searchString={searchStringInput}
+            onChange={this.handleSearchStringInputChange}
+            onSearch={this.handleSearch}
+          />
+        );
+      }
+      return searchBox;
+    };
 
     if (onMobile) {
       if (showSearchOnMobile) {
@@ -493,7 +490,7 @@ class App extends React.PureComponent {
             >
               <Icon icon="ArrowBack" />
             </IconButton>
-            {this.searchBox(true)}
+            {searchBox(true)}
           </React.Fragment>
         );
       } else {
@@ -519,7 +516,7 @@ class App extends React.PureComponent {
           {this.menuButton()}
           {this.title()}
           {this.archivedToggle()}
-          {this.searchBox()}
+          {searchBox()}
         </React.Fragment>
       );
     }
