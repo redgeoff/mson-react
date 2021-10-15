@@ -43,7 +43,7 @@ const ResponsiveIconButton = styled(IconButton)(({ theme }) => ({
 function MenuButton(props) {
   const { responsive, onClick } = props;
 
-  // TODO: use the following instead after migrate to MUI 5:
+  // TODO: instead, use the following after migrate to MUI 5:
   //   `<IconButton sx={responsive ? { display: { md: 'none' } } : null} />`
   const IButton = responsive ? ResponsiveIconButton : IconButton;
 
@@ -51,6 +51,15 @@ function MenuButton(props) {
     <IButton color="inherit" aria-label="open drawer" onClick={onClick}>
       <Icon icon="Menu" />
     </IButton>
+  );
+}
+
+function Title(props) {
+  const { title } = props;
+  return (
+    <Typography variant="h6" color="inherit" noWrap>
+      {title ? title : ''}
+    </Typography>
   );
 }
 
@@ -466,21 +475,15 @@ class App extends React.PureComponent {
     );
   }
 
-  title() {
-    const { menuItem } = this.state;
-    return (
-      <Typography variant="h6" color="inherit" noWrap>
-        {menuItem ? menuItem.label : ''}
-      </Typography>
-    );
-  }
-
   appBar() {
     const { classes, width } = this.props;
-    const { showSearchOnMobile, searchStringInput, showSearch } = this.state;
+    const { showSearchOnMobile, searchStringInput, showSearch, menuItem } =
+      this.state;
 
     const onMobile = isWidthDown('sm', width);
     const responsive = this.isResponsive();
+
+    const title = menuItem?.label;
 
     let bar = null;
 
@@ -521,7 +524,7 @@ class App extends React.PureComponent {
               responsive={responsive}
               onClick={this.handleDrawerToggle}
             />
-            {this.title()}
+            <Title title={title} />
             {this.archivedToggle()}
             <IconButton
               color="inherit"
@@ -541,7 +544,7 @@ class App extends React.PureComponent {
             responsive={responsive}
             onClick={this.handleDrawerToggle}
           />
-          {this.title()}
+          <Title title={title} />
           {this.archivedToggle()}
           {searchBox()}
         </React.Fragment>
