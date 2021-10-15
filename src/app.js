@@ -30,6 +30,32 @@ import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
 
+// ------ BEGIN: MOVE TO SEPARATE FILE??
+
+import { styled } from '@material-ui/core/styles';
+
+const ResponsiveIconButton = styled(IconButton)(({ theme }) => ({
+  [theme.breakpoints.up('md')]: {
+    display: 'none',
+  },
+}));
+
+function MenuButton(props) {
+  const { responsive, onClick } = props;
+
+  // TODO: use the following instead after migrate to MUI 5:
+  //   `<IconButton sx={responsive ? { display: { md: 'none' } } : null} />`
+  const IButton = responsive ? ResponsiveIconButton : IconButton;
+
+  return (
+    <IButton color="inherit" aria-label="open drawer" onClick={onClick}>
+      <Icon icon="Menu" />
+    </IButton>
+  );
+}
+
+// ------ END: MOVE TO SEPARATE FILE??
+
 const drawerWidth = 240;
 
 const styles = (theme) => ({
@@ -53,11 +79,6 @@ const styles = (theme) => ({
   appBarResponsive: {
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
-    },
-  },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
     },
   },
   content: {
@@ -496,7 +517,10 @@ class App extends React.PureComponent {
       } else {
         bar = (
           <React.Fragment>
-            {this.menuButton()}
+            <MenuButton
+              responsive={responsive}
+              onClick={this.handleDrawerToggle}
+            />
             {this.title()}
             {this.archivedToggle()}
             <IconButton
@@ -513,7 +537,10 @@ class App extends React.PureComponent {
     } else {
       bar = (
         <React.Fragment>
-          {this.menuButton()}
+          <MenuButton
+            responsive={responsive}
+            onClick={this.handleDrawerToggle}
+          />
           {this.title()}
           {this.archivedToggle()}
           {searchBox()}
