@@ -63,6 +63,22 @@ function Title(props) {
   );
 }
 
+function ArchivedToggle(props) {
+  const { showArchived, showArchivedToggle, onChange } = props;
+
+  // A component must not switch from controlled to uncontrolled so we need to avoid setting
+  // checked=undefined
+  const showArchivedChecked = showArchived ? true : false;
+
+  return (
+    showArchivedToggle && (
+      <Tooltip title={showArchived ? 'Show Active' : 'Show Deleted'}>
+        <MUISwitch onChange={onChange} checked={showArchivedChecked} />
+      </Tooltip>
+    )
+  );
+}
+
 // ------ END: MOVE TO SEPARATE FILE??
 
 const drawerWidth = 240;
@@ -434,36 +450,20 @@ class App extends React.PureComponent {
     );
   };
 
-  archivedToggle() {
-    const { showArchived, showArchivedToggle } = this.state;
-
-    // A component must not switch from controlled to uncontrolled so we need to avoid setting
-    // checked=undefined
-    const showArchivedChecked = showArchived ? true : false;
-
-    let archivedToggle = null;
-    if (showArchivedToggle) {
-      archivedToggle = (
-        <Tooltip title={showArchived ? 'Show Active' : 'Show Deleted'}>
-          <MUISwitch
-            onChange={this.handleArchivedChange}
-            checked={showArchivedChecked}
-          />
-        </Tooltip>
-      );
-    }
-
-    return archivedToggle;
-  }
-
   toggleShowSearch = () => {
     this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
   };
 
   appBar() {
     const { classes, width } = this.props;
-    const { showSearchOnMobile, searchStringInput, showSearch, menuItem } =
-      this.state;
+    const {
+      showSearchOnMobile,
+      searchStringInput,
+      showSearch,
+      menuItem,
+      showArchived,
+      showArchivedToggle,
+    } = this.state;
 
     const onMobile = isWidthDown('sm', width);
     const responsive = this.isResponsive();
@@ -488,6 +488,7 @@ class App extends React.PureComponent {
       return searchBox;
     };
 
+    // TODO: remove duplicate code below and generalize "bar"
     if (onMobile) {
       if (showSearchOnMobile) {
         bar = (
@@ -510,7 +511,11 @@ class App extends React.PureComponent {
               onClick={this.handleDrawerToggle}
             />
             <Title title={title} />
-            {this.archivedToggle()}
+            <ArchivedToggle
+              showArchived={showArchived}
+              showArchivedToggle={showArchivedToggle}
+              onChange={this.handleArchivedChange}
+            />
             <IconButton
               color="inherit"
               aria-label="toggle search"
@@ -530,7 +535,11 @@ class App extends React.PureComponent {
             onClick={this.handleDrawerToggle}
           />
           <Title title={title} />
-          {this.archivedToggle()}
+          <ArchivedToggle
+            showArchived={showArchived}
+            showArchivedToggle={showArchivedToggle}
+            onChange={this.handleArchivedChange}
+          />
           {searchBox()}
         </React.Fragment>
       );
