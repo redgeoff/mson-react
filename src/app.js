@@ -101,9 +101,11 @@ function MenuTitleArchived(props) {
   );
 }
 
-const StyledSearchBar = styled(SearchBar)({
+const alignRight = {
   marginLeft: 'auto', // right align
-});
+};
+
+const StyledSearchBar = styled(SearchBar)(alignRight);
 
 function SearchBox(props) {
   const { fullWidth, showSearch, searchString, onChange, onSearch } = props;
@@ -117,6 +119,89 @@ function SearchBox(props) {
       />
     )
   );
+}
+
+const StyledIconButton = styled(IconButton)(alignRight);
+
+function Toolbar(props) {
+  const {
+    onMobile,
+    showSearchOnMobile,
+    onToggleShowSearch,
+    showSearch,
+    searchString,
+    onSearchChange,
+    onSearch,
+    onMenuClick,
+    responsive,
+    title,
+    showArchived,
+    showArchivedToggle,
+    onArchivedToggleChange,
+  } = props;
+
+  if (onMobile) {
+    if (showSearchOnMobile) {
+      return (
+        <Fragment>
+          <IconButton
+            color="inherit"
+            aria-label="close search"
+            onClick={onToggleShowSearch}
+          >
+            <Icon icon="ArrowBack" />
+          </IconButton>
+          <SearchBox
+            fullWidth={true}
+            showSearch={showSearch}
+            searchString={searchString}
+            onChange={onSearchChange}
+            onSearch={onSearch}
+          />
+        </Fragment>
+      );
+    } else {
+      return (
+        <Fragment>
+          <MenuTitleArchived
+            responsive={responsive}
+            onMenuClick={onMenuClick}
+            title={title}
+            showArchived={showArchived}
+            showArchivedToggle={showArchivedToggle}
+            onArchivedToggleChange={onArchivedToggleChange}
+          />
+          <StyledIconButton
+            color="inherit"
+            aria-label="toggle search"
+            onClick={onToggleShowSearch}
+          >
+            <Icon icon="Search" />
+          </StyledIconButton>
+        </Fragment>
+      );
+    }
+  } else {
+    return (
+      <Fragment>
+        <MenuTitleArchived
+          responsive={responsive}
+          onMenuClick={onMenuClick}
+          title={title}
+          showArchived={showArchived}
+          showArchivedToggle={showArchivedToggle}
+          onArchivedToggleChange={onArchivedToggleChange}
+        />
+        <SearchBox
+          fullWidth={false}
+          showSearch={showSearch}
+          searchString={searchString}
+          onChange={onSearchChange}
+          onSearch={onSearch}
+        />
+      </Fragment>
+    );
+  }
 }
 
 // ------ END: MOVE TO SEPARATE FILE??
@@ -167,9 +252,6 @@ const styles = (theme) => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: drawerWidth,
     },
-  },
-  alignRight: {
-    marginLeft: 'auto', // right align
   },
 });
 
@@ -510,72 +592,6 @@ class App extends React.PureComponent {
 
     const title = menuItem?.label;
 
-    let bar = null;
-
-    if (onMobile) {
-      if (showSearchOnMobile) {
-        bar = (
-          <Fragment>
-            <IconButton
-              color="inherit"
-              aria-label="close search"
-              onClick={this.toggleShowSearch}
-            >
-              <Icon icon="ArrowBack" />
-            </IconButton>
-            <SearchBox
-              fullWidth={true}
-              showSearch={showSearch}
-              searchString={searchStringInput}
-              onChange={this.handleSearchStringInputChange}
-              onSearch={this.handleSearch}
-            />
-          </Fragment>
-        );
-      } else {
-        bar = (
-          <Fragment>
-            <MenuTitleArchived
-              responsive={responsive}
-              onMenuClick={this.handleDrawerToggle}
-              title={title}
-              showArchived={showArchived}
-              showArchivedToggle={showArchivedToggle}
-              onArchivedToggleChange={this.handleArchivedChange}
-            />
-            <IconButton
-              color="inherit"
-              aria-label="toggle search"
-              onClick={this.toggleShowSearch}
-              className={classes.alignRight}
-            >
-              <Icon icon="Search" />
-            </IconButton>
-          </Fragment>
-        );
-      }
-    } else {
-      bar = (
-        <Fragment>
-          <MenuTitleArchived
-            responsive={responsive}
-            onMenuClick={this.handleDrawerToggle}
-            title={title}
-            showArchived={showArchived}
-            showArchivedToggle={showArchivedToggle}
-            onArchivedToggleChange={this.handleArchivedChange}
-          />
-          <SearchBox
-            fullWidth={false}
-            showSearch={showSearch}
-            searchString={searchStringInput}
-            onChange={this.handleSearchStringInputChange}
-            onSearch={this.handleSearch}
-          />
-        </Fragment>
-      );
-    }
-
     return (
       <AppBar
         elevation={1} // tone down the elevation
@@ -583,7 +599,23 @@ class App extends React.PureComponent {
           classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
         }
       >
-        <MuiToolbar>{bar}</MuiToolbar>
+        <MuiToolbar>
+          <Toolbar
+            onMobile={onMobile}
+            showSearchOnMobile={showSearchOnMobile}
+            onToggleShowSearch={this.toggleShowSearch}
+            showSearch={showSearch}
+            searchString={searchStringInput}
+            onSearchChange={this.handleSearchStringInputChange}
+            onSearch={this.handleSearch}
+            onMenuClick={this.handleDrawerToggle}
+            responsive={responsive}
+            title={title}
+            showArchived={showArchived}
+            showArchivedToggle={showArchivedToggle}
+            onArchivedToggleChange={this.handleArchivedChange}
+          />
+        </MuiToolbar>
       </AppBar>
     );
   }
