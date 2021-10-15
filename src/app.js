@@ -79,6 +79,28 @@ function ArchivedToggle(props) {
   );
 }
 
+function MenuTitleArchived(props) {
+  const {
+    responsive,
+    onMenuClick,
+    title,
+    showArchived,
+    showArchivedToggle,
+    onArchivedToggleChange,
+  } = props;
+  return (
+    <React.Fragment>
+      <MenuButton responsive={responsive} onClick={onMenuClick} />
+      <Title title={title} />
+      <ArchivedToggle
+        showArchived={showArchived}
+        showArchivedToggle={showArchivedToggle}
+        onChange={onArchivedToggleChange}
+      />
+    </React.Fragment>
+  );
+}
+
 // ------ END: MOVE TO SEPARATE FILE??
 
 const drawerWidth = 240;
@@ -488,7 +510,6 @@ class App extends React.PureComponent {
       return searchBox;
     };
 
-    // TODO: remove duplicate code below and generalize "bar"
     if (onMobile) {
       if (showSearchOnMobile) {
         bar = (
@@ -506,15 +527,13 @@ class App extends React.PureComponent {
       } else {
         bar = (
           <React.Fragment>
-            <MenuButton
+            <MenuTitleArchived
               responsive={responsive}
-              onClick={this.handleDrawerToggle}
-            />
-            <Title title={title} />
-            <ArchivedToggle
+              onMenuClick={this.handleDrawerToggle}
+              title={title}
               showArchived={showArchived}
               showArchivedToggle={showArchivedToggle}
-              onChange={this.handleArchivedChange}
+              onArchivedToggleChange={this.handleArchivedChange}
             />
             <IconButton
               color="inherit"
@@ -530,15 +549,13 @@ class App extends React.PureComponent {
     } else {
       bar = (
         <React.Fragment>
-          <MenuButton
+          <MenuTitleArchived
             responsive={responsive}
-            onClick={this.handleDrawerToggle}
-          />
-          <Title title={title} />
-          <ArchivedToggle
+            onMenuClick={this.handleDrawerToggle}
+            title={title}
             showArchived={showArchived}
             showArchivedToggle={showArchivedToggle}
-            onChange={this.handleArchivedChange}
+            onArchivedToggleChange={this.handleArchivedChange}
           />
           {searchBox()}
         </React.Fragment>
