@@ -460,21 +460,6 @@ class App extends React.PureComponent {
     this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
   };
 
-  menuButton() {
-    const { classes } = this.props;
-    const responsive = this.isResponsive();
-    return (
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={this.handleDrawerToggle}
-        className={responsive ? classes.navIconHide : ''}
-      >
-        <Icon icon="Menu" />
-      </IconButton>
-    );
-  }
-
   appBar() {
     const { classes, width } = this.props;
     const { showSearchOnMobile, searchStringInput, showSearch, menuItem } =
