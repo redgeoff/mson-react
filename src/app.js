@@ -2,11 +2,11 @@
 //   - On mobile when using search bar, display title and search icon. When user clicks icon then
 //     hides title and allows for search string to be entered.
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
-import Toolbar from '@material-ui/core/Toolbar';
+import MuiToolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from './icon';
@@ -22,7 +22,7 @@ import attach from './attach';
 import globals from 'mson/lib/globals';
 import Snackbar from './snackbar';
 import ConfirmationDialog from './confirmation-dialog';
-import MUISwitch from '@material-ui/core/Switch';
+import MuiSwitch from '@material-ui/core/Switch';
 // import UserMenu from './user-menu';
 import Action from 'mson/lib/actions/action';
 import CollectionField from 'mson/lib/fields/collection-field';
@@ -73,7 +73,7 @@ function ArchivedToggle(props) {
   return (
     showArchivedToggle && (
       <Tooltip title={showArchived ? 'Show Active' : 'Show Deleted'}>
-        <MUISwitch onChange={onChange} checked={showArchivedChecked} />
+        <MuiSwitch onChange={onChange} checked={showArchivedChecked} />
       </Tooltip>
     )
   );
@@ -89,7 +89,7 @@ function MenuTitleArchived(props) {
     onArchivedToggleChange,
   } = props;
   return (
-    <React.Fragment>
+    <Fragment>
       <MenuButton responsive={responsive} onClick={onMenuClick} />
       <Title title={title} />
       <ArchivedToggle
@@ -97,7 +97,7 @@ function MenuTitleArchived(props) {
         showArchivedToggle={showArchivedToggle}
         onChange={onArchivedToggleChange}
       />
-    </React.Fragment>
+    </Fragment>
   );
 }
 
@@ -513,7 +513,7 @@ class App extends React.PureComponent {
     if (onMobile) {
       if (showSearchOnMobile) {
         bar = (
-          <React.Fragment>
+          <Fragment>
             <IconButton
               color="inherit"
               aria-label="close search"
@@ -522,11 +522,11 @@ class App extends React.PureComponent {
               <Icon icon="ArrowBack" />
             </IconButton>
             {searchBox(true)}
-          </React.Fragment>
+          </Fragment>
         );
       } else {
         bar = (
-          <React.Fragment>
+          <Fragment>
             <MenuTitleArchived
               responsive={responsive}
               onMenuClick={this.handleDrawerToggle}
@@ -543,12 +543,12 @@ class App extends React.PureComponent {
             >
               <Icon icon="Search" />
             </IconButton>
-          </React.Fragment>
+          </Fragment>
         );
       }
     } else {
       bar = (
-        <React.Fragment>
+        <Fragment>
           <MenuTitleArchived
             responsive={responsive}
             onMenuClick={this.handleDrawerToggle}
@@ -558,7 +558,7 @@ class App extends React.PureComponent {
             onArchivedToggleChange={this.handleArchivedChange}
           />
           {searchBox()}
-        </React.Fragment>
+        </Fragment>
       );
     }
 
@@ -569,7 +569,7 @@ class App extends React.PureComponent {
           classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
         }
       >
-        <Toolbar>{bar}</Toolbar>
+        <MuiToolbar>{bar}</MuiToolbar>
       </AppBar>
     );
   }
