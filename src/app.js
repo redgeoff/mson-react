@@ -101,6 +101,24 @@ function MenuTitleArchived(props) {
   );
 }
 
+const StyledSearchBar = styled(SearchBar)({
+  marginLeft: 'auto', // right align
+});
+
+function SearchBox(props) {
+  const { fullWidth, showSearch, searchString, onChange, onSearch } = props;
+  return (
+    showSearch && (
+      <StyledSearchBar
+        fullWidth={fullWidth}
+        searchString={searchString}
+        onChange={onChange}
+        onSearch={onSearch}
+      />
+    )
+  );
+}
+
 // ------ END: MOVE TO SEPARATE FILE??
 
 const drawerWidth = 240;
@@ -494,22 +512,6 @@ class App extends React.PureComponent {
 
     let bar = null;
 
-    const searchBox = (fullWidth) => {
-      let searchBox = null;
-      if (showSearch) {
-        searchBox = (
-          <SearchBar
-            fullWidth={fullWidth}
-            className={classes.alignRight}
-            searchString={searchStringInput}
-            onChange={this.handleSearchStringInputChange}
-            onSearch={this.handleSearch}
-          />
-        );
-      }
-      return searchBox;
-    };
-
     if (onMobile) {
       if (showSearchOnMobile) {
         bar = (
@@ -521,7 +523,13 @@ class App extends React.PureComponent {
             >
               <Icon icon="ArrowBack" />
             </IconButton>
-            {searchBox(true)}
+            <SearchBox
+              fullWidth={true}
+              showSearch={showSearch}
+              searchString={searchStringInput}
+              onChange={this.handleSearchStringInputChange}
+              onSearch={this.handleSearch}
+            />
           </Fragment>
         );
       } else {
@@ -557,7 +565,13 @@ class App extends React.PureComponent {
             showArchivedToggle={showArchivedToggle}
             onArchivedToggleChange={this.handleArchivedChange}
           />
-          {searchBox()}
+          <SearchBox
+            fullWidth={false}
+            showSearch={showSearch}
+            searchString={searchStringInput}
+            onChange={this.handleSearchStringInputChange}
+            onSearch={this.handleSearch}
+          />
         </Fragment>
       );
     }
