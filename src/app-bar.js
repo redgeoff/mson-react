@@ -152,13 +152,15 @@ function Toolbar(props) {
             showArchivedToggle={showArchivedToggle}
             onArchivedToggleChange={onArchivedToggleChange}
           />
-          <StyledIconButton
-            color="inherit"
-            aria-label="toggle search"
-            onClick={onToggleShowSearch}
-          >
-            <Icon icon="Search" />
-          </StyledIconButton>
+          {showSearch && (
+            <StyledIconButton
+              color="inherit"
+              aria-label="toggle search"
+              onClick={onToggleShowSearch}
+            >
+              <Icon icon="Search" />
+            </StyledIconButton>
+          )}
         </Fragment>
       );
     }
