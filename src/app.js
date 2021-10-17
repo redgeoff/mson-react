@@ -1,273 +1,20 @@
-// TODO:
-//   - On mobile when using search bar, display title and search icon. When user clicks icon then
-//     hides title and allows for search string to be entered.
-
-import React, { Fragment } from 'react';
+import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MuiAppBar from '@material-ui/core/AppBar';
-import Tooltip from '@material-ui/core/Tooltip';
-import MuiToolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from './icon';
 import Menu from './menu';
-import SearchBar from './search-bar';
 import { Switch, Route } from 'react-router-dom';
 import Component from './component';
 import ComponentMSON from 'mson/lib/component';
-// import compiler from 'mson/lib/compiler';
 import { withRouter } from 'react-router';
 import attach from './attach';
 import globals from 'mson/lib/globals';
 import Snackbar from './snackbar';
 import ConfirmationDialog from './confirmation-dialog';
-import MuiSwitch from '@material-ui/core/Switch';
-// import UserMenu from './user-menu';
 import Action from 'mson/lib/actions/action';
 import CollectionField from 'mson/lib/fields/collection-field';
 import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
-
-// ------ BEGIN: MOVE TO SEPARATE FILE?? MOVE TO app-bar.js??
-
-import { styled } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-const ResponsiveIconButton = styled(IconButton)(({ theme }) => ({
-  [theme.breakpoints.up('md')]: {
-    display: 'none',
-  },
-}));
-
-function MenuButton(props) {
-  const { responsive, onClick } = props;
-
-  // TODO: instead, use the following after migrate to MUI 5:
-  //   `<IconButton sx={responsive ? { display: { md: 'none' } } : null} />`
-  const IButton = responsive ? ResponsiveIconButton : IconButton;
-
-  return (
-    <IButton color="inherit" aria-label="open drawer" onClick={onClick}>
-      <Icon icon="Menu" />
-    </IButton>
-  );
-}
-
-function Title(props) {
-  const { title } = props;
-  return (
-    <Typography variant="h6" color="inherit" noWrap>
-      {title ? title : ''}
-    </Typography>
-  );
-}
-
-function ArchivedToggle(props) {
-  const { showArchived, showArchivedToggle, onChange } = props;
-
-  // A component must not switch from controlled to uncontrolled so we need to avoid setting
-  // checked=undefined
-  const showArchivedChecked = showArchived ? true : false;
-
-  return (
-    showArchivedToggle && (
-      <Tooltip title={showArchived ? 'Show Active' : 'Show Deleted'}>
-        <MuiSwitch onChange={onChange} checked={showArchivedChecked} />
-      </Tooltip>
-    )
-  );
-}
-
-function MenuTitleArchived(props) {
-  const {
-    responsive,
-    onMenuClick,
-    title,
-    showArchived,
-    showArchivedToggle,
-    onArchivedToggleChange,
-  } = props;
-  return (
-    <Fragment>
-      <MenuButton responsive={responsive} onClick={onMenuClick} />
-      <Title title={title} />
-      <ArchivedToggle
-        showArchived={showArchived}
-        showArchivedToggle={showArchivedToggle}
-        onChange={onArchivedToggleChange}
-      />
-    </Fragment>
-  );
-}
-
-const alignRight = {
-  marginLeft: 'auto', // right align
-};
-
-const StyledSearchBar = styled(SearchBar)(alignRight);
-
-function SearchBox(props) {
-  const { fullWidth, showSearch, searchString, onChange, onSearch } = props;
-  return (
-    showSearch && (
-      <StyledSearchBar
-        fullWidth={fullWidth}
-        searchString={searchString}
-        onChange={onChange}
-        onSearch={onSearch}
-      />
-    )
-  );
-}
-
-const StyledIconButton = styled(IconButton)(alignRight);
-
-function Toolbar(props) {
-  const {
-    onMobile,
-    showSearchOnMobile,
-    onToggleShowSearch,
-    showSearch,
-    searchString,
-    onSearchChange,
-    onSearch,
-    onMenuClick,
-    responsive,
-    title,
-    showArchived,
-    showArchivedToggle,
-    onArchivedToggleChange,
-  } = props;
-
-  if (onMobile) {
-    if (showSearchOnMobile) {
-      return (
-        <Fragment>
-          <IconButton
-            color="inherit"
-            aria-label="close search"
-            onClick={onToggleShowSearch}
-          >
-            <Icon icon="ArrowBack" />
-          </IconButton>
-          <SearchBox
-            fullWidth={true}
-            showSearch={showSearch}
-            searchString={searchString}
-            onChange={onSearchChange}
-            onSearch={onSearch}
-          />
-        </Fragment>
-      );
-    } else {
-      return (
-        <Fragment>
-          <MenuTitleArchived
-            responsive={responsive}
-            onMenuClick={onMenuClick}
-            title={title}
-            showArchived={showArchived}
-            showArchivedToggle={showArchivedToggle}
-            onArchivedToggleChange={onArchivedToggleChange}
-          />
-          <StyledIconButton
-            color="inherit"
-            aria-label="toggle search"
-            onClick={onToggleShowSearch}
-          >
-            <Icon icon="Search" />
-          </StyledIconButton>
-        </Fragment>
-      );
-    }
-  } else {
-    return (
-      <Fragment>
-        <MenuTitleArchived
-          responsive={responsive}
-          onMenuClick={onMenuClick}
-          title={title}
-          showArchived={showArchived}
-          showArchivedToggle={showArchivedToggle}
-          onArchivedToggleChange={onArchivedToggleChange}
-        />
-        <SearchBox
-          fullWidth={false}
-          showSearch={showSearch}
-          searchString={searchString}
-          onChange={onSearchChange}
-          onSearch={onSearch}
-        />
-      </Fragment>
-    );
-  }
-}
-
-const drawerWidth = 240;
-
-// This is needed or else a "responsive" prop is passed to MuiAppBar, causing the error "Received `true` for a non-boolean attribute `responsive`"
-const ResponsiveMuiAppBar = ({ responsive, ...otherProps }) => (
-  <MuiAppBar {...otherProps} />
-);
-
-const StyledMuiAppBar = styled(ResponsiveMuiAppBar)(
-  ({ theme, responsive }) => ({
-    position: 'fixed',
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: responsive && {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
-  })
-);
-
-function AppBar(props) {
-  const {
-    showSearchOnMobile,
-    searchString,
-    showSearch,
-    showArchived,
-    showArchivedToggle,
-    title,
-    onToggleShowSearch,
-    onSearchChange,
-    onSearch,
-    onMenuClick,
-    responsive,
-    onArchivedToggleChange,
-  } = props;
-
-  const theme = useTheme();
-  const onMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
-  return (
-    <StyledMuiAppBar
-      elevation={1} // tone down the elevation
-      responsive={responsive}
-    >
-      <MuiToolbar>
-        <Toolbar
-          onMobile={onMobile}
-          showSearchOnMobile={showSearchOnMobile}
-          onToggleShowSearch={onToggleShowSearch}
-          showSearch={showSearch}
-          searchString={searchString}
-          onSearchChange={onSearchChange}
-          onSearch={onSearch}
-          onMenuClick={onMenuClick}
-          responsive={responsive}
-          title={title}
-          showArchived={showArchived}
-          showArchivedToggle={showArchivedToggle}
-          onArchivedToggleChange={onArchivedToggleChange}
-        />
-      </MuiToolbar>
-    </StyledMuiAppBar>
-  );
-}
-
-// ------ END: MOVE TO SEPARATE FILE??
+import AppBar, { DRAWER_WIDTH } from './app-bar';
 
 const styles = (theme) => ({
   root: {
@@ -302,12 +49,12 @@ const styles = (theme) => ({
   contentResponsive: {
     // Also needed to extend menu vertically
     [theme.breakpoints.up('md')]: {
-      marginLeft: drawerWidth,
+      marginLeft: DRAWER_WIDTH,
     },
   },
 });
 
-// TODO: break up into components for header, menu, body, etc...
+// TODO: use React Hooks
 class App extends React.PureComponent {
   state = {
     mobileOpen: false,
