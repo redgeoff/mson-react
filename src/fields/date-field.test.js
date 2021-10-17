@@ -9,6 +9,13 @@ const definition = {
   help: 'Date help',
 };
 
+// We used to always choose 17 as our test day, but when the tests are actually run on the 17th of
+// the month, they would fail as there would be multiple buttons for the 17th: the current day in
+// the header and the day button in the calendar itself. To avoid this, we pick 18, another
+// unique number that isn't 17
+const currentDay = new Date().getDate();
+const testDay = currentDay === 17 ? 18 : 17;
+
 const shouldPickDate = (definition, expectedValue) => {
   const { getByLabelText, getByRole } = compileAndRender(definition);
 
@@ -16,9 +23,9 @@ const shouldPickDate = (definition, expectedValue) => {
   const textField = getByLabelText(/Date/, { selector: 'input' });
   fireEvent.click(textField);
 
-  // Select the 17th day of the current month
-  const seventeenth = getByRole('button', { name: /17/ });
-  fireEvent.click(seventeenth);
+  // Select the test day of the current month
+  const day = getByRole('button', { name: RegExp(testDay) });
+  fireEvent.click(day);
 
   // Click OK to close the date picker
   const ok = getByRole('button', { name: /OK/i });
@@ -30,7 +37,7 @@ const shouldPickDate = (definition, expectedValue) => {
 
 it('should pick date', async () => {
   const month = new Date().toLocaleString('default', { month: 'long' });
-  shouldPickDate(definition, `${month} 17th`);
+  shouldPickDate(definition, `${month} ${testDay}th`);
 });
 
 it('should pick date with custom format', async () => {
@@ -40,7 +47,7 @@ it('should pick date with custom format', async () => {
       ...definition,
       format: 'yyyy-MM-dd',
     },
-    `${yearMonth}-17`
+    `${yearMonth}-${testDay}`
   );
 });
 
