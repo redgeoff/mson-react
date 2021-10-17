@@ -225,7 +225,7 @@ const StyledMuiAppBar = styled(ResponsiveMuiAppBar)(
 function AppBar(props) {
   const {
     showSearchOnMobile,
-    searchStringInput,
+    searchString,
     showSearch,
     showArchived,
     showArchivedToggle,
@@ -252,7 +252,7 @@ function AppBar(props) {
           showSearchOnMobile={showSearchOnMobile}
           onToggleShowSearch={onToggleShowSearch}
           showSearch={showSearch}
-          searchString={searchStringInput}
+          searchString={searchString}
           onSearchChange={onSearchChange}
           onSearch={onSearch}
           onMenuClick={onMenuClick}
