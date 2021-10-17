@@ -4,7 +4,7 @@
 
 import React, { Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import AppBar from '@material-ui/core/AppBar';
+import MuiAppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,7 +17,6 @@ import Component from './component';
 import ComponentMSON from 'mson/lib/component';
 // import compiler from 'mson/lib/compiler';
 import { withRouter } from 'react-router';
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import attach from './attach';
 import globals from 'mson/lib/globals';
 import Snackbar from './snackbar';
@@ -30,9 +29,11 @@ import Form from 'mson/lib/form';
 import access from 'mson/lib/access';
 import registrar from 'mson/lib/compiler/registrar';
 
-// ------ BEGIN: MOVE TO SEPARATE FILE??
+// ------ BEGIN: MOVE TO SEPARATE FILE?? MOVE TO app-bar.js??
 
 import { styled } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const ResponsiveIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -204,9 +205,69 @@ function Toolbar(props) {
   }
 }
 
-// ------ END: MOVE TO SEPARATE FILE??
-
 const drawerWidth = 240;
+
+// This is needed or else a "responsive" prop is passed to MuiAppBar, causing the error "Received `true` for a non-boolean attribute `responsive`"
+const ResponsiveMuiAppBar = ({ responsive, ...otherProps }) => (
+  <MuiAppBar {...otherProps} />
+);
+
+const StyledMuiAppBar = styled(ResponsiveMuiAppBar)(
+  ({ theme, responsive }) => ({
+    position: 'fixed',
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: responsive && {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  })
+);
+
+function AppBar(props) {
+  const {
+    showSearchOnMobile,
+    searchStringInput,
+    showSearch,
+    showArchived,
+    showArchivedToggle,
+    title,
+    onToggleShowSearch,
+    onSearchChange,
+    onSearch,
+    onMenuClick,
+    responsive,
+    onArchivedToggleChange,
+  } = props;
+
+  const theme = useTheme();
+  const onMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  return (
+    <StyledMuiAppBar
+      elevation={1} // tone down the elevation
+      responsive={responsive}
+    >
+      <MuiToolbar>
+        <Toolbar
+          onMobile={onMobile}
+          showSearchOnMobile={showSearchOnMobile}
+          onToggleShowSearch={onToggleShowSearch}
+          showSearch={showSearch}
+          searchString={searchStringInput}
+          onSearchChange={onSearchChange}
+          onSearch={onSearch}
+          onMenuClick={onMenuClick}
+          responsive={responsive}
+          title={title}
+          showArchived={showArchived}
+          showArchivedToggle={showArchivedToggle}
+          onArchivedToggleChange={onArchivedToggleChange}
+        />
+      </MuiToolbar>
+    </StyledMuiAppBar>
+  );
+}
+
+// ------ END: MOVE TO SEPARATE FILE??
 
 const styles = (theme) => ({
   root: {
@@ -221,15 +282,6 @@ const styles = (theme) => ({
     display: 'flex',
     width: '100%',
     height: '100%',
-  },
-  appBar: {
-    position: 'fixed',
-    marginLeft: drawerWidth,
-  },
-  appBarResponsive: {
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
   },
   content: {
     backgroundColor: theme.palette.background.default,
@@ -576,56 +628,12 @@ class App extends React.PureComponent {
     this.setState({ showSearchOnMobile: !this.state.showSearchOnMobile });
   };
 
-  appBar() {
-    const { classes, width } = this.props;
-    const {
-      showSearchOnMobile,
-      searchStringInput,
-      showSearch,
-      menuItem,
-      showArchived,
-      showArchivedToggle,
-    } = this.state;
-
-    const onMobile = isWidthDown('sm', width);
-    const responsive = this.isResponsive();
-
-    const title = menuItem?.label;
-
-    return (
-      <AppBar
-        elevation={1} // tone down the elevation
-        className={
-          classes.appBar + (responsive ? ` ${classes.appBarResponsive}` : '')
-        }
-      >
-        <MuiToolbar>
-          <Toolbar
-            onMobile={onMobile}
-            showSearchOnMobile={showSearchOnMobile}
-            onToggleShowSearch={this.toggleShowSearch}
-            showSearch={showSearch}
-            searchString={searchStringInput}
-            onSearchChange={this.handleSearchStringInputChange}
-            onSearch={this.handleSearch}
-            onMenuClick={this.handleDrawerToggle}
-            responsive={responsive}
-            title={title}
-            showArchived={showArchived}
-            showArchivedToggle={showArchivedToggle}
-            onArchivedToggleChange={this.handleArchivedChange}
-          />
-        </MuiToolbar>
-      </AppBar>
-    );
-  }
-
   isResponsive() {
     return !this.props.menuAlwaysTemporary;
   }
 
   render() {
-    const { classes, component, confirmation } = this.props;
+    const { classes, component, confirmation, location } = this.props;
     const {
       mobileOpen,
       menuItem,
@@ -633,6 +641,11 @@ class App extends React.PureComponent {
       snackbarMessage,
       confirmationOpen,
       currentComponent,
+      showSearchOnMobile,
+      searchStringInput,
+      showSearch,
+      showArchived,
+      showArchivedToggle,
     } = this.state;
 
     const responsive = this.isResponsive();
@@ -640,13 +653,30 @@ class App extends React.PureComponent {
     const menu = component.get('menu');
 
     // Use the path from the location prop as this.state.path may not be up to date
-    const path = this.props.location.pathname;
+    const path = location.pathname;
 
     const comp = currentComponent ? (
       <Component component={currentComponent} />
     ) : null;
 
-    const appBar = this.appBar();
+    const title = menuItem?.label;
+
+    const appBar = (
+      <AppBar
+        showSearchOnMobile={showSearchOnMobile}
+        onToggleShowSearch={this.toggleShowSearch}
+        showSearch={showSearch}
+        searchString={searchStringInput}
+        onSearchChange={this.handleSearchStringInputChange}
+        onSearch={this.handleSearch}
+        onMenuClick={this.handleDrawerToggle}
+        responsive={responsive}
+        title={title}
+        showArchived={showArchived}
+        showArchivedToggle={showArchivedToggle}
+        onArchivedToggleChange={this.handleArchivedChange}
+      />
+    );
 
     const menuSidebar = (
       <Menu
@@ -706,7 +736,6 @@ class App extends React.PureComponent {
 }
 
 App = withStyles(styles, { withTheme: true })(App);
-App = withWidth()(App);
 App = withRouter(App);
 App = attach(['menuAlwaysTemporary'])(App);
 App = attach(
