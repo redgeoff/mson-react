@@ -1,6 +1,6 @@
 import React from 'react';
-import FormControlMU from '@material-ui/core/FormControl';
-import withStyles from '@material-ui/core/styles/withStyles';
+import FormControlMU from '@mui/material/FormControl';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = (theme) => ({
   formControl: {
@@ -8,7 +8,7 @@ const styles = (theme) => ({
   },
   fullWidth: {
     // TODO: bug in material ui?
-    width: `calc(100% - ${theme.spacing(2)}px)`,
+    width: `calc(100% - ${theme.spacing(2)})`,
   },
   noMarginBottom: {
     marginBottom: 0,

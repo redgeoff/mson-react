@@ -1,8 +1,8 @@
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
+import Switch from '@mui/material/Switch';
 import CommonField from './common-field';
 import attach from '../attach';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import DisplayValueTypography from './display-value-typography';
 
 class BooleanField extends React.PureComponent {
@@ -11,14 +11,8 @@ class BooleanField extends React.PureComponent {
   };
 
   render() {
-    const {
-      value,
-      disabled,
-      component,
-      editable,
-      useDisplayValue,
-      label,
-    } = this.props;
+    const { value, disabled, component, editable, useDisplayValue, label } =
+      this.props;
 
     let hideLabelUI = null;
 

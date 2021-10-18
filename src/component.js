@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import InnerComponent from './inner-component';
 import compiler from 'mson/lib/compiler';
 import useComponent from './use-component';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const getOrZero = (value) => (value ? value : 0);
 

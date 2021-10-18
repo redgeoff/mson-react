@@ -3,17 +3,17 @@
 //     hides title and allows for search string to be entered.
 
 import React, { Fragment } from 'react';
-import MuiAppBar from '@material-ui/core/AppBar';
-import Tooltip from '@material-ui/core/Tooltip';
-import MuiToolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import MuiAppBar from '@mui/material/AppBar';
+import Tooltip from '@mui/material/Tooltip';
+import MuiToolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import Icon from './icon';
 import SearchBar from './search-bar';
-import MuiSwitch from '@material-ui/core/Switch';
-import { styled } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import MuiSwitch from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const ResponsiveIconButton = styled(IconButton)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -129,6 +129,7 @@ function Toolbar(props) {
             color="inherit"
             aria-label="close search"
             onClick={onToggleShowSearch}
+            size="large"
           >
             <Icon icon="ArrowBack" />
           </IconButton>
@@ -222,7 +223,7 @@ export default function AppBar(props) {
   } = props;
 
   const theme = useTheme();
-  const onMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const onMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <StyledMuiAppBar

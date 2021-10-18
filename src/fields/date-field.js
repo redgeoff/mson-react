@@ -7,7 +7,7 @@ import {
   DatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 import DisplayValueTypography from './display-value-typography';
 
 const styles = (theme) => ({

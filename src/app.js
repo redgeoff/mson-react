@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 import Menu from './menu';
 import { Switch, Route } from 'react-router-dom';
 import Component from './component';

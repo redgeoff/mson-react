@@ -1,12 +1,12 @@
 import React from 'react';
-import IconMui from '@material-ui/core/Icon';
+import IconMui from '@mui/material/Icon';
 import snakeCase from 'lodash/snakeCase';
 
 // Note: we use font icons instead of SVG icons as this allows us to support any icon dynamically
 // without adding all icons to the JS bundle. The MaterialUI icons are about 54KB which is
 // substantially smaller than their SVG counterparts.
 //
-// import * as Icons from '@material-ui/icons';
+// import * as Icons from '@mui/icons-material';
 
 export default class Icon extends React.PureComponent {
   handleClick = (event) => {

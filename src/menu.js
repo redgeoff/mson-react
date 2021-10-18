@@ -1,10 +1,10 @@
 // TODO: when click on another section, close other sections? Requires moving menu state to app?
 
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
+import withStyles from '@mui/styles/withStyles';
+import Drawer from '@mui/material/Drawer';
+import Hidden from '@mui/material/Hidden';
+import Divider from '@mui/material/Divider';
 import Submenu from './submenu';
 import attach from './attach';
 import registrar from 'mson/lib/compiler/registrar';
@@ -72,13 +72,8 @@ class Menu extends React.PureComponent {
   }
 
   render() {
-    const {
-      classes,
-      theme,
-      mobileOpen,
-      responsive,
-      header /*, roles*/,
-    } = this.props;
+    const { classes, theme, mobileOpen, responsive, header /*, roles*/ } =
+      this.props;
 
     let items = null;
     // if (!roles || (registrar.client && registrar.client.user.hasRole(roles))) {
@@ -130,7 +125,7 @@ class Menu extends React.PureComponent {
       return (
         <div>
           <Hidden mdUp>{temporaryDrawer}</Hidden>
-          <Hidden smDown implementation="css">
+          <Hidden mdDown implementation="css">
             {permanentDrawer}
           </Hidden>
         </div>

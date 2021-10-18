@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import IconButtonMui from '@material-ui/core/IconButton';
+import IconButtonMui from '@mui/material/IconButton';
 import Icon from './icon';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 
 const IconButton = (props) => {
   const { onClick, icon, tooltip } = props;

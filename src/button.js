@@ -29,7 +29,14 @@ const Button = (props) => {
       />
     );
   } else {
-    return <IconButton onClick={onClick} icon={icon} tooltip={tooltip} />;
+    return (
+      <IconButton
+        onClick={onClick}
+        icon={icon}
+        tooltip={tooltip}
+        size="large"
+      />
+    );
   }
 };
 

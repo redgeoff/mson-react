@@ -1,7 +1,7 @@
 import React from 'react';
 import useComponent from './use-component';
 import Component from './component';
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@mui/material/Alert';
 
 export default function Alert(props) {
   const { severity, content } = useComponent(props.component, [

@@ -1,6 +1,6 @@
 import React from 'react';
-import FormLabelMui from '@material-ui/core/FormLabel';
-import withStyles from '@material-ui/core/styles/withStyles';
+import FormLabelMui from '@mui/material/FormLabel';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = (theme) => ({
   shrink: {

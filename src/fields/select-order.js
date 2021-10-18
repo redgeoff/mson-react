@@ -1,10 +1,10 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import Icon from '../icon';
-import withStyles from '@material-ui/core/styles/withStyles';
+import withStyles from '@mui/styles/withStyles';
 
 const styles = (theme) => ({
   formControl: {
@@ -72,6 +72,7 @@ class SelectOrder extends React.PureComponent {
           color="primary"
           aria-label="sort order"
           onClick={this.handleClick}
+          size="large"
         >
           <Icon icon="Sort" className={flipped ? classes.flip : null} />
         </IconButton>

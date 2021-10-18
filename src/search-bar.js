@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
+import withStyles from '@mui/styles/withStyles';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
 import Icon from './icon';
 import classNames from 'classnames';
 
@@ -71,13 +71,8 @@ class SearchBar extends React.PureComponent {
   };
 
   render() {
-    const {
-      classes,
-      className,
-      searchString,
-      onChange,
-      fullWidth,
-    } = this.props;
+    const { classes, className, searchString, onChange, fullWidth } =
+      this.props;
 
     const { autoFullWidth } = this.state;
 
@@ -106,6 +101,7 @@ class SearchBar extends React.PureComponent {
             aria-label="clear search"
             onClick={this.handleClearSearch}
             className={classes.closeIcon}
+            size="large"
           >
             <Icon icon="Close" />
           </IconButton>
