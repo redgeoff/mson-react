@@ -9029,10 +9029,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-mingo@^4.1.4:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/mingo/-/mingo-4.4.1.tgz#76ce40f9b7a909d704320cdb0ad2444155a74c12"
-  integrity sha512-aig/3anjeJ8VcXLqDQmB/iO8Z8BVzln2BeWcyeI5NtOiLMAQ5xX00QHX9piy8OBAC9pSDYWErY8MHoh8nlCHig==
+mingo@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mingo/-/mingo-5.0.0.tgz#c75bc2c77bcd5544de0e3fc51064c5ff0816aa4c"
+  integrity sha512-JTw+s3nO2nebKJRt5rkGs2MLzs+UIL7pqD2fZDHyXPo5IFOs0ANTd6Bqo48/s4lZzQvB554pJ8ti+PG56fK3dQ==
 
 mini-create-react-context@^0.4.0:
   version "0.4.1"
@@ -9191,17 +9191,17 @@ ms@2.1.3, ms@^2.0.0, ms@^2.1.1, ms@^2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-mson@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-2.11.0.tgz#33babcfb129c93578c0cf49782ba778453456eb7"
-  integrity sha512-7DWi9vsJq3eUu7eBr4BIVgQ5+rlVzSaPOgvoMfP7AuAwTgvgSh03OGQcBcEfoMxHqlqXvaFKtH/MS4U5qPYMZg==
+mson@^2.11.3:
+  version "2.11.3"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-2.11.3.tgz#d30c2ac3af06fd78df8f860eb6d97b93014eb6f9"
+  integrity sha512-e2+pdheMCGSVYyQPW1sqj0kBfKZGleKzUYQLyunPQKl5AEatQxuM84q2r9uMgArFrflxMeDlPv7+8V5YymK4BQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     country-telephone-data "^0.6.3"
     date-fns "^2.15.0"
     events "^3.2.0"
     lodash "^4.17.20"
-    mingo "^4.1.4"
+    mingo "^5.0.0"
     text-mask-addons "^3.8.0"
     uuid "^8.3.2"
     vanilla-text-mask "^5.1.1"
