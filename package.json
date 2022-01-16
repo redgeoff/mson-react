@@ -75,7 +75,7 @@
     "analyze-bundle": "webpack --profile --json > ./dist/stats.json && webpack-bundle-analyzer ./dist/stats.json",
     "predeploy": "yarn build",
     "deploy": "echo 'redgeoff.com' > ./build/CNAME && gh-pages -d build",
-    "prepublishOnly": "NODE_OPTIONS=--openssl-legacy-provider && yarn compile && yarn bundle",
+    "prepublishOnly": "export NODE_OPTIONS=--openssl-legacy-provider && yarn compile && yarn bundle",
     "semantic-release": "semantic-release",
     "prepare": "git config core.hooksPath ./git-hooks"
   },
