@@ -7,13 +7,11 @@ import Form from 'mson/lib/form';
 import TextField from 'mson/lib/fields/text-field';
 
 class CustomComponentJS extends UIComponent {
-  // className is needed as JS minification strips the constructor name
-  className = 'CustomComponentJS';
+  constructor(props) {
+    super({
+      // name is needed as JS minification strips the constructor name
+      name: 'CustomComponentJS',
 
-  create(props) {
-    super.create(props);
-
-    this.set({
       schema: new Form({
         fields: [
           new TextField({
@@ -24,6 +22,8 @@ class CustomComponentJS extends UIComponent {
           }),
         ],
       }),
+
+      ...props,
     });
   }
 }
