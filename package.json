@@ -65,7 +65,7 @@
     "lint": "eslint --max-warnings=0 src",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "just-test": "react-scripts test --maxWorkers=3",
+    "just-test": "react-scripts test --maxWorkers=2",
     "test": "npm run lint && npm run just-test -- --coverage",
     "copy-json": "copyfiles -u 1 src/**/*.json lib",
     "copy-css": "copyfiles -u 1 src/**/*.css lib",
