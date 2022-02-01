@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 
-mainMaxBytes=410000
-chunkMaxBytes=1390000
+maxBytes=1250000
 
-if [ $(wc -c < build/static/js/main.*.js) -gt ${mainMaxBytes} ]; then
-  echo 'Error: main bundle too large!'
-  exit 1
-fi
-
-if [ $(wc -c < build/static/js/2.*.chunk.js) -gt ${chunkMaxBytes} ]; then
-  echo 'Error: chunk bundle too large!'
+if [ $(wc -c < dist/msonreact.js) -gt ${maxBytes} ]; then
+  echo 'Error: bundle too large!'
   exit 1
 fi
