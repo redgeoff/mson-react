@@ -1,8 +1,7 @@
-import each from 'lodash/each';
 class Utils {
   getIfDefined(props) {
     const definedProps = {};
-    each(props, (value, name) => {
+    Object.keys(props).forEach(([name, value]) => {
       if (value !== undefined) {
         definedProps[name] = value;
       }

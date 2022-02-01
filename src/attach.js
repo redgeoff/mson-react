@@ -1,5 +1,5 @@
 import React from 'react';
-import difference from 'lodash/difference';
+import utils from 'mson/lib/utils/utils';
 
 // Usage: attach(['prop1', 'prop2', ...], componentOrName)(Component)
 
@@ -34,7 +34,10 @@ const attach = (_watchProps, componentOrName) => {
 
         // The field props that we want to expose in the state. Remove any names that are in
         // this.props so that we can override those values.
-        this.watchProps = difference(_watchProps, Object.keys(this.props));
+        this.watchProps = utils.difference(
+          _watchProps,
+          Object.keys(this.props)
+        );
 
         // These values need to be in the state so that the component is rerendered when they change.
         if (this.hasComponent()) {

@@ -6,7 +6,6 @@ import Form from './form';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Field from './fields/field';
 import compiler from 'mson/lib/compiler';
-import each from 'lodash/each';
 import attach from './attach';
 import ComponentField from 'mson/lib/fields/component-field';
 
@@ -68,7 +67,7 @@ class FieldEditorForm extends React.PureComponent {
         field.getClassName() === 'ComponentField'
           ? field.get('content')
           : field;
-      each(values, (value, name) => {
+      Object.entries(values).forEach(([name, value]) => {
         if (component.has(name)) {
           component.set({ [name]: value });
         }

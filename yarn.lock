@@ -9191,10 +9191,10 @@ ms@2.1.3, ms@^2.0.0, ms@^2.1.1, ms@^2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-mson@^2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/mson/-/mson-2.12.0.tgz#86ab1ccf8123e0ea77bc3dc57c78858077168b3d"
-  integrity sha512-2ZpiScfgiqG/PiNgsgjHteDmXRZv0jead0gnE98gvpx7P55jZuJDPy7o2sa5V1Hp0veMx+cbEnqek+/KbkUgdQ==
+mson@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/mson/-/mson-2.12.1.tgz#a62d027bfb558870e9fc53ae414b917578051c5d"
+  integrity sha512-EFt7SHuvlAiaWf0WOajQhi9btfYxGSi1A2beqaQOkoAhBNrq0qW+ghFG07lxlveXA0ZU5gSH3lQr5rA9fJ9xDg==
   dependencies:
     country-telephone-data "^0.6.3"
     date-fns "^2.15.0"

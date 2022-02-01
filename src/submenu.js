@@ -6,8 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import Icon from './icon';
-import each from 'lodash/each';
 import registrar from 'mson/lib/compiler/registrar';
+import utils from 'mson/lib/utils/utils';
 
 const styles = (theme) => ({
   nested: {
@@ -38,7 +38,7 @@ class Submenu extends React.PureComponent {
 
     let childSelected = false;
 
-    each(item.items, (item) => {
+    utils.each(item.items, (item) => {
       if (path === item.path) {
         childSelected = true;
         return false; // exit loop
